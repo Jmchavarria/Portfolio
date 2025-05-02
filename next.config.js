@@ -1,11 +1,10 @@
-/** @type {import('next').NextConfig} */
-const nextConfig = {
-  reactStrictMode: true,
-  swcMinify: true,
-  // Configura el directorio de salida si es necesario
-  // output: 'export',
-  // Deshabilita las imágenes optimizadas si usas export
-  // images: { unoptimized: true }
-};
+import { setupDevPlatform } from '@cloudflare/next-on-pages/next-dev';
 
-module.exports = nextConfig;
+/** @type {import('next').NextConfig} */
+const nextConfig = {};
+
+if (process.env.NODE_ENV === 'development') {
+  await setupDevPlatform();
+}
+
+export default nextConfig;
