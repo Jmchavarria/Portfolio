@@ -1,4 +1,6 @@
+export const runtime = 'edge'
 import AboutSection from "./AboutSection";
+
 
 import Sidebar from "./components/sidebar";
 import ContactMe from "./contactMe";
