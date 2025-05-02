@@ -1,6 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // Configuración básica, sin images
-}
+  // Tu configuración aquí
+};
 
-module.exports = nextConfig
+module.exports = nextConfig;
