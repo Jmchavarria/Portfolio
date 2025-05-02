@@ -2,15 +2,15 @@
   "name": "portfolio",
   "version": "0.1.0",
   "private": true,
-
-    "scripts": {
-      "dev": "next dev",
-      "build": "next build",
-      "cloudflare": "npx @cloudflare/next-on-pages",
-      "start": "next start",
-      "lint": "next lint"
-    }, 
-
+  "scripts": {
+    "dev": "next dev --turbopack",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "pages:build": "npx @cloudflare/next-on-pages",
+    "preview": "npm run pages:build && wrangler pages dev",
+    "deploy": "npm run pages:build && wrangler pages deploy"
+  },
   "dependencies": {
     "@cloudflare/next-on-pages": "^1.13.12",
     "animejs": "^4.0.2",
