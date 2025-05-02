@@ -8,6 +8,7 @@
     "pages:build": "npx @cloudflare/next-on-pages",
     "start": "next start",
     "lint": "next lint",
+    "build": "npx @cloudflare/next-on-pages",
     "pages:build": "npx @cloudflare/next-on-pages"
   },
   "dependencies": {
