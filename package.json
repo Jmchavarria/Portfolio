@@ -7,9 +7,11 @@
     "build": "next build",
     "pages:build": "npx @cloudflare/next-on-pages",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "pages:build": "npx @cloudflare/next-on-pages"
   },
   "dependencies": {
+    "@cloudflare/next-on-pages": "^1.13.12",
     "animejs": "^4.0.2",
     "framer-motion": "^12.9.2",
     "lucide-react": "^0.503.0",
@@ -22,6 +24,8 @@
   "devDependencies": {
     "@cloudflare/next-on-pages": "^1.13.12",
     "@tailwindcss/postcss": "^4",
+    "@types/estree": "^1.0.7",
+    "@types/json-schema": "^7.0.15",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
