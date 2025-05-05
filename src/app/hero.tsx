@@ -95,25 +95,21 @@ const Hero = () => {
               {/* Redes sociales con diseño mejorado */}
               <div className="mt-6 flex justify-center gap-4">
                 <a
-                  href="#"
+                  target="_blank"
+                  href="https://github.com/Jmchavarria"
                   className="w-10 h-10 rounded-full bg-[#1a1a36] flex items-center justify-center hover:bg-violet-500/20 transition-all duration-300"
                   aria-label="GitHub"
                 >
                   <Github size={18} className="text-white" />
                 </a>
+
                 <a
-                  href="#"
+                  target="_blank"
+                  href="https://www.linkedin.com/in/jhonmarlonchavarria"
                   className="w-10 h-10 rounded-full bg-[#1a1a36] flex items-center justify-center hover:bg-violet-500/20 transition-all duration-300"
                   aria-label="LinkedIn"
                 >
                   <Linkedin size={18} className="text-white" />
-                </a>
-                <a
-                  href="#"
-                  className="w-10 h-10 rounded-full bg-[#1a1a36] flex items-center justify-center hover:bg-violet-500/20 transition-all duration-300"
-                  aria-label="Twitter"
-                >
-                  <Twitter size={18} className="text-white" />
                 </a>
               </div>
 
