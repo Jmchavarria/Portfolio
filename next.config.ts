@@ -1,13 +1,6 @@
-import { setupDevPlatform } from '@cloudflare/next-on-pages/next-dev';
+import { defineCloudflareConfig } from "@opennextjs/cloudflare";
+import staticAssetsIncrementalCache from "@opennextjs/cloudflare/overrides/incremental-cache/static-assets-incremental-cache";
 
-/** @type {import('next').NextConfig} */
-const nextConfig = {};
-
-const configure = async () => {
-  if (process.env.NODE_ENV === 'development') {
-    await setupDevPlatform();
-  }
-  return nextConfig;
-};
-
-export default configure();
+export default defineCloudflareConfig({
+  incrementalCache: staticAssetsIncrementalCache,
+});
