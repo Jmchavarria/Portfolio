@@ -6,7 +6,7 @@ import "./globals.css";
 
 const Hero = () => {
   return (
-    <div className="flex flex-col lg:grid lg:grid-cols-5 lg:grid-rows-5 bg-[rgb(15,15,27)] gap-4 min-h-screen p-4 py-14">
+    <div className="flex flex-col lg:grid lg:grid-cols-5 lg:grid-rows-5 bg-white gap-4 min-h-screen p-4 py-14">
       {/* Div 1 - Contenido principal */}
       <div className="lg:col-span-3 lg:row-span-5 w-full flex flex-col justify-center items-center lg:items-start text-center lg:text-left lg:ml-16">
         <motion.h1
