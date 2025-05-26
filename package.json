@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "next dev --turbopack",
     "build": "next build",
+    "pages:build": "npx @cloudflare/next-on-pages",
     "start": "next start",
     "lint": "next lint",
     "pages:build": "npx @cloudflare/next-on-pages",
@@ -12,6 +13,7 @@
     "deploy": "npm run pages:build && wrangler pages deploy"
   },
   "dependencies": {
+<<<<<<< HEAD
     "@cloudflare/next-on-pages": "^1.13.12",
     "animejs": "^4.0.2",
     "framer-motion": "^12.9.2",
@@ -19,10 +21,20 @@
     "next": "14.2.3",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+=======
+    "@types/animejs": "^3.1.13",
+    "animejs": "^4.0.2",
+    "framer-motion": "^12.9.2",
+    "lucide-react": "^0.503.0",
+    "next": "^15.3.1",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+>>>>>>> dev-jhon
     "react-icons": "^5.5.0",
     "smooth-scrollbar": "^8.8.4"
   },
   "devDependencies": {
+    "@cloudflare/next-on-pages": "^1.13.12",
     "@tailwindcss/postcss": "^4",
     "@types/estree": "^1.0.7",
     "@types/json-schema": "^7.0.15",
@@ -30,6 +42,7 @@
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "tailwindcss": "^4",
-    "typescript": "^5"
+    "typescript": "^5",
+    "wrangler": "^4.14.1"
   }
 }
