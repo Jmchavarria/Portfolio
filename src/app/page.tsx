@@ -36,7 +36,7 @@ export default function Home() {
   // Mejorado: configuración del intersection observer
   useEffect(() => {
     const sectionElements = navItems.map(item => document.getElementById(item.id)).filter(Boolean) as HTMLElement[];
-    
+
     // Desactivar el observer anterior si existe
     if (observerRef.current) {
       observerRef.current.disconnect();
@@ -56,12 +56,12 @@ export default function Home() {
       const visibleEntries = entries
         .filter(entry => entry.isIntersecting)
         .sort((a, b) => b.intersectionRatio - a.intersectionRatio);
-      
+
       if (visibleEntries.length > 0) {
         // Tomar la entrada con mayor área visible
         const mostVisibleEntry = visibleEntries[0];
         const newActiveSection = mostVisibleEntry.target.id;
-        
+
         if (newActiveSection !== activeSection) {
           setActiveSection(newActiveSection);
           // Actualizar URL hash sin scroll
@@ -71,7 +71,7 @@ export default function Home() {
     };
 
     observerRef.current = new IntersectionObserver(handleIntersect, observerOptions);
-    
+
     // Observar todas las secciones
     sectionElements.forEach(section => {
       if (section) {
@@ -91,35 +91,35 @@ export default function Home() {
 
       const scrollPosition = window.scrollY + window.innerHeight / 3;
       const sections = navItems.map(item => document.getElementById(item.id)).filter(Boolean) as HTMLElement[];
-      
+
       // Encontrar la sección más cercana a la posición actual
       let newActiveSection = activeSection;
       let minDistance = Infinity;
-      
+
       sections.forEach(section => {
         const sectionTop = section.offsetTop;
         const sectionHeight = section.offsetHeight;
         const distance = Math.abs(scrollPosition - (sectionTop + sectionHeight / 2));
-        
+
         if (distance < minDistance) {
           minDistance = distance;
           newActiveSection = section.id;
         }
       });
-      
+
       if (newActiveSection !== activeSection) {
         setActiveSection(newActiveSection);
         history.replaceState(null, '', `#${newActiveSection}`);
       }
     };
-    
+
     // Debounced scroll listener
     let scrollTimeout: NodeJS.Timeout;
     const debouncedScrollHandler = () => {
       clearTimeout(scrollTimeout);
       scrollTimeout = setTimeout(handleScroll, 100);
     };
-    
+
     window.addEventListener('scroll', debouncedScrollHandler, { passive: true });
     return () => {
       window.removeEventListener('scroll', debouncedScrollHandler);
@@ -131,23 +131,23 @@ export default function Home() {
   const scrollToSection = (sectionId: string) => {
     setIsScrolling(true);
     setMobileMenuOpen(false);
-    
+
     const section = document.getElementById(sectionId);
     if (section) {
       // Calcular la posición teniendo en cuenta el navbar fijo
       const navbarHeight = 56; // Altura del notch
       const elementPosition = section.getBoundingClientRect().top;
       const offsetPosition = elementPosition + window.scrollY - navbarHeight;
-      
+
       window.scrollTo({
         top: offsetPosition,
         behavior: 'smooth'
       });
-      
+
       // Set active section after scrolling completes
       setActiveSection(sectionId);
       history.replaceState(null, '', `#${sectionId}`);
-      
+
       // Reactivar detección después de completar scroll
       setTimeout(() => {
         setIsScrolling(false);
@@ -160,10 +160,10 @@ export default function Home() {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
         e.preventDefault();
-        
+
         const currentIndex = navItems.findIndex(item => item.id === activeSection);
         let nextIndex;
-        
+
         if (e.key === 'ArrowDown' && currentIndex < navItems.length - 1) {
           nextIndex = currentIndex + 1;
         } else if (e.key === 'ArrowUp' && currentIndex > 0) {
@@ -171,11 +171,11 @@ export default function Home() {
         } else {
           return;
         }
-        
+
         scrollToSection(navItems[nextIndex].id);
       }
     };
-    
+
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [activeSection]);
@@ -202,12 +202,12 @@ export default function Home() {
         <div className="relative mx-auto">
           {/* Forma del notch */}
           <div className="absolute left-1/2 transform -translate-x-1/2 w-[95%] max-w-4xl h-14 
-                        bg-gradient-to-r from-[#0f0f1b]/95 via-[#151528]/95 to-[#0f0f1b]/95 
+                        
                         backdrop-blur-md rounded-b-xl shadow-lg">
             {/* Barra de progreso */}
-            <div className="absolute top-0 left-0 h-1 bg-violet-500 rounded-bl-xl transition-all duration-300" 
-                style={{ width: progressWidth }} />
-            
+            <div className="absolute top-0 left-0 h-1 bg-violet-500 rounded-bl-xl transition-all duration-300"
+              style={{ width: progressWidth }} />
+
             {/* Contenido del navbar */}
             <div className="flex justify-between items-center h-full px-8">
               <motion.div
@@ -215,28 +215,27 @@ export default function Home() {
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.5 }}
               >
-                <h2 className="text-lg font-bold text-violet-400">Portfolio🐲</h2>
+                <h2 className="text-lg font-bold text-black">Portfolio🐲</h2>
               </motion.div>
-              
+
               {/* Desktop navigation */}
               <div className="hidden md:flex space-x-6">
                 {navItems.map((item) => (
                   <button
                     key={item.id}
-                    className={`font-medium transition-colors duration-300 ${
-                      activeSection === item.id 
-                        ? "text-violet-400" 
-                        : "text-gray-300 hover:text-white"
-                    }`}
+                    className={`font-medium transition-colors duration-300 ${activeSection === item.id
+                        ? "text-black"
+                        : "text-[#313638] hover:text-white"
+                      }`}
                     onClick={() => scrollToSection(item.id)}
                   >
                     {item.label}
                   </button>
                 ))}
               </div>
-              
+
               {/* Mobile menu button */}
-              <button 
+              <button
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
                 className="md:hidden text-gray-200 p-2 rounded-lg bg-gray-800/50 hover:bg-gray-700/50"
                 aria-label={mobileMenuOpen ? "Cerrar menú" : "Abrir menú"}
@@ -266,9 +265,8 @@ export default function Home() {
                   initial={{ opacity: 0, y: -10 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.1 * index }}
-                  className={`text-2xl font-medium ${
-                    activeSection === item.id ? "text-violet-400" : "text-gray-300 hover:text-white"
-                  }`}
+                  className={`text-2xl font-medium ${activeSection === item.id ? "text-violet-400" : "text-gray-300 hover:text-white"
+                    }`}
                   onClick={() => scrollToSection(item.id)}
                 >
                   {item.label}
@@ -297,34 +295,33 @@ export default function Home() {
       </AnimatePresence>
 
       {/* Contenido principal - Con padding-top para compensar el navbar */}
-        {/* Content sections */}
-        <section id="hero" className="min-h-screen" data-section-index="0">
-          <Hero />
-        </section>
+      {/* Content sections */}
+      <section id="hero" className="min-h-screen" data-section-index="0">
+        <Hero />
+      </section>
 
-        <section id="about" className="min-h-screen" data-section-index="1">
-          <AboutSection />
-        </section>
+      <section id="about" className="min-h-screen" data-section-index="1">
+        <AboutSection />
+      </section>
 
-        <section id="projects" className="min-h-screen" data-section-index="2">
-          <MyProjects />
-        </section>
+      <section id="projects" className="min-h-screen" data-section-index="2">
+        <MyProjects />
+      </section>
 
-        <section id="contact" className="min-h-screen" data-section-index="3">
-          <ContactMe />
-        </section>
-      
+      <section id="contact" className="min-h-screen" data-section-index="3">
+        <ContactMe />
+      </section>
+
       {/* Navigation Dots */}
       <div className="fixed right-6 top-1/2 transform -translate-y-1/2 z-30 hidden lg:flex flex-col gap-4">
         {navItems.map((item) => (
           <button
             key={item.id}
             onClick={() => scrollToSection(item.id)}
-            className={`w-3 h-3 rounded-full transition-all duration-300 ${
-              activeSection === item.id 
-                ? "bg-violet-500 scale-125" 
+            className={`w-3 h-3 rounded-full transition-all duration-300 ${activeSection === item.id
+                ? "bg-violet-500 scale-125"
                 : "bg-gray-500 hover:bg-gray-400"
-            }`}
+              }`}
             aria-label={`Navegar a ${item.label}`}
           />
         ))}
