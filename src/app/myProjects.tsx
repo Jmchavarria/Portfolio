@@ -3,7 +3,7 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from 'next/image';
-import { FiX, FiChevronLeft, FiChevronRight, FiExternalLink, FiMaximize } from 'react-icons/fi';
+import { FiX, FiChevronLeft, FiChevronRight, FiExternalLink, FiMaximize, FiGithub } from 'react-icons/fi';
 
 // Tipos
 interface Project {
@@ -11,6 +11,7 @@ interface Project {
   title: string;
   shortDescription: string;
   longDescription: string;
+  codeLink?: string;
   link: string;
   imageUrl: string;
   additionalImages?: string[];
@@ -44,7 +45,7 @@ const useCarousel = (imagesLength: number, autoPlayInterval = 5000) => {
   // Manejar el autoplay
   useEffect(() => {
     if (!autoPlay || imagesLength <= 1) return;
-    
+
     const interval = setInterval(nextSlide, autoPlayInterval);
     return () => clearInterval(interval);
   }, [autoPlay, imagesLength, nextSlide, autoPlayInterval]);
@@ -70,7 +71,7 @@ const FullScreenImage: React.FC<{
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'Escape') onClose();
     };
-    
+
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [onClose]);
@@ -99,7 +100,7 @@ const FullScreenImage: React.FC<{
       >
         <FiX size={24} />
       </button>
-      
+
       <div className="w-full h-full p-4 flex items-center justify-center" onClick={handleContentClick}>
         <div className="relative w-full h-full">
           <Image
@@ -124,31 +125,33 @@ const projects: Project[] = [
     title: "MOTORBIKE",
     shortDescription: "Plataforma de venta de motocicletas y repuestos.",
     longDescription: "MotorBike es una plataforma completa para la venta de motocicletas y repuestos, con sistema de inventario, carrito de compras y pasarela de pagos integrada. Desarrollada con React, Node.js y MongoDB.",
-    link: "https://motorbikefull.onrender.com/",
-    imageUrl: "/images/motorbike.png",
+    link: "https://github.com/carlos2771/MotorBikeFull",
+    codeLink: "https://github.com/carlos2771/MotorBikeFull",
+    imageUrl: "/images/motorbike/motorbike1.png",
     additionalImages: [
       "/images/motorbike/motorbike1.png",
       "/images/motorbike/motorbike2.png",
-      "/images/motorbike/motorbike3.png", 
-      "/images/motorbike/motorbike4.png", 
-      "/images/motorbike/motorbike5.png", 
-      "/images/motorbike/motorbike6.png", 
+      "/images/motorbike/motorbike3.png",
+      "/images/motorbike/motorbike4.png",
+      "/images/motorbike/motorbike5.png",
+      "/images/motorbike/motorbike6.png",
       "/images/motorbike/motorbike7.png"
     ],
     technologies: ["React", "Node.js", "MongoDB", "TailwindCSS"],
     features: ["Catálogo de productos", "Carrito de compras", "Sistema de autenticación", "Panel administrativo"]
-  }, 
+  },
   {
     id: "barmanager",
     title: "Bar Manager",
     shortDescription: "Sistema que gestiona bares y restaurantes.",
     longDescription: "Bar manager es un software dedicado a la gestión de bares y restaurantes, con funcionalidades para la administración de mesas, pedidos y facturación.",
     link: "https://barmanager.example.com/",
-    imageUrl: "/images/motorbike.png",
+    imageUrl: "/images/bmg/login.webp",
     additionalImages: [
-      "/images/motorbike.png",
-      "/images/motorbike2.png",
-      "/images/motorbike3.png"
+      "/images/bmg/login.jpg",
+      "/images/bmg/profile.webp",
+      "/images/bmg/usersList.jpg",
+      "/images/bmg/tableList.webp",
     ],
     technologies: ["React", "Node.js", "ORM Prisma", "TailwindCSS"],
     features: ["Tabla de usuarios", "Módulo de mesas", "Sistema de autenticación", "Panel administrativo"]
@@ -159,11 +162,13 @@ const projects: Project[] = [
     shortDescription: "Sistema que gestiona el intercambio de monedas.",
     longDescription: "CGE es un software dedicado a la gestión de intercambios de monedas, permitiendo a los usuarios realizar conversiones entre diferentes divisas con tarifas competitivas.",
     link: "https://cge-exchange.greenstudio.workers.dev/",
-    imageUrl: "/images/motorbike.png",
+    imageUrl: "/images/cge/cge1.png",
     additionalImages: [
-      "/images/motorbike.png",
-      "/images/motorbike2.png",
-      "/images/motorbike3.png"
+      "/images/cge/cge1.png",
+      "/images/cge/cge2.png",
+      "/images/cge/cge3.png",
+      "/images/cge/cge4.png",
+      "/images/cge/cge5.png"
     ],
     technologies: ["React", "Node.js", "ORM Prisma", "TailwindCSS", "Cloudflare Workers"],
     features: ["Conversión de divisas", "Historial de transacciones", "Sistema de autenticación", "Panel administrativo"]
@@ -171,9 +176,9 @@ const projects: Project[] = [
 ];
 
 // Componente para la tarjeta de proyecto
-const ProjectCard: React.FC<{ 
-  project: Project; 
-  onOpen: (id: string) => void; 
+const ProjectCard: React.FC<{
+  project: Project;
+  onOpen: (id: string) => void;
   delay: number;
 }> = ({ project, onOpen, delay }) => {
   const [imageError, setImageError] = useState(false);
@@ -208,7 +213,7 @@ const ProjectCard: React.FC<{
                 onClick={handleImageClick}
                 priority={delay < 0.2}
               />
-              <button 
+              <button
                 onClick={(e) => {
                   e.preventDefault();
                   e.stopPropagation();
@@ -243,21 +248,37 @@ const ProjectCard: React.FC<{
               </span>
             )}
           </div>
-          <button
-            onClick={() => onOpen(project.id)}
-            aria-label={`Ver detalles del proyecto ${project.title}`}
-            className="flex items-center gap-2 text-blue-400 hover:text-blue-300 font-medium transition-colors"
-            type="button"
-          >
-            Ver Proyecto
-            <span className="h-8 w-8 rounded-full bg-blue-900/30 flex items-center justify-center group-hover:bg-blue-900/50 transition-colors">
-              <FiChevronRight />
-            </span>
-          </button>
+          <div className="flex items-center justify-between">
+            <button
+              onClick={() => onOpen(project.id)}
+              aria-label={`Ver detalles del proyecto ${project.title}`}
+              className="flex items-center gap-2 text-blue-400 hover:text-blue-300 font-medium transition-colors"
+              type="button"
+            >
+              Ver Proyecto
+              <span className="h-8 w-8 rounded-full bg-blue-900/30 flex items-center justify-center group-hover:bg-blue-900/50 transition-colors">
+                <FiChevronRight />
+              </span>
+            </button>
+
+            {project.codeLink && (
+              <a
+                href={project.codeLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={`Ver código de ${project.title}`}
+                className="flex items-center gap-2 text-gray-400 hover:text-violet-300 font-medium transition-colors"
+              >
+                <span className="h-8 w-8 rounded-full bg-gray-700/50 hover:bg-violet-900/50 flex items-center justify-center transition-colors">
+                  <FiGithub size={16} />
+                </span>
+                Código
+              </a>
+            )}
+          </div>
         </div>
       </motion.div>
 
-      {/* Imagen a pantalla completa */}
       <AnimatePresence>
         {isImageFullScreen && (
           <FullScreenImage
@@ -272,19 +293,19 @@ const ProjectCard: React.FC<{
 };
 
 // Componente para el modal de detalle de proyecto
-const ProjectModal: React.FC<{ 
-  project: Project; 
-  onClose: () => void; 
+const ProjectModal: React.FC<{
+  project: Project;
+  onClose: () => void;
 }> = ({ project, onClose }) => {
   const [imageError, setImageError] = useState(false);
   const [isImageFullScreen, setIsImageFullScreen] = useState(false);
   const imagesLength = project.additionalImages?.length || 0;
-  
-  const { 
-    currentIndex, 
-    nextSlide, 
-    prevSlide, 
-    goToSlide 
+
+  const {
+    currentIndex,
+    nextSlide,
+    prevSlide,
+    goToSlide
   } = useCarousel(imagesLength);
 
   // Manejar teclado
@@ -308,8 +329,8 @@ const ProjectModal: React.FC<{
   }, [onClose, nextSlide, prevSlide, isImageFullScreen]);
 
   // Obtener la URL de la imagen actual
-  const currentImageUrl = imagesLength > 0 
-    ? project.additionalImages?.[currentIndex] || project.imageUrl 
+  const currentImageUrl = imagesLength > 0
+    ? project.additionalImages?.[currentIndex] || project.imageUrl
     : project.imageUrl;
 
   const handleFullScreenImage = (e: React.MouseEvent) => {
@@ -395,7 +416,7 @@ const ProjectModal: React.FC<{
                       onError={() => setImageError(true)}
                       priority
                     />
-                    <button 
+                    <button
                       onClick={(e) => {
                         e.preventDefault();
                         e.stopPropagation();
@@ -446,11 +467,10 @@ const ProjectModal: React.FC<{
                         key={idx}
                         onClick={(e) => handleGoToSlide(idx, e)}
                         aria-label={`Ir a imagen ${idx + 1}`}
-                        className={`h-2 rounded-full transition-all ${
-                          currentIndex === idx 
-                            ? 'bg-white w-8' 
-                            : 'bg-gray-500 w-2 hover:bg-gray-400'
-                        }`}
+                        className={`h-2 rounded-full transition-all ${currentIndex === idx
+                          ? 'bg-white w-8'
+                          : 'bg-gray-500 w-2 hover:bg-gray-400'
+                          }`}
                         type="button"
                       />
                     ))}
@@ -469,7 +489,7 @@ const ProjectModal: React.FC<{
                       className="object-contain"
                       onError={() => setImageError(true)}
                     />
-                    <button 
+                    <button
                       onClick={(e) => {
                         e.preventDefault();
                         e.stopPropagation();
@@ -490,7 +510,7 @@ const ProjectModal: React.FC<{
 
             {/* Contenido del proyecto */}
             <div className="space-y-6">
-              <h2 
+              <h2
                 id={`modal-title-${project.id}`}
                 className="text-2xl md:text-3xl font-bold text-violet-400 pb-2 border-b border-gray-700"
               >
@@ -508,8 +528,8 @@ const ProjectModal: React.FC<{
                     <h3 className="text-xl font-semibold mb-3 text-violet-200">Tecnologías</h3>
                     <div className="flex flex-wrap gap-2">
                       {project.technologies.map((tech, idx) => (
-                        <span 
-                          key={idx} 
+                        <span
+                          key={idx}
                           className="bg-violet-900/60 text-violet-200 px-3 py-1 rounded-full text-sm"
                         >
                           {tech}
@@ -534,21 +554,26 @@ const ProjectModal: React.FC<{
                 )}
               </div>
 
-              <div className="flex justify-center pt-4">
-                <a
-                  href={project.link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-6 py-3 bg-violet-700 hover:bg-violet-600 
-                          rounded-lg font-medium transition-colors shadow-lg shadow-violet-900/30"
-                  aria-label={`Visitar sitio web de ${project.title}`}
-                >
-                  Visitar sitio web
-                  <FiExternalLink />
-                </a>
-              </div>
+
+              {project.title === 'Bar Manager' ?
+                '' :
+                <div className="flex justify-center pt-4">
+                  <a
+                    href={project.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 px-6 py-3 bg-violet-700 hover:bg-violet-600 
+                rounded-lg font-medium transition-colors shadow-lg shadow-violet-900/30"
+                    aria-label={`Visitar sitio web de ${project.title}`}
+                  >
+                    Visitar sitio web
+                    <FiExternalLink />
+                  </a>
+                </div>
+              }
             </div>
           </div>
+
         </motion.div>
       </motion.div>
 
@@ -616,9 +641,9 @@ const MyProjects: React.FC = () => {
       {/* Modal de detalles del proyecto */}
       <AnimatePresence>
         {selectedProject && (
-          <ProjectModal 
-            project={selectedProject} 
-            onClose={closeProjectModal} 
+          <ProjectModal
+            project={selectedProject}
+            onClose={closeProjectModal}
           />
         )}
       </AnimatePresence>
