@@ -146,7 +146,7 @@ const projects: Project[] = [
     shortDescription: "Sistema que gestiona bares y restaurantes.",
     longDescription: "Bar manager es un software dedicado a la gestión de bares y restaurantes, con funcionalidades para la administración de mesas, pedidos y facturación.",
     link: "https://barmanager.example.com/",
-    imageUrl: "/images/bmg/login.webp",
+    imageUrl: "/images/bmg/login.jpg",
     additionalImages: [
       "/images/bmg/login.jpg",
       "/images/bmg/profile.webp",
