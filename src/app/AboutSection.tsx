@@ -1,5 +1,4 @@
-import { Linkedin, Twitter, Instagram } from 'lucide-react';
-import { SiReact, SiNextdotjs, SiNodedotjs, SiMongodb, SiTailwindcss, SiTypescript, SiDocker, SiJest } from 'react-icons/si';
+import { SiReact, SiNextdotjs, SiNodedotjs, SiMongodb, SiTailwindcss, SiTypescript, SiDocker, SiJest, SiSupabase, SiHtml5, SiCss3, SiJavascript, SiPrisma, SiGithub, SiGit} from 'react-icons/si';
 import { motion, useAnimation, useInView } from 'framer-motion';
 import Image from 'next/image';
 import React, { useEffect, useRef } from 'react';
@@ -23,8 +22,15 @@ const AboutSection = () => {
     { icon: <SiMongodb className="text-[#47A248] text-3xl" />, name: "MongoDB" },
     { icon: <SiTailwindcss className="text-[#38B2AC] text-3xl" />, name: "Tailwind" },
     { icon: <SiTypescript className="text-[#3178C6] text-3xl" />, name: "TypeScript" },
-    { icon: <SiDocker className="text-[#2496ED] text-3xl" />, name: "Docker" },
-    { icon: <SiJest className="text-[#C21325] text-3xl" />, name: "Jest" }
+    { icon: <SiJest className="text-[#C21325] text-3xl" />, name: "Jest" }, 
+    { icon: <SiSupabase className="text-[#3ecf8e] text-3xl" />, name: "Supabase" }, 
+    { icon: <SiHtml5 className="text-[#e14e1d] text-3xl" />, name: "Html" }, 
+    { icon: <SiCss3 className="text-[#0277bd] text-3xl" />, name: "Css" },
+    { icon: <SiJavascript className="text-[#f0db4f] text-3xl" />, name: "Javascript" }, 
+    { icon: <SiPrisma className="text-[#677eeb] text-3xl" />, name: "Prisma" },
+    { icon: <SiGithub className="text-[#ffffff] text-3xl" />, name: "Github" }, 
+    { icon: <SiGit className="text-[#f03c2e] text-3xl" />, name: "Git" }, 
+
   ];
 
   const services = [
@@ -102,7 +108,7 @@ const AboutSection = () => {
           >
             <div className="relative w-64 h-80 md:w-72 md:h-96 rounded-xl overflow-hidden shadow-lg border-2 border-violet-500/20 hover:border-violet-500/40 transition-all">
               <Image
-                src="/images/imgPersonal.jpg"
+                src="/images/imgportfolio.jpg"
                 alt="Jhon Marlon Chavarría Cuervo"
                 width={400}
                 height={600}
