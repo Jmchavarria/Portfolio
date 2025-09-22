@@ -197,55 +197,7 @@ export default function Home() {
   return (
     <main className="flex flex-col min-h-screen">
       {/* Header tipo notch fijo */}
-      <header className="fixed top-0 left-0 right-0 z-50">
-        {/* Contenedor del notch con fondo difuminado */}
-        <div className="relative mx-auto">
-          {/* Forma del notch */}
-          <div className="absolute left-1/2 transform -translate-x-1/2 w-[95%] max-w-4xl h-14 
-                        
-                        backdrop-blur-md rounded-b-xl shadow-lg">
-            {/* Barra de progreso */}
-            <div className="absolute top-0 left-0 h-1 bg-violet-500 rounded-bl-xl transition-all duration-300"
-              style={{ width: progressWidth }} />
-
-            {/* Contenido del navbar */}
-            <div className="flex justify-between items-center h-full px-8">
-              <motion.div
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.5 }}
-              >
-                <h2 className="text-lg font-bold text-black">Portfolio🐲</h2>
-              </motion.div>
-
-              {/* Desktop navigation */}
-              <div className="hidden md:flex space-x-6">
-                {navItems.map((item) => (
-                  <button
-                    key={item.id}
-                    className={`font-medium transition-colors duration-300 ${activeSection === item.id
-                        ? "text-black"
-                        : "text-[#313638] hover:text-white"
-                      }`}
-                    onClick={() => scrollToSection(item.id)}
-                  >
-                    {item.label}
-                  </button>
-                ))}
-              </div>
-
-              {/* Mobile menu button */}
-              <button
-                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                className="md:hidden text-gray-200 p-2 rounded-lg bg-gray-800/50 hover:bg-gray-700/50"
-                aria-label={mobileMenuOpen ? "Cerrar menú" : "Abrir menú"}
-              >
-                {mobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
-              </button>
-            </div>
-          </div>
-        </div>
-      </header>
+      
 
       {/* Menu móvil */}
       <AnimatePresence>
