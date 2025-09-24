@@ -1,22 +1,12 @@
 "use client";
 
-// components/MyProjects.tsx
 import React, { useState, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { FiChevronLeft, FiChevronRight } from 'react-icons/fi';
-
-// Types
-import { Project } from "@/types/project";
-
-// Data
-import { projects } from '../data/projects';
-
-// Hooks
-import { useProjectCarousel } from '../hooks/useProjectCarousel';
-
-// Components
-import { ProjectCard } from "./components/projectCard";
-import { ProjectModal } from "./components/ProjectModal";
+import { projects } from "@/data/projects";
+import { useProjectCarousel } from "@/hooks/useProjectCarousel";
+import { ProjectCard } from "./projectCard";
+import { ProjectModal } from './ProjectModal';
 
 const MyProjects: React.FC = () => {
   const [selectedProjectId, setSelectedProjectId] = useState<string | null>(null);
@@ -58,9 +48,7 @@ const MyProjects: React.FC = () => {
           </p>
         </motion.div>
 
-        {/* Contenedor del carrusel */}
         <div className="relative">
-          {/* Botones de navegación */}
           {projects.length > itemsToShow && (
             <>
               <button
@@ -83,7 +71,6 @@ const MyProjects: React.FC = () => {
             </>
           )}
 
-          {/* Contenedor del carrusel */}
           <div className="overflow-hidden">
             <motion.div
               className="flex gap-6 md:gap-8"
@@ -102,7 +89,7 @@ const MyProjects: React.FC = () => {
               {projects.map((project, index) => (
                 <div
                   key={project.id}
-                  className="flex-shrink-0 h-full"
+                  className="flex-shrink-0"
                   style={{
                     width: `calc(${100 / projects.length}% - ${(24 * (projects.length - 1)) / projects.length}px)`
                   }}
@@ -117,24 +104,19 @@ const MyProjects: React.FC = () => {
             </motion.div>
           </div>
 
-          {/* Indicadores */}
           {projects.length > itemsToShow && (
             <div className="flex justify-center mt-8 space-x-2">
               {Array.from({ length: Math.max(1, projects.length - itemsToShow + 1) }).map((_, idx) => (
                 <button
                   key={idx}
                   onClick={() => goToSlide(idx)}
-                  className={`h-2 rounded-full transition-all ${currentIndex === idx
-                      ? 'bg-[#ffb17a] w-8'
-                      : 'bg-gray-300 w-2 hover:bg-gray-200'
-                    }`}
+                  className={`h-2 rounded-full transition-all ${currentIndex === idx ? 'bg-[#ffb17a] w-8' : 'bg-gray-300 w-2 hover:bg-gray-200'}`}
                   aria-label={`Ir a proyecto ${idx + 1}`}
                 />
               ))}
             </div>
           )}
 
-          {/* Información adicional */}
           <div className="mt-4 text-center">
             <p className="text-gray-300 text-sm">
               Showing {Math.min(itemsToShow, projects.length)} de {projects.length} projects
@@ -143,7 +125,6 @@ const MyProjects: React.FC = () => {
         </div>
       </div>
 
-      {/* Modal de detalles del proyecto */}
       <AnimatePresence>
         {selectedProject && (
           <ProjectModal
