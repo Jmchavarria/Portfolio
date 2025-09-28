@@ -58,21 +58,31 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
         animate={{ opacity: 1 }}
         exit={{ opacity: 0, transition: { duration: 0.2 } }}
         onClick={onClose}
-        className="fixed inset-0 bg-black/90 backdrop-blur-md z-50 flex items-center justify-center p-4 overflow-hidden"
+        className="fixed inset-0 bg-black/90 backdrop-blur-md z-50 flex items-end sm:items-center justify-center p-0 sm:p-4 overflow-hidden"
         role="dialog"
         aria-modal="true"
       >
         <motion.div
-          initial={{ scale: 0.95, y: 20, opacity: 0 }}
-          animate={{ scale: 1, y: 0, opacity: 1 }}
-          exit={{ scale: 0.95, y: 20, opacity: 0 }}
-          transition={{ type: "spring", damping: 25, stiffness: 300 }}
-          className="relative bg-zinc-900 rounded-xl w-full max-w-7xl h-[90vh] flex flex-col overflow-hidden shadow-2xl"
+          initial={{ y: "100%", opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          exit={{ y: "100%", opacity: 0 }}
+          transition={{ 
+            type: "spring", 
+            damping: 30, 
+            stiffness: 300,
+            duration: 0.4
+          }}
+          className="relative bg-zinc-900 rounded-t-2xl sm:rounded-xl w-full max-w-7xl h-[95vh] sm:h-[90vh] flex flex-col overflow-hidden shadow-2xl"
           onClick={(e) => e.stopPropagation()}
         >
+          {/* Handle bar para móvil */}
+          <div className="flex justify-center pt-3 pb-1 sm:hidden">
+            <div className="w-10 h-1 bg-gray-400 rounded-full"></div>
+          </div>
+
           {/* Header */}
-          <div className="flex items-center justify-between p-6 border-b border-gray-800/50 bg-black/20 backdrop-blur-sm">
-            <h2 className="text-2xl md:text-3xl font-bold text-white flex items-center gap-3">
+          <div className="flex items-center justify-between p-4 sm:p-6 border-b border-gray-800/50 bg-black/20 backdrop-blur-sm">
+            <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-white flex items-center gap-3">
               <span className="bg-gradient-to-r from-[#ffb17a] to-[#ff9e5c] bg-clip-text text-transparent">
                 {project.title}
               </span>
@@ -84,33 +94,31 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
                   aria-label={`Ver proyecto ${project.title}`}
                   className="text-gray-400 hover:text-[#ffb17a] transition-all duration-300 hover:scale-110"
                 >
-                  <FiExternalLink size={24} />
+                  <FiExternalLink size={20} className="sm:w-6 sm:h-6" />
                 </a>
               )}
             </h2>
 
             <button
               onClick={onClose}
-              className="text-gray-400 hover:text-white bg-gray-800/50 hover:bg-gray-700/50 backdrop-blur-sm rounded-full p-2.5 transition-all duration-300 hover:scale-105 shadow-lg"
+              className="text-gray-400 hover:text-white bg-gray-800/50 hover:bg-gray-700/50 backdrop-blur-sm rounded-full p-2 sm:p-2.5 transition-all duration-300 hover:scale-105 shadow-lg"
               aria-label="Cerrar modal"
               type="button"
             >
-              <FiX size={20} />
+              <FiX size={18} className="sm:w-5 sm:h-5" />
             </button>
           </div>
 
           {/* Contenido scrollable */}
           <div className="flex-1 overflow-y-auto overscroll-contain [-webkit-overflow-scrolling:touch] scrollbar-modal">
-            <div className="p-4 space-y-6">
-              {/* Carrusel con alto fijo (sin saltos) */}
+            <div className="p-4 sm:p-6 space-y-6">
+              {/* Carrusel con alto fijo */}
               <div className="flex justify-center">
-                <div
-                  className="relative group w-full max-w-5xl bg-gradient-to-br from-gray-900 to-black border border-gray-800/60 rounded-xl shadow-2xl overflow-hidden h-[40vh] sm:h-[50vh] md:h-[60vh]"
-                >
+                <div className="relative group w-full max-w-5xl bg-gradient-to-br from-gray-900 to-black border border-gray-800/60 rounded-xl shadow-2xl overflow-hidden h-[30vh] sm:h-[40vh] md:h-[50vh] lg:h-[60vh]">
                   {/* Loader overlay */}
                   {imageLoading && (
                     <div className="absolute inset-0 flex items-center justify-center bg-gray-900/40 z-10">
-                      <div className="w-8 h-8 border-2 border-[#ffb17a] border-t-transparent rounded-full animate-spin" />
+                      <div className="w-6 h-6 sm:w-8 sm:h-8 border-2 border-[#ffb17a] border-t-transparent rounded-full animate-spin" />
                     </div>
                   )}
 
@@ -139,13 +147,13 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
                   {/* Botón pantalla completa */}
                   <button
                     onClick={() => setIsImageFullScreen(true)}
-                    className="absolute top-4 right-4 bg-black/60 hover:bg-black/80 text-white p-2 rounded-lg opacity-0 group-hover:opacity-100 transition-all duration-300 backdrop-blur-sm z-20"
+                    className="absolute top-2 right-2 sm:top-4 sm:right-4 bg-black/60 hover:bg-black/80 text-white p-1.5 sm:p-2 rounded-lg opacity-0 group-hover:opacity-100 transition-all duration-300 backdrop-blur-sm z-20"
                     aria-label="Ver en pantalla completa"
                   >
-                    <FiMaximize2 size={16} />
+                    <FiMaximize2 size={14} className="sm:w-4 sm:h-4" />
                   </button>
 
-                  {/* Controles */}
+                  {/* Controles - Ocultos en móvil */}
                   {imagesLength > 1 && (
                     <>
                       <button
@@ -153,10 +161,10 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
                           e.stopPropagation();
                           prevSlide();
                         }}
-                        className="absolute left-4 top-1/2 cursor-pointer -translate-y-1/2 bg-black/60 hover:bg-black/80 text-white h-12 w-12 flex items-center justify-center rounded-full transition-all duration-300 hover:scale-110 backdrop-blur-sm opacity-0 group-hover:opacity-100 z-20"
+                        className="absolute left-2 sm:left-4 top-1/2 cursor-pointer -translate-y-1/2 bg-black/60 hover:bg-black/80 text-white h-8 w-8 sm:h-12 sm:w-12 flex items-center justify-center rounded-full transition-all duration-300 hover:scale-110 backdrop-blur-sm opacity-0 group-hover:opacity-100 z-20"
                         aria-label="Imagen anterior"
                       >
-                        <FiChevronLeft size={24} />
+                        <FiChevronLeft size={16} className="sm:w-6 sm:h-6" />
                       </button>
 
                       <button
@@ -164,10 +172,10 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
                           e.stopPropagation();
                           nextSlide();
                         }}
-                        className="absolute right-4 cursor-pointer top-1/2 -translate-y-1/2 bg-black/60 hover:bg-black/80 text-white h-12 w-12 flex items-center justify-center rounded-full transition-all duration-300 hover:scale-110 backdrop-blur-sm opacity-0 group-hover:opacity-100 z-20"
+                        className="absolute right-2 sm:right-4 cursor-pointer top-1/2 -translate-y-1/2 bg-black/60 hover:bg-black/80 text-white h-8 w-8 sm:h-12 sm:w-12 flex items-center justify-center rounded-full transition-all duration-300 hover:scale-110 backdrop-blur-sm opacity-0 group-hover:opacity-100 z-20"
                         aria-label="Imagen siguiente"
                       >
-                        <FiChevronRight size={24} />
+                        <FiChevronRight size={16} className="sm:w-6 sm:h-6" />
                       </button>
                     </>
                   )}
@@ -186,8 +194,8 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
                       }}
                       className={`h-0.5 transition-all duration-300 ease-in-out ${
                         currentIndex === idx
-                          ? "bg-gradient-to-r from-[#ffb17a] to-[#ff9e5c] w-20"
-                          : "bg-gray-600/60 hover:bg-gray-500/80 w-16"
+                          ? "bg-gradient-to-r from-[#ffb17a] to-[#ff9e5c] w-16 sm:w-20"
+                          : "bg-gray-600/60 hover:bg-gray-500/80 w-12 sm:w-16"
                       }`}
                       aria-label={`Ir a imagen ${idx + 1}`}
                     />
@@ -199,34 +207,34 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
               )}
 
               {/* Descripción */}
-              <div className="bg-zinc-800 border border-gray-700/30 p-5 rounded-xl">
+              <div className="bg-zinc-800 border border-gray-700/30 p-4 sm:p-5 rounded-xl">
                 <div className="flex items-center gap-2 mb-4">
-                  <h3 className="text-xl font-semibold text-gray-200">Description</h3>
+                  <h3 className="text-lg sm:text-xl font-semibold text-gray-200">Description</h3>
                 </div>
-                <p className="text-gray-300 leading-relaxed text-base">
+                <p className="text-gray-300 leading-relaxed text-sm sm:text-base">
                   {project.longDescription}
                 </p>
               </div>
 
               {/* Grid tecnologías / características */}
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6">
                 {project.technologies && project.technologies.length > 0 && (
-                  <div className="bg-zinc-800 border border-gray-700/30 p-5 rounded-xl backdrop-blur-sm">
+                  <div className="bg-zinc-800 border border-gray-700/30 p-4 sm:p-5 rounded-xl backdrop-blur-sm">
                     <div className="flex items-center gap-2 mb-4">
-                      <h3 className="text-xl font-semibold text-gray-200">Technologies</h3>
+                      <h3 className="text-lg sm:text-xl font-semibold text-gray-200">Technologies</h3>
                     </div>  
-                    <div className="flex flex-wrap gap-3">
+                    <div className="flex flex-wrap gap-2 sm:gap-3">
                       {project.technologies.map((tech, idx) => (
                         <motion.div
                           key={idx}
                           initial={{ opacity: 0, scale: 0.9 }}
                           animate={{ opacity: 1, scale: 1 }}
                           transition={{ delay: idx * 0.06 }}
-                          className="flex items-center gap-2 bg-black/40 px-4 py-2.5 rounded-lg hover:from-gray-600/50 hover:to-gray-500/40 transition-all duration-300 hover:scale-105 backdrop-blur-sm"
+                          className="flex items-center gap-2 bg-black/40 px-3 py-2 sm:px-4 sm:py-2.5 rounded-lg hover:from-gray-600/50 hover:to-gray-500/40 transition-all duration-300 hover:scale-105 backdrop-blur-sm"
                           title={tech}
                         >
                           {getTechnologyIcon(tech)}
-                          <span className="text-sm text-gray-200 font-medium">{tech}</span>
+                          <span className="text-xs sm:text-sm text-gray-200 font-medium">{tech}</span>
                         </motion.div>
                       ))}
                     </div>
@@ -234,11 +242,11 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
                 )}
 
                 {project.features && project.features.length > 0 && (
-                  <div className="bg-zinc-800 p-5 rounded-xl backdrop-blur-sm">
+                  <div className="bg-zinc-800 border border-gray-700/30 p-4 sm:p-5 rounded-xl backdrop-blur-sm">
                     <div className="flex items-center gap-2 mb-4">
-                      <h3 className="text-xl font-semibold text-gray-200">Characteristics</h3>
+                      <h3 className="text-lg sm:text-xl font-semibold text-gray-200">Characteristics</h3>
                     </div>
-                    <ul className="space-y-3 text-gray-300">
+                    <ul className="space-y-2 sm:space-y-3 text-gray-300">
                       {project.features.map((feature, idx) => (
                         <motion.li
                           key={idx}
@@ -248,7 +256,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
                           className="flex items-start gap-3 group"
                         >
                           <div className="w-1.5 h-1.5 bg-gradient-to-r from-[#ffb17a] to-[#ff9e5c] rounded-full mt-2 group-hover:scale-125 transition-transform duration-200" />
-                          <span className="flex-1">{feature}</span>
+                          <span className="flex-1 text-sm sm:text-base">{feature}</span>
                         </motion.li>
                       ))}
                     </ul>
@@ -258,12 +266,12 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
 
               {/* CTA */}
               {project.title !== "Bar Manager" && (
-                <div className="flex justify-center pt-2">
+                <div className="flex justify-center pt-2 pb-4 sm:pb-0">
                   <a
                     href={project.link}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 px-6 py-3 text-black bg-[#ffb17a] hover:bg-[#ff9e5c] rounded-lg font-medium transition-colors duration-300"
+                    className="inline-flex items-center gap-2 px-6 py-3 text-black bg-[#ffb17a] hover:bg-[#ff9e5c] rounded-lg font-medium transition-all duration-300 hover:scale-105 active:scale-95"
                   >
                     Visit website
                     <FiExternalLink />
@@ -285,14 +293,14 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
         )}
       </AnimatePresence>
 
-      {/* Scrollbar mejorado */}S
+      {/* Scrollbar mejorado */}
       <style jsx global>{`
         .scrollbar-modal {
           scrollbar-width: thin;
           scrollbar-color: rgba(255, 177, 122, 0.4) rgba(0, 0, 0, 0.1);
-        }P
+        }
         .scrollbar-modal::-webkit-scrollbar {
-          width: 8px;
+          width: 6px;
         }
         .scrollbar-modal::-webkit-scrollbar-track {
           background: rgba(0, 0, 0, 0.1);

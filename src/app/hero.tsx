@@ -66,7 +66,7 @@ const Hero = () => {
             <a
               href="/files/Jhon-Chavarria-CV.pdf"
               download="Jhon-Chavarria-CV.pdf"
-              className="inline-flex items-center justify-center sm:justify-start gap-2 px-5 py-3 bg-[#ffb17a] text-black font-semibold rounded-lg shadow-md hover:bg-[#e89c62] transition text-sm sm:text-base border w-full sm:w-auto border-white sm:border-none"
+              className="inline-flex items-center justify-center sm:justify-start gap-2 px-5 py-3 bg-[#ffb17a] text-black font-semibold rounded-lg shadow-md hover:bg-[#e89c62] transition text-sm sm:text-base border w-full sm:w-auto  sm:border-none"
             >
               <Download size={20} />
               Download CV
