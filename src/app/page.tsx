@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef } from "react";
 import AboutSection from "./AboutSection";
-import ContactMe from "./contactMe";
+import ContactMe from "./experience";
 import Hero from "./hero";
 import MyProjects from "./myProjects";
 import { motion, AnimatePresence } from "framer-motion";
@@ -111,9 +111,8 @@ export default function Home() {
       {/* Header fijo */}
       <header
         className={`sticky top-0 z-50  flex items-center justify-between px-6 lg:px-20 py-4  
-        transition-colors duration-300 ${
-          hasScrolled ? "bg-black/90 backdrop-blur-md" : "bg-black"
-        }`}
+        transition-colors duration-300 ${hasScrolled ? "bg-black/90 backdrop-blur-md" : "bg-black"
+          }`}
       >
         {/* Logo */}
         <div className="text-xl font-bold text-white">JmChavarría</div>
@@ -122,13 +121,12 @@ export default function Home() {
         <nav className="hidden lg:flex gap-12 text-white font-semibold">
           {navItems.map((item) => (
             <button
-              key={item.id} 
+              key={item.id}
               onClick={() => scrollToSection(item.id)}
-              className={`relative transition-colors duration-300 ${
-                activeSection === item.id
-                  ? "text-yellow-400 after:w-full"
-                  : "hover:text-yellow-400"
-              } 
+              className={`relative transition-colors duration-300 ${activeSection === item.id
+                ? "text-yellow-400 after:w-full"
+                : "hover:text-yellow-400"
+                } 
                 after:content-[''] after:absolute after:left-0 after:-bottom-1
                 after:h-[2px] after:bg-yellow-400 after:w-0 
                 after:transition-all after:duration-300 hover:after:w-full`}
@@ -163,11 +161,10 @@ export default function Home() {
                 initial={{ opacity: 0, y: -10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.1 * index }}
-                className={`text-2xl font-medium ${
-                  activeSection === item.id
-                    ? "text-yellow-400"
-                    : "text-gray-300 hover:text-white"
-                }`}
+                className={`text-2xl font-medium ${activeSection === item.id
+                  ? "text-yellow-400"
+                  : "text-gray-300 hover:text-white"
+                  }`}
                 onClick={() => scrollToSection(item.id)}
               >
                 {item.label}
@@ -203,13 +200,15 @@ export default function Home() {
         <AboutSection />
       </section>
 
+      <section id="contact" className="min-h-screen">
+        <ContactMe />
+      </section>
+
+
       <section id="projects" className="min-h-screen">
         <MyProjects />
       </section>
 
-      <section id="contact" className="min-h-screen">
-        <ContactMe />
-      </section>
     </main>
   );
 }

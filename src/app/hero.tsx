@@ -2,6 +2,8 @@
 
 import Image from "next/image";
 import "./globals.css";
+import { Download, Mail } from "lucide-react";
+import { FiGithub, FiLinkedin } from "react-icons/fi";
 
 const Hero = () => {
   // Función para hacer scroll suave
@@ -10,13 +12,19 @@ const Hero = () => {
     section?.scrollIntoView({ behavior: "smooth" });
   };
 
+  const socialLinks = [
+    { icon: FiGithub, href: "https://github.com/Jmchavarria", label: "GitHub" },
+    { icon: FiLinkedin, href: "https://www.linkedin.com/in/jhonmarlonchavarria", label: "LinkedIn" },
+    { icon: Mail, href: "mailto:marlon05chavarria@gmail.com", label: "Email" },
+  ];
+
   return (
     <section className="bg-black text-white min-h-screen flex items-center">
       <div className="flex flex-col lg:grid lg:grid-cols-5 lg:grid-rows-5 gap-8 w-full p-6 lg:p-12">
-        
+
         {/* Contenido principal */}
         <div className="lg:col-span-3 lg:row-span-5 flex flex-col justify-center items-center lg:items-start text-center lg:text-left gap-6 lg:ml-12">
-          
+
           {/* Nuevo Hello */}
           <span className="text-[#FFB17A] text-lg sm:text-xl font-semibold tracking-wide uppercase">
             Hello!
@@ -37,18 +45,42 @@ const Hero = () => {
 
           {/* Botones */}
           <div className="flex gap-4">
-            <button
-              onClick={() => scrollToSection("about")}
-              className="px-6 py-3 bg-[#FFFDED] text-black font-semibold rounded-lg shadow-md hover:shadow-lg hover:bg-gray-100 transition"
+            {/* Botón CV */}
+            <a
+              href="/files/Jhon-Chavarria-CV.pdf"
+              download="Jhon-Chavarria-CV.pdf"
+              className="inline-flex items-center gap-2 px-6 py-3 bg-[#ffb17a] text-black font-semibold rounded-lg shadow-md hover:bg-[#e89c62] transition"
             >
-              About me
-            </button>
-            <button
-              onClick={() => scrollToSection("projects")}
-              className="px-6 py-3 bg-transparent border border-[#FFFDED] text-[#FFFDED] font-semibold rounded-lg hover:bg-[#FFFDED] hover:text-black transition"
-            >
-              My projects
-            </button>
+              <Download size={20} />
+              Download CV
+            </a>
+
+            <div className="flex justify-center gap-2">
+              {socialLinks.map((social, index) => {
+                const hoverClass =
+                  social.label === "GitHub"
+                    ? "hover:bg-white/10"
+                    : social.label === "LinkedIn"
+                    ? "hover:bg-[#0a66c2]"
+                    : "hover:bg-[#ffb17a]/20";
+
+                return (
+                  <a
+                    key={index}
+                    href={social.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={`w-12 h-12 bg-gray-800/50 rounded-xl flex items-center justify-center transition-colors ${hoverClass}`}
+                    aria-label={social.label}
+                  >
+                    <social.icon
+                      className="text-gray-200 transition-colors"
+                      size={22}
+                    />
+                  </a>
+                );
+              })}
+            </div>
           </div>
         </div>
 
