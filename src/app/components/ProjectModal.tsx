@@ -285,12 +285,12 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
         )}
       </AnimatePresence>
 
-      {/* Scrollbar mejorado */}
+      {/* Scrollbar mejorado */}S
       <style jsx global>{`
         .scrollbar-modal {
           scrollbar-width: thin;
           scrollbar-color: rgba(255, 177, 122, 0.4) rgba(0, 0, 0, 0.1);
-        }
+        }P
         .scrollbar-modal::-webkit-scrollbar {
           width: 8px;
         }
