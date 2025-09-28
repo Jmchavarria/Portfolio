@@ -17,7 +17,7 @@ const Hero = () => {
   const socialLinks = [
     { icon: FiGithub, href: "https://github.com/Jmchavarria", label: "GitHub" },
     { icon: FiLinkedin, href: "https://www.linkedin.com/in/jhonmarlonchavarria", label: "LinkedIn" },
-    { icon: Mail, label: "Email" },
+    { icon: Mail, href: "mailto:marlon05chavarria@gmail.com", label: "Email" },
   ];
 
   return (
@@ -52,14 +52,14 @@ const Hero = () => {
             <a
               href="/files/Jhon-Chavarria-CV.pdf"
               download="Jhon-Chavarria-CV.pdf"
-              className="inline-flex items-center gap-2 px-5 py-3 bg-[#ffb17a] text-black font-semibold rounded-lg shadow-md hover:bg-[#e89c62] transition text-sm sm:text-base"
+              className="inline-flex items-center justify-center sm:justify-start gap-2 px-5 py-3 bg-[#ffb17a] text-black font-semibold rounded-lg shadow-md hover:bg-[#e89c62] transition text-sm sm:text-base border w-full sm:w-auto  border-white sm:border-none"
             >
               <Download size={20} />
               Download CV
             </a>
 
             {/* Social Buttons */}
-            <div className="flex gap-3">
+            <div className="flex gap-3  sm:border-none w-full sm:w-auto justify-center sm:justify-normal">
               {socialLinks.map((social, index) => {
                 const hoverClass =
                   social.label === "GitHub"
@@ -74,14 +74,14 @@ const Hero = () => {
                     href={social.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className={`flex items-center justify-center rounded-lg transition-colors ${hoverClass}
+                    className={`flex items-center justify-center rounded-lg transition-colors ${hoverClass} 
             ${social.label === "Email" ? "px-4 py-2 gap-2 bg-gray-800/50" : "w-11 h-11 bg-gray-800/50"}
           `}
                     aria-label={social.label}
                   >
                     <social.icon className="text-gray-200 transition-colors" size={20} />
                     {social.label === "Email" && (
-                      <span className="text-sm text-gray-200">marlon05chavarria@gmail.com</span>
+                      <span className="text-sm text-gray-200 hidden sm:inline">marlon05chavarria@gmail.com</span>
                     )}
                   </a>
                 );
