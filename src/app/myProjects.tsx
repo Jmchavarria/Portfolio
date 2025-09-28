@@ -65,7 +65,7 @@ const MyProjects: React.FC = () => {
             <>
               <button
                 onClick={prevSlide}
-                className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 z-10 p-3 rounded-full 
+                className="absolute left-0 top-1/2 cursor-pointer -translate-y-1/2 -translate-x-4 z-10 p-3 rounded-full 
                           bg-white text-black"
                 aria-label="Proyecto anterior"
               >
@@ -74,7 +74,7 @@ const MyProjects: React.FC = () => {
 
               <button
                 onClick={nextSlide}
-                className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 z-10 p-3 rounded-full 
+                className="absolute right-0 top-1/2 cursor-pointer -translate-y-1/2 translate-x-4 z-10 p-3 rounded-full 
                           bg-white text-black"
                 aria-label="Proyecto siguiente"
               >
@@ -137,7 +137,7 @@ const MyProjects: React.FC = () => {
           {/* Información adicional */}
           <div className="mt-4 text-center">
             <p className="text-gray-300 text-sm">
-              Showing {Math.min(itemsToShow, projects.length)} de {projects.length} projects
+              Showing {Math.min(itemsToShow, projects.length)} of {projects.length} projects
             </p>
           </div>
         </div>

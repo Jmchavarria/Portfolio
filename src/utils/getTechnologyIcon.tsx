@@ -13,7 +13,8 @@ import {
   SiCss3,
   SiExpress,
   SiMysql,
-  SiPostgresql
+  SiPostgresql,
+  SiDocker
 } from 'react-icons/si';
 
 export const getTechnologyIcon = (tech: string) => {
@@ -46,6 +47,7 @@ export const getTechnologyIcon = (tech: string) => {
     case 'js':
       return <SiJavascript {...iconProps} className="text-[#F7DF1E]" />;
     case 'typescript':
+      return <SiTypescript {...iconProps} className="text-[#3178C6]" />;
     case 'ts':
       return <SiTypescript {...iconProps} className="text-[#3178C6]" />;
     case 'html5':
@@ -62,6 +64,10 @@ export const getTechnologyIcon = (tech: string) => {
     case 'postgresql':
     case 'postgres':
       return <SiPostgresql {...iconProps} className="text-[#4169E1]" />;
+    case 'betterauth':
+      return <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24" transform="" id="injected-svg"><path d="M12.1 10.36H15.149999999999999V13.68H12.1z"></path><path d="m3,3v18h18V3H3Zm15.48,10.68v3h-6.38v-3h-3.48v3h-3.13V7.36h3.13v3h3.48v-3h6.38v6.32Z"></path></svg>
+    case 'docker':
+      return <SiDocker {...iconProps} className="text-[#2496ED]" />;
     default:
       return <span className="text-xs px-2 py-1 bg-[#e89c62] text-black rounded-full">{tech}</span>;
   }

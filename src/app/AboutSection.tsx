@@ -88,15 +88,6 @@ const AboutSection = () => {
               I love tackling technical challenges and delivering efficient, innovative solutions.
             </p>
 
-            {/* Botón CV */}
-            <a
-              href="/files/Jhon-Chavarria-CV.pdf"
-              download="Jhon-Chavarria-CV.pdf"
-              className="inline-flex items-center gap-2 px-6 py-3 bg-[#ffb17a] text-black font-semibold rounded-lg shadow-md hover:bg-[#e89c62] transition"
-            >
-              <Download size={20} />
-              Download CV
-            </a>
 
           </motion.div>
 
