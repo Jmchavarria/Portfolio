@@ -50,12 +50,10 @@ const MyProjects: React.FC = () => {
           viewport={{ once: false, amount: 0.3 }}
           className="mb-16 text-center"
         >
-          <h2 className="text-4xl md:text-4xl text-[#FFFDED] font-extrabold leading-tight mb-4">
-            My Projects
+          <h2 className="text-4xl md:text-4xl text-[#FFFDED] font-bold leading-tight mb-4">
+            Projects
           </h2>
-          <p className="text-base max-w-xl mx-auto text-gray-300">
-            Explore some of the projects I've worked on recently
-          </p>
+
         </motion.div>
 
         {/* Contenedor del carrusel con padding lateral para los botones */}

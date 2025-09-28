@@ -7,7 +7,8 @@ import {
 import { motion, useAnimation, useInView } from 'framer-motion';
 import Image from 'next/image';
 import React, { useEffect, useRef } from 'react';
-import { Download } from 'lucide-react';
+import { Download, GraduationCap } from 'lucide-react';
+import { FiCalendar, FiMapPin } from 'react-icons/fi';
 
 const AboutSection = () => {
   const sectionRef = useRef(null);
@@ -50,8 +51,8 @@ const AboutSection = () => {
   }, [isInView]);
 
   return (
-    <section id="about" ref={sectionRef} className="w-full py-16 px-6 md:px-12  text-white">
-      <div className="max-w-6xl mx-auto flex flex-col lg:flex-row gap-10 lg:gap-16 items-center">
+    <section id="about" ref={sectionRef} className="w-full py-16 px-6 md:px-12  text-white ">
+      <div className="max-w-6xl mx-auto flex flex-col  lg:flex-row gap-10 lg:gap-16 items-center">
 
         {/* Imagen */}
         <motion.div
@@ -93,7 +94,7 @@ const AboutSection = () => {
 
           {/* Tecnologías */}
           <motion.div animate={skillsControls}>
-            <h2 className="text-xl font-bold mb-4 text-white/90">Main Technologies</h2>
+            <h2 className="text-xl font-bold mb-4 text-[#FFFDED]"> Technologies</h2>
 
             <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-4">
               {skills.map((skill, index) => (
@@ -108,6 +109,45 @@ const AboutSection = () => {
               ))}
             </div>
           </motion.div>
+
+
+          {/* Formación */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={contentControls}
+            className="mt-8"
+          >
+            {/* Encabezado con título y calendario */}
+            <div className="flex justify-between items-center mb-4">
+              <h2 className="text-xl font-bold text-[#FFFDED]">Formation</h2>
+
+              <div className="flex items-center gap-2 text-gray-400 text-sm">
+                <FiCalendar />
+                <span className="font-semibold text-sm">2 years</span>
+              </div>
+            </div>
+
+            {/* Contenido de la formación */}
+            <div className="gap-5 flex">
+              <GraduationCap className="w-8 h-8" />
+
+              <div className="flex flex-col gap-1.5">
+                <span className="font-normal text-gray-300 text-base">
+                  Tecnólogo en Análisis y Desarrollo de Software
+                </span>
+                <span className="text-sm text-[#ffb17a]">
+                  Servicio Nacional de Aprendizaje SENA
+                </span>
+
+                <div className="flex items-center gap-2 text-gray-400 text-sm ">
+                  <FiMapPin />
+                  Medellín
+                </div>
+              </div>
+            </div>
+          </motion.div>
+
+
         </div>
       </div>
     </section>
