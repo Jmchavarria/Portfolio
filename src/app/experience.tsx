@@ -22,7 +22,7 @@ const Experience = () => {
       description: "Developing RESTful APIs with Node.js and PostgreSQL, testing with Jest, and building optimized UIs with React, Tailwind CSS, and Redux under agile practices.",
       technologies: ["Next.js", "Express", "PostgreSQL", "Docker"]
     }
-  ];  
+  ];
 
   return (
     <section
@@ -38,12 +38,10 @@ const Experience = () => {
           viewport={{ once: true }}
           className="text-center"
         >
-          <h2 className="text-3xl md:text-4xl font-bold mb-4 text-white">
-            My <span className="text-[#ffb17a]">Experience</span>
+          <h2 className="text-4xl md:text-4xl font-bold mb-4 text-[#FFFDED]">
+            Experience
           </h2>
-          <p className="text-gray-400 max-w-2xl mx-auto">
-            Here's a timeline of my professional journey and the roles that have shaped my skills as a developer.
-          </p>
+
         </motion.div>
 
         {/* Timeline */}
@@ -69,11 +67,10 @@ const Experience = () => {
                 <div className="bg-zinc-900/50 border border-gray-800/50 rounded-xl p-6 hover:bg-zinc-800/70 transition-colors">
                   <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between mb-4">
                     <div>
-                      <h3 className="text-xl font-bold text-white mb-1">
+                      <h3 className="text-xl font-bold text-gray-300 mb-1">
                         {experience.title}
                       </h3>
                       <div className="flex items-center gap-2 text-[#ffb17a] font-semibold mb-2">
-                        <FiBriefcase size={16} />
                         {experience.company}
                       </div>
                     </div>
@@ -94,17 +91,7 @@ const Experience = () => {
                     {experience.description}
                   </p>
 
-                  {/* Tecnologías */}
-                  <div className="flex flex-wrap gap-2">
-                    {experience.technologies.map((tech, techIndex) => (
-                      <span
-                        key={techIndex}
-                        className="px-3 py-1 bg-[#ffb17a]/10 text-[#ffb17a] text-sm rounded-full border border-[#ffb17a]/20"
-                      >
-                        {tech}
-                      </span>
-                    ))}
-                  </div>
+
                 </div>
               </motion.div>
             ))}

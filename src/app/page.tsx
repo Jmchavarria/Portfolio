@@ -118,12 +118,12 @@ export default function Home() {
         <div className="text-xl font-bold text-white">JmChavarría</div>
 
         {/* Menú desktop */}
-        <nav className="hidden lg:flex gap-12 text-white font-semibold">
+        <nav className="hidden lg:flex gap-12 text-white font-semibold ">
           {navItems.map((item) => (
             <button
               key={item.id}
               onClick={() => scrollToSection(item.id)}
-              className={`relative transition-colors duration-300 ${activeSection === item.id
+              className={`relative transition-colors duration-300 cursor-pointer ${activeSection === item.id
                 ? "text-yellow-400 after:w-full"
                 : "hover:text-yellow-400"
                 } 
