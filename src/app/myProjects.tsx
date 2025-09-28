@@ -58,32 +58,34 @@ const MyProjects: React.FC = () => {
           </p>
         </motion.div>
 
-        {/* Contenedor del carrusel */}
-        <div className="relative">
-          {/* Botones de navegación */}
+        {/* Contenedor del carrusel con padding lateral para los botones */}
+        <div className="relative px-8 sm:px-12 md:px-16">
+          {/* Botones de navegación - FUERA del área de contenido */}
           {projects.length > itemsToShow && (
             <>
               <button
                 onClick={prevSlide}
-                className="absolute left-0 top-1/2 cursor-pointer -translate-y-1/2 -translate-x-4 z-10 p-3 rounded-full 
-                          bg-white text-black"
+                className="absolute left-0 top-1/2 cursor-pointer -translate-y-1/2 z-10 p-3 rounded-full 
+                          bg-white/90 hover:bg-white text-black transition-all duration-300 
+                          hover:scale-110 shadow-lg backdrop-blur-sm"
                 aria-label="Proyecto anterior"
               >
-                <FiChevronLeft size={24} />
+                <FiChevronLeft size={20} />
               </button>
 
               <button
                 onClick={nextSlide}
-                className="absolute right-0 top-1/2 cursor-pointer -translate-y-1/2 translate-x-4 z-10 p-3 rounded-full 
-                          bg-white text-black"
+                className="absolute right-0 top-1/2 cursor-pointer -translate-y-1/2 z-10 p-3 rounded-full 
+                          bg-white/90 hover:bg-white text-black transition-all duration-300 
+                          hover:scale-110 shadow-lg backdrop-blur-sm"
                 aria-label="Proyecto siguiente"
               >
-                <FiChevronRight size={24} />
+                <FiChevronRight size={20} />
               </button>
             </>
           )}
 
-          {/* Contenedor del carrusel */}
+          {/* Contenedor del carrusel - SIN superposición */}
           <div className="overflow-hidden">
             <motion.div
               className="flex gap-6 md:gap-8"
@@ -125,8 +127,8 @@ const MyProjects: React.FC = () => {
                   key={idx}
                   onClick={() => goToSlide(idx)}
                   className={`h-2 rounded-full transition-all ${currentIndex === idx
-                      ? 'bg-[#ffb17a] w-8'
-                      : 'bg-gray-300 w-2 hover:bg-gray-200'
+                    ? 'bg-[#ffb17a] w-8'
+                    : 'bg-gray-300 w-2 hover:bg-gray-200'
                     }`}
                   aria-label={`Ir a proyecto ${idx + 1}`}
                 />

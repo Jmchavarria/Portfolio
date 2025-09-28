@@ -222,7 +222,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
                           initial={{ opacity: 0, scale: 0.9 }}
                           animate={{ opacity: 1, scale: 1 }}
                           transition={{ delay: idx * 0.06 }}
-                          className="flex items-center gap-2 bg-black/40  px-4 py-2.5 rounded-lg hover:from-gray-600/50 hover:to-gray-500/40 transition-all duration-300 hover:scale-105 backdrop-blur-sm"
+                          className="flex items-center gap-2 bg-black/40 px-4 py-2.5 rounded-lg hover:from-gray-600/50 hover:to-gray-500/40 transition-all duration-300 hover:scale-105 backdrop-blur-sm"
                           title={tech}
                         >
                           {getTechnologyIcon(tech)}
