@@ -40,7 +40,7 @@ export const projects: Project[] = [
         title: "Motorbike",
         shortDescription: "Platform for selling motorcycles and spare parts.",
         longDescription: "MotorBike is a complete platform for selling motorcycles and spare parts, with an inventory system, shopping cart, and integrated payment gateway. Developed with React, Node.js, and MongoDB.",
-        link: "https://github.com/carlos2771/MotorBikeFull",
+        link: "https://motorbikefull.onrender.com/",
         codeLink: "https://github.com/carlos2771/MotorBikeFull",
         imageUrl: "/images/motorbike/motorbike1.png",
         additionalImages: [
@@ -68,7 +68,7 @@ export const projects: Project[] = [
             "/images/bmg/usersList.jpg",
             "/images/bmg/tableList.webp",
         ],
-        technologies: ["Next.js", "TypeScript", "TailwindCSS", "Node.js", "Docker"],
+        technologies: ["React", "TypeScript", "TailwindCSS", "Node.js", "Docker"],
         features: ["User table", "Table module", "Authentication system", "Admin panel"]
     },
 ];

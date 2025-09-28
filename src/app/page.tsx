@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef } from "react";
 import AboutSection from "./AboutSection";
-import ContactMe from "./experience";
+import Experience from "./experience";
 import Hero from "./hero";
 import MyProjects from "./myProjects";
 import { motion, AnimatePresence } from "framer-motion";
@@ -11,8 +11,8 @@ import { Menu, X, ChevronUp } from "lucide-react";
 const navItems = [
   { id: "hero", label: "Home" },
   { id: "about", label: "About me" },
+  { id: "experience", label: "Exprience" },
   { id: "projects", label: "Projects" },
-  { id: "contact", label: "Contact" },
 ];
 
 export default function Home() {
@@ -204,8 +204,8 @@ export default function Home() {
         <AboutSection />
       </section>
 
-      <section id="contact" className="min-h-screen">
-        <ContactMe />
+      <section id="experience" className="min-h-screen">
+        <Experience />
       </section>
 
 
