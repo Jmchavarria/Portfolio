@@ -168,13 +168,7 @@ const MyProjects: React.FC = () => {
         </div>
 
         {/* Información total - Solo móvil */}
-        <div className="block md:hidden mt-8 text-center">
-          <div className="inline-flex items-center px-4 py-2 rounded-full bg-white/5 border border-white/10">
-            <span className="text-gray-400 text-sm">
-              {projects.length} {projects.length === 1 ? 'Project' : 'Projects'} Total
-            </span>
-          </div>
-        </div>
+       
       </div>
 
       {/* Modal de detalles del proyecto */}
