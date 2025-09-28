@@ -72,7 +72,11 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
             stiffness: 300,
             duration: 0.4
           }}
-          className="relative bg-zinc-900 rounded-t-2xl sm:rounded-xl w-full max-w-7xl h-[95vh] sm:h-[90vh] flex flex-col overflow-hidden shadow-2xl"
+          className="relative bg-zinc-900 rounded-t-2xl sm:rounded-xl w-full max-w-7xl h-[90vh] sm:h-[90vh] flex flex-col overflow-hidden shadow-2xl"
+          style={{ 
+            paddingTop: 'env(safe-area-inset-top)', 
+            paddingBottom: 'env(safe-area-inset-bottom)' 
+          }}
           onClick={(e) => e.stopPropagation()}
         >
           {/* Handle bar para móvil */}
