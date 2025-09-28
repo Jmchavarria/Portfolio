@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import {
@@ -24,6 +24,11 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
   const [imageError, setImageError] = useState(false);
   const [isImageFullScreen, setIsImageFullScreen] = useState(false);
   const [imageLoading, setImageLoading] = useState(true);
+  
+  // Touch gesture states
+  const [touchStart, setTouchStart] = useState(0);
+  const [touchEnd, setTouchEnd] = useState(0);
+  const carouselRef = useRef<HTMLDivElement>(null);
 
   const imagesLength = project.additionalImages?.length || 0;
   const { currentIndex, nextSlide, prevSlide, goToSlide } = useCarousel(imagesLength);
@@ -31,12 +36,45 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
   const currentImageUrl =
     imagesLength > 0 ? project.additionalImages?.[currentIndex] || project.imageUrl : project.imageUrl;
 
+  // Touch gesture handlers
+  const handleTouchStart = (e: React.TouchEvent) => {
+    setTouchEnd(0); // Reset touchEnd
+    setTouchStart(e.targetTouches[0].clientX);
+  };
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    setTouchEnd(e.targetTouches[0].clientX);
+  };
+
+  const handleTouchEnd = () => {
+    if (!touchStart || !touchEnd) return;
+    
+    const distance = touchStart - touchEnd;
+    const isLeftSwipe = distance > 50;
+    const isRightSwipe = distance < -50;
+
+    if (isLeftSwipe && imagesLength > 1) {
+      nextSlide();
+    }
+    if (isRightSwipe && imagesLength > 1) {
+      prevSlide();
+    }
+  };
+
   useEffect(() => {
     setImageLoading(true);
     setImageError(false);
   }, [currentImageUrl]);
 
   useEffect(() => {
+    // Agregar entrada al historial cuando se abre el modal
+    window.history.pushState({ modalOpen: true }, '');
+    
+    const handlePopState = (event: PopStateEvent) => {
+      // Si el usuario presiona atrás, cerrar el modal
+      onClose();
+    };
+
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === "Escape") {
         if (isImageFullScreen) setIsImageFullScreen(false);
@@ -47,8 +85,14 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
         if (e.key === "ArrowLeft") prevSlide();
       }
     };
+
+    window.addEventListener("popstate", handlePopState);
     window.addEventListener("keydown", handleKeyDown);
-    return () => window.removeEventListener("keydown", handleKeyDown);
+    
+    return () => {
+      window.removeEventListener("popstate", handlePopState);
+      window.removeEventListener("keydown", handleKeyDown);
+    };
   }, [onClose, nextSlide, prevSlide, isImageFullScreen]);
 
   return (
@@ -116,9 +160,15 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
           {/* Contenido scrollable */}
           <div className="flex-1 overflow-y-auto overscroll-contain [-webkit-overflow-scrolling:touch] scrollbar-modal">
             <div className="p-4 sm:p-6 space-y-6">
-              {/* Carrusel con alto fijo */}
+              {/* Carrusel con gestos táctiles */}
               <div className="flex justify-center">
-                <div className="relative group w-full max-w-5xl bg-gradient-to-br from-gray-900 to-black border border-gray-800/60 rounded-xl shadow-2xl overflow-hidden h-[30vh] sm:h-[40vh] md:h-[50vh] lg:h-[60vh]">
+                <div 
+                  ref={carouselRef}
+                  className="relative group w-full max-w-5xl bg-gradient-to-br from-gray-900 to-black border border-gray-800/60 rounded-xl shadow-2xl overflow-hidden h-[30vh] sm:h-[40vh] md:h-[50vh] lg:h-[60vh] select-none"
+                  onTouchStart={handleTouchStart}
+                  onTouchMove={handleTouchMove}
+                  onTouchEnd={handleTouchEnd}
+                >
                   {/* Loader overlay */}
                   {imageLoading && (
                     <div className="absolute inset-0 flex items-center justify-center bg-gray-900/40 z-10">
@@ -148,16 +198,25 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
                     </div>
                   )}
 
+                  {/* Indicador de swipe en móvil */}
+                  {imagesLength > 1 && (
+                    <div className="absolute bottom-2 left-1/2 transform -translate-x-1/2 sm:hidden">
+                      <div className="bg-black/60 text-white text-xs px-3 py-1 rounded-full backdrop-blur-sm">
+                        ← Swipe to navigate →
+                      </div>
+                    </div>
+                  )}
+
                   {/* Botón pantalla completa */}
                   <button
                     onClick={() => setIsImageFullScreen(true)}
-                    className="absolute top-2 right-2 sm:top-4 sm:right-4 bg-black/60 hover:bg-black/80 text-white p-1.5 sm:p-2 rounded-lg opacity-0 group-hover:opacity-100 transition-all duration-300 backdrop-blur-sm z-20"
+                    className="absolute top-2 right-2 sm:top-4 sm:right-4 bg-black/60 hover:bg-black/80 text-white p-1.5 sm:p-2 rounded-lg opacity-70 sm:opacity-0 sm:group-hover:opacity-100 transition-all duration-300 backdrop-blur-sm z-20"
                     aria-label="Ver en pantalla completa"
                   >
                     <FiMaximize2 size={14} className="sm:w-4 sm:h-4" />
                   </button>
 
-                  {/* Controles - Ocultos en móvil */}
+                  {/* Controles - Solo desktop */}
                   {imagesLength > 1 && (
                     <>
                       <button
@@ -165,7 +224,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
                           e.stopPropagation();
                           prevSlide();
                         }}
-                        className="absolute left-2 sm:left-4 top-1/2 cursor-pointer -translate-y-1/2 bg-black/60 hover:bg-black/80 text-white h-8 w-8 sm:h-12 sm:w-12 flex items-center justify-center rounded-full transition-all duration-300 hover:scale-110 backdrop-blur-sm opacity-0 group-hover:opacity-100 z-20"
+                        className="absolute left-2 sm:left-4 top-1/2 cursor-pointer -translate-y-1/2 bg-black/60 hover:bg-black/80 text-white h-8 w-8 sm:h-12 sm:w-12 flex items-center justify-center rounded-full transition-all duration-300 hover:scale-110 backdrop-blur-sm opacity-0 sm:group-hover:opacity-100 z-20 hidden sm:flex"
                         aria-label="Imagen anterior"
                       >
                         <FiChevronLeft size={16} className="sm:w-6 sm:h-6" />
@@ -176,7 +235,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
                           e.stopPropagation();
                           nextSlide();
                         }}
-                        className="absolute right-2 sm:right-4 cursor-pointer top-1/2 -translate-y-1/2 bg-black/60 hover:bg-black/80 text-white h-8 w-8 sm:h-12 sm:w-12 flex items-center justify-center rounded-full transition-all duration-300 hover:scale-110 backdrop-blur-sm opacity-0 group-hover:opacity-100 z-20"
+                        className="absolute right-2 sm:right-4 cursor-pointer top-1/2 -translate-y-1/2 bg-black/60 hover:bg-black/80 text-white h-8 w-8 sm:h-12 sm:w-12 flex items-center justify-center rounded-full transition-all duration-300 hover:scale-110 backdrop-blur-sm opacity-0 sm:group-hover:opacity-100 z-20 hidden sm:flex"
                         aria-label="Imagen siguiente"
                       >
                         <FiChevronRight size={16} className="sm:w-6 sm:h-6" />
