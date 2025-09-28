@@ -53,12 +53,37 @@ const MyProjects: React.FC = () => {
           <h2 className="text-4xl md:text-4xl text-[#FFFDED] font-bold leading-tight mb-4">
             Projects
           </h2>
-
         </motion.div>
 
-        {/* Contenedor del carrusel con padding lateral para los botones */}
-        <div className="relative px-8 sm:px-12 md:px-16">
-          {/* Botones de navegación - FUERA del área de contenido */}
+        {/* Grid para móvil - Solo visible en móvil */}
+        <div className="block md:hidden">
+          <div className="grid grid-cols-1 gap-6">
+            {projects.map((project, index) => (
+              <motion.div
+                key={project.id}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ 
+                  duration: 0.5, 
+                  delay: index * 0.1,
+                  ease: "easeOut"
+                }}
+                viewport={{ once: true, amount: 0.2 }}
+                className="w-full"
+              >
+                <ProjectCard
+                  project={project}
+                  onOpen={openProjectModal}
+                  delay={0}
+                />
+              </motion.div>
+            ))}
+          </div>
+        </div>
+
+        {/* Carrusel para desktop - Solo visible en desktop */}
+        <div className="hidden md:block relative px-8 sm:px-12 md:px-16">
+          {/* Botones de navegación */}
           {projects.length > itemsToShow && (
             <>
               <button
@@ -71,7 +96,7 @@ const MyProjects: React.FC = () => {
                 <FiChevronLeft size={20} />
               </button>
 
-              <button
+              <button 
                 onClick={nextSlide}
                 className="absolute right-0 top-1/2 cursor-pointer -translate-y-1/2 z-10 p-3 rounded-full 
                           bg-white/90 hover:bg-white text-black transition-all duration-300 
@@ -83,7 +108,7 @@ const MyProjects: React.FC = () => {
             </>
           )}
 
-          {/* Contenedor del carrusel - SIN superposición */}
+          {/* Contenedor del carrusel */}
           <div className="overflow-hidden">
             <motion.div
               className="flex gap-6 md:gap-8"
@@ -117,7 +142,7 @@ const MyProjects: React.FC = () => {
             </motion.div>
           </div>
 
-          {/* Indicadores */}
+          {/* Indicadores - Solo desktop */}
           {projects.length > itemsToShow && (
             <div className="flex justify-center mt-8 space-x-2">
               {Array.from({ length: Math.max(1, projects.length - itemsToShow + 1) }).map((_, idx) => (
@@ -134,11 +159,20 @@ const MyProjects: React.FC = () => {
             </div>
           )}
 
-          {/* Información adicional */}
+          {/* Información adicional - Solo desktop */}
           <div className="mt-4 text-center">
             <p className="text-gray-300 text-sm">
               Showing {Math.min(itemsToShow, projects.length)} of {projects.length} projects
             </p>
+          </div>
+        </div>
+
+        {/* Información total - Solo móvil */}
+        <div className="block md:hidden mt-8 text-center">
+          <div className="inline-flex items-center px-4 py-2 rounded-full bg-white/5 border border-white/10">
+            <span className="text-gray-400 text-sm">
+              {projects.length} {projects.length === 1 ? 'Project' : 'Projects'} Total
+            </span>
           </div>
         </div>
       </div>
