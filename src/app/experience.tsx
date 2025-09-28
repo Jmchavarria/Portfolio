@@ -41,7 +41,6 @@ const Experience = () => {
           <h2 className="text-4xl md:text-4xl font-bold mb-4 text-[#FFFDED]">
             Experience
           </h2>
-
         </motion.div>
 
         {/* Timeline */}
@@ -58,33 +57,30 @@ const Experience = () => {
                 whileInView={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.6, delay: index * 0.2 }}
                 viewport={{ once: true }}
-                className="relative  sm:pl-20"
+                className="relative sm:pl-20"
               >
                 {/* Punto en la línea */}
-                <div className="absolute left-6 top-6 w-4 h-4 bg-[#ffb17a] rounded-full border-4 border-black hidden sm:inline "></div>
+                <div className="absolute left-6 top-6 w-4 h-4 bg-[#ffb17a] rounded-full border-4 border-black hidden sm:inline"></div>
 
                 {/* Contenido de la experiencia */}
                 <div className="bg-zinc-900/50 border border-gray-800/50 rounded-xl p-6 hover:bg-zinc-800/70 transition-colors">
-                  <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between mb-4">
-                    <div>
-
-
-                      <h3 className="text-xl font-bold text-gray-300 mb-1 flex sm:block justify-between sm:justify-start ">
+                  
+                  {/* Header flexible - sin duplicación */}
+                  <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between mb-4">
+                    
+                    {/* Lado izquierdo - Título y compañía */}
+                    <div className="flex flex-col order-2 sm:order-1">
+                      <h3 className="text-xl font-bold text-gray-300 mb-1">
                         {experience.title}
-                        <div className="flex items-center gap-2 text-gray-400 text-sm sm:hidden">
-                          <FiCalendar size={14} />
-                          {experience.period}
-                        </div>
                       </h3>
-
-
                       <div className="flex items-center gap-2 text-[#ffb17a] font-semibold mb-2">
                         {experience.company}
                       </div>
                     </div>
 
-                    <div className="flex sm:flex-col lg:items-end gap-1   ">
-                      <div className="sm:flex items-center gap-2 text-gray-400 text-sm hidden">
+                    {/* Lado derecho - Fechas y ubicación */}
+                    <div className="flex justify-between sm:flex-col sm:items-end gap-1 order-1 sm:order-2 mb-2 sm:mb-0">
+                      <div className="flex items-center gap-2 text-gray-400 text-sm">
                         <FiCalendar size={14} />
                         {experience.period}
                       </div>
@@ -98,8 +94,6 @@ const Experience = () => {
                   <p className="text-gray-300 mb-4 leading-relaxed">
                     {experience.description}
                   </p>
-
-
                 </div>
               </motion.div>
             ))}

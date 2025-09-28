@@ -24,8 +24,23 @@ const Hero = () => {
     <section className="bg-black text-white min-h-screen flex items-center">
       <div className="flex flex-col lg:grid lg:grid-cols-5 lg:grid-rows-5 gap-8 w-full p-6 lg:p-12">
 
-        {/* Contenido principal */}
-        <div className="lg:col-span-3 lg:row-span-5 flex flex-col justify-center items-center lg:items-start text-center lg:text-left gap-6 lg:ml-12">
+        {/* Imagen - Arriba en móvil, derecha en desktop */}
+        <div className="order-1 lg:order-2 lg:col-span-2 lg:row-span-5 flex items-center justify-center">
+          <div className="relative group">
+            <Image
+              src="/images/imgportfolio.png"
+              alt="Jhon Marlon Chavarría Cuervo"
+              width={350}
+              height={500}
+              className="object-cover rounded-xl shadow-lg"
+              priority
+            />
+            <div className="absolute inset-0 rounded-xl border border-white/20 pointer-events-none" />
+          </div>
+        </div>
+
+        {/* Contenido principal - Abajo en móvil, izquierda en desktop */}
+        <div className="order-2 lg:order-1 lg:col-span-3 lg:row-span-5 flex flex-col justify-center items-center lg:items-start text-center lg:text-left gap-6 lg:ml-12">
 
           {/* Nuevo Hello */}
           <span className="text-[#FFB17A] text-lg sm:text-xl font-semibold tracking-wide uppercase">
@@ -46,20 +61,19 @@ const Hero = () => {
           </p>
 
           {/* Botones */}
-          {/* Buttons */}
           <div className="flex flex-wrap items-center gap-4">
             {/* CV Button */}
             <a
               href="/files/Jhon-Chavarria-CV.pdf"
               download="Jhon-Chavarria-CV.pdf"
-              className="inline-flex items-center justify-center sm:justify-start gap-2 px-5 py-3 bg-[#ffb17a] text-black font-semibold rounded-lg shadow-md hover:bg-[#e89c62] transition text-sm sm:text-base border w-full sm:w-auto  border-white sm:border-none"
+              className="inline-flex items-center justify-center sm:justify-start gap-2 px-5 py-3 bg-[#ffb17a] text-black font-semibold rounded-lg shadow-md hover:bg-[#e89c62] transition text-sm sm:text-base border w-full sm:w-auto border-white sm:border-none"
             >
               <Download size={20} />
               Download CV
             </a>
 
             {/* Social Buttons */}
-            <div className="flex gap-3  sm:border-none w-full sm:w-auto justify-center sm:justify-normal">
+            <div className="flex gap-3 sm:border-none w-full sm:w-auto justify-center sm:justify-normal">
               {socialLinks.map((social, index) => {
                 const hoverClass =
                   social.label === "GitHub"
@@ -89,21 +103,6 @@ const Hero = () => {
             </div>
           </div>
 
-        </div>
-
-        {/* Imagen */}
-        <div className="lg:col-span-2 lg:row-span-5 flex items-center justify-center">
-          <div className="relative group">
-            <Image
-              src="/images/imgportfolio.png"
-              alt="Jhon Marlon Chavarría Cuervo"
-              width={350}
-              height={500}
-              className="object-cover rounded-xl shadow-lg"
-              priority
-            />
-            <div className="absolute inset-0 rounded-xl border border-white/20 pointer-events-none" />
-          </div>
         </div>
       </div>
     </section>
