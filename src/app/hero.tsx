@@ -6,33 +6,65 @@ import { Download, Mail } from "lucide-react";
 import { FiGithub, FiLinkedin } from "react-icons/fi";
 import { SiOpensourceinitiative } from "react-icons/si";
 import { MdEmail } from "react-icons/md";
+import { useState } from "react";
 
 const Hero = () => {
+  const [showCopiedAlert, setShowCopiedAlert] = useState(false);
+
   // Función para hacer scroll suave
   const scrollToSection = (id: string) => {
     const section = document.getElementById(id);
     section?.scrollIntoView({ behavior: "smooth" });
   };
 
+  // Función para copiar email
+  const copyEmailToClipboard = async () => {
+    const email = "marlon05chavarria@gmail.com";
+    
+    try {
+      await navigator.clipboard.writeText(email);
+      setShowCopiedAlert(true);
+      
+      // Ocultar la alerta después de 2 segundos
+      setTimeout(() => {
+        setShowCopiedAlert(false);
+      }, 2000);
+    } catch (err) {
+      console.error('Error al copiar al portapapeles:', err);
+    }
+  };
+
   const socialLinks = [
     { icon: FiGithub, href: "https://github.com/Jmchavarria", label: "GitHub" },
     { icon: FiLinkedin, href: "https://www.linkedin.com/in/jhonmarlonchavarria", label: "LinkedIn" },
-    { icon: Mail, href: "mailto:marlon05chavarria@gmail.com", label: "Email" },
+    { icon: Mail, href: "#", label: "Email", onClick: copyEmailToClipboard },
   ];
 
   return (
-    <section className="bg-black text-white min-h-screen flex items-center">
+    <section className="bg-black text-white min-h-screen flex items-center relative">
+      {/* Mini alerta de copiado */}
+      {showCopiedAlert && (
+        <div className="fixed top-4 right-4 z-50 bg-[#FFB17A] text-black px-4 py-2 rounded-lg shadow-lg animate-pulse">
+          <div className="flex items-center gap-2">
+            <Mail size={16} />
+            <span className="font-medium">Email copiado al portapapeles!</span>
+          </div>
+        </div>
+      )}
+
       <div className="flex flex-col lg:grid lg:grid-cols-5 lg:grid-rows-5 gap-8 w-full p-6 lg:p-12">
 
         {/* Imagen - Arriba en móvil, derecha en desktop */}
         <div className="order-1 lg:order-2 lg:col-span-2 lg:row-span-5 flex items-center justify-center">
           <div className="relative group">
             <Image
-              src="/images/imgportfolio.png"
+              src="/images/imgportfolio.webp"
               alt="Jhon Marlon Chavarría Cuervo"
-              width={350}
-              height={500}
-              className="object-cover rounded-xl shadow-lg"
+              width={300}
+              height={400}
+              quality={85}
+              sizes="(max-width: 640px) 240px, (max-width: 768px) 280px, 320px"
+              className="object-cover rounded-xl shadow-lg w-60 h-72 sm:w-72 sm:h-80 lg:w-80 lg:h-96"
               priority
             />
             <div className="absolute inset-0 rounded-xl border border-white/20 pointer-events-none" />
@@ -66,7 +98,7 @@ const Hero = () => {
             <a
               href="/files/Jhon-Chavarria-CV.pdf"
               download="Jhon-Chavarria-CV.pdf"
-              className="inline-flex items-center justify-center sm:justify-start gap-2 px-5 py-3 bg-[#ffb17a] text-black font-semibold rounded-lg shadow-md hover:bg-[#e89c62] transition text-sm sm:text-base border w-full sm:w-auto  sm:border-none"
+              className="inline-flex items-center justify-center sm:justify-start gap-2 px-5 py-3 bg-[#ffb17a] text-black font-semibold rounded-lg shadow-md hover:bg-[#e89c62] transition text-sm sm:text-base border w-full sm:w-auto sm:border-none"
             >
               <Download size={20} />
               Download CV
@@ -82,21 +114,31 @@ const Hero = () => {
                       ? "hover:bg-[#0a66c2]"
                       : "hover:bg-[#ffb17a]/20";
 
+                // Si es el botón de email, usar button en lugar de anchor
+                if (social.label === "Email") {
+                  return (
+                    <button
+                      key={index}
+                      onClick={social.onClick}
+                      className={`flex items-center justify-center rounded-lg transition-colors cursor-pointer ${hoverClass} px-4 py-2 gap-2 bg-gray-800/50`}
+                      aria-label={social.label}
+                      title="Copiar email"
+                    >
+                      <social.icon className="text-gray-200 transition-colors" size={20} />
+                    </button>
+                  );
+                }
+
                 return (
                   <a
                     key={index}
                     href={social.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className={`flex items-center justify-center rounded-lg transition-colors ${hoverClass} 
-            ${social.label === "Email" ? "px-4 py-2 gap-2 bg-gray-800/50" : "w-11 h-11 bg-gray-800/50"}
-          `}
+                    className={`flex items-center justify-center rounded-lg transition-colors ${hoverClass} w-11 h-11 bg-gray-800/50`}
                     aria-label={social.label}
                   >
                     <social.icon className="text-gray-200 transition-colors" size={20} />
-                    {social.label === "Email" && (
-                      <span className="text-sm text-gray-200 hidden sm:inline">marlon05chavarria@gmail.com</span>
-                    )}
                   </a>
                 );
               })}

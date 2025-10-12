@@ -81,7 +81,7 @@ const AboutSection = () => {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={paragraphControls}
-            className="mb-8 text-gray-300"
+            className="mb-8 text-gray-300 "
           >
             <p className="text-base md:text-lg leading-relaxed mb-6">
               Full-stack developer with one year of experience building scalable and user-centric web applications.
@@ -94,17 +94,17 @@ const AboutSection = () => {
 
           {/* Tecnologías */}
           <motion.div animate={skillsControls}>
-            <h2 className="text-xl font-bold mb-4 text-[#FFFDED]"> Technologies</h2>
+            <h2 className="text-xl font-bold mb-4 text-[#FFFDED]">Technologies</h2>
 
-            <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-4">
+            <div className="grid grid-cols-4   sm:flex flex-wrap justify-center gap-3 ">
               {skills.map((skill, index) => (
                 <motion.div
                   key={index}
                   whileHover={{ y: -5 }}
-                  className="flex flex-col items-center p-3 border border-gray-700/40 rounded-lg shadow-sm hover:shadow-md transition-all"
+                  className="flex flex-col items-center p-2 border border-gray-700/40 rounded-lg shadow-sm hover:shadow-md transition-all w-20"
                 >
                   {skill.icon}
-                  <p className="text-xs text-gray-300 mt-1">{skill.name}</p>
+                  <p className="text-xs text-gray-300 mt-1 text-center">{skill.name}</p>
                 </motion.div>
               ))}
             </div>

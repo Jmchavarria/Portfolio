@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect, useRef } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import {
   FiX,
@@ -24,6 +24,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
   const [imageError, setImageError] = useState(false);
   const [isImageFullScreen, setIsImageFullScreen] = useState(false);
   const [imageLoading, setImageLoading] = useState(true);
+  const [isClosing, setIsClosing] = useState(false);
   
   // Touch gesture states
   const [touchStart, setTouchStart] = useState(0);
@@ -38,7 +39,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
 
   // Touch gesture handlers
   const handleTouchStart = (e: React.TouchEvent) => {
-    setTouchEnd(0); // Reset touchEnd
+    setTouchEnd(0);
     setTouchStart(e.targetTouches[0].clientX);
   };
 
@@ -61,24 +62,29 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
     }
   };
 
+  const handleClose = () => {
+    setIsClosing(true);
+    setTimeout(() => {
+      onClose();
+    }, 200);
+  };
+
   useEffect(() => {
     setImageLoading(true);
     setImageError(false);
   }, [currentImageUrl]);
 
   useEffect(() => {
-    // Agregar entrada al historial cuando se abre el modal
     window.history.pushState({ modalOpen: true }, '');
     
     const handlePopState = (event: PopStateEvent) => {
-      // Si el usuario presiona atrás, cerrar el modal
-      onClose();
+      handleClose();
     };
 
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === "Escape") {
         if (isImageFullScreen) setIsImageFullScreen(false);
-        else onClose();
+        else handleClose();
       }
       if (!isImageFullScreen) {
         if (e.key === "ArrowRight") nextSlide();
@@ -93,30 +99,24 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
       window.removeEventListener("popstate", handlePopState);
       window.removeEventListener("keydown", handleKeyDown);
     };
-  }, [onClose, nextSlide, prevSlide, isImageFullScreen]);
+  }, [nextSlide, prevSlide, isImageFullScreen]);
 
   return (
     <>
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        exit={{ opacity: 0, transition: { duration: 0.2 } }}
-        onClick={onClose}
-        className="fixed inset-0 bg-black/90 backdrop-blur-md z-50 flex items-end sm:items-center justify-center p-0 sm:p-4 overflow-hidden"
+      {/* Overlay */}
+      <div
+        onClick={handleClose}
+        className={`fixed inset-0 bg-black/90 backdrop-blur-md z-50 flex items-end sm:items-center justify-center p-0 sm:p-4 overflow-hidden transition-opacity duration-300 ${
+          isClosing ? 'opacity-0' : 'opacity-100'
+        }`}
         role="dialog"
         aria-modal="true"
       >
-        <motion.div
-          initial={{ y: "100%", opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          exit={{ y: "100%", opacity: 0 }}
-          transition={{ 
-            type: "spring", 
-            damping: 30, 
-            stiffness: 300,
-            duration: 0.4
-          }}
-          className="relative bg-zinc-900 rounded-t-2xl sm:rounded-xl w-full max-w-7xl h-[90vh] sm:h-[90vh] flex flex-col overflow-hidden shadow-2xl"
+        {/* Modal */}
+        <div
+          className={`modal-slide-up relative bg-zinc-900 rounded-t-2xl sm:rounded-xl w-full max-w-7xl h-[90vh] sm:h-[90vh] flex flex-col overflow-hidden shadow-2xl ${
+            isClosing ? 'modal-slide-down' : ''
+          }`}
           style={{ 
             paddingTop: 'env(safe-area-inset-top)', 
             paddingBottom: 'env(safe-area-inset-bottom)' 
@@ -148,7 +148,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
             </h2>
 
             <button
-              onClick={onClose}
+              onClick={handleClose}
               className="text-gray-400 hover:text-white bg-gray-800/50 hover:bg-gray-700/50 backdrop-blur-sm rounded-full p-2 sm:p-2.5 transition-all duration-300 hover:scale-105 shadow-lg"
               aria-label="Cerrar modal"
               type="button"
@@ -288,17 +288,14 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
                     </div>  
                     <div className="flex flex-wrap gap-2 sm:gap-3">
                       {project.technologies.map((tech, idx) => (
-                        <motion.div
+                        <div
                           key={idx}
-                          initial={{ opacity: 0, scale: 0.9 }}
-                          animate={{ opacity: 1, scale: 1 }}
-                          transition={{ delay: idx * 0.06 }}
-                          className="flex items-center gap-2 bg-black/40 px-3 py-2 sm:px-4 sm:py-2.5 rounded-lg hover:from-gray-600/50 hover:to-gray-500/40 transition-all duration-300 hover:scale-105 backdrop-blur-sm"
+                          className="flex items-center gap-2 bg-black/40 px-3 py-2 sm:px-4 sm:py-2.5 rounded-lg transition-all duration-300 hover:scale-105 backdrop-blur-sm"
                           title={tech}
                         >
                           {getTechnologyIcon(tech)}
                           <span className="text-xs sm:text-sm text-gray-200 font-medium">{tech}</span>
-                        </motion.div>
+                        </div>
                       ))}
                     </div>
                   </div>
@@ -311,16 +308,13 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
                     </div>
                     <ul className="space-y-2 sm:space-y-3 text-gray-300">
                       {project.features.map((feature, idx) => (
-                        <motion.li
+                        <li
                           key={idx}
-                          initial={{ opacity: 0, x: -10 }}
-                          animate={{ opacity: 1, x: 0 }}
-                          transition={{ delay: idx * 0.06 }}
                           className="flex items-start gap-3 group"
                         >
                           <div className="w-1.5 h-1.5 bg-gradient-to-r from-[#ffb17a] to-[#ff9e5c] rounded-full mt-2 group-hover:scale-125 transition-transform duration-200" />
                           <span className="flex-1 text-sm sm:text-base">{feature}</span>
-                        </motion.li>
+                        </li>
                       ))}
                     </ul>
                   </div>
@@ -343,8 +337,8 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
               )}
             </div>
           </div>
-        </motion.div>
-      </motion.div>
+        </div>
+      </div>
 
       <AnimatePresence>
         {isImageFullScreen && (
@@ -356,8 +350,38 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
         )}
       </AnimatePresence>
 
-      {/* Scrollbar mejorado */}
+      {/* Animaciones CSS personalizadas */}
       <style jsx global>{`
+        .modal-slide-up {
+          animation: slideUp 0.4s ease-out forwards;
+        }
+        
+        .modal-slide-down {
+          animation: slideDown 0.2s ease-in forwards;
+        }
+        
+        @keyframes slideUp {
+          from {
+            transform: translateY(100%);
+            opacity: 0;
+          }
+          to {
+            transform: translateY(0);
+            opacity: 1;
+          }
+        }
+        
+        @keyframes slideDown {
+          from {
+            transform: translateY(0);
+            opacity: 1;
+          }
+          to {
+            transform: translateY(100%);
+            opacity: 0;
+          }
+        }
+        
         .scrollbar-modal {
           scrollbar-width: thin;
           scrollbar-color: rgba(255, 177, 122, 0.4) rgba(0, 0, 0, 0.1);
