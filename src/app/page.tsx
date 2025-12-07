@@ -1,13 +1,12 @@
+'use client'
+
 export const runtime = 'edge'
+import { useEffect, useRef, useState } from "react";
 import AboutSection from "./AboutSection";
-
-
-import Sidebar from "./components/sidebar";
-import ContactMe from "./contactMe";
 import Hero from "./hero";
 import MyProjects from "./myProjects";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, ChevronUp } from "lucide-react";
+import {  ChevronUp } from "lucide-react";
 
 const navItems = [
   { id: "hero", label: "Home" },
@@ -257,9 +256,7 @@ export default function Home() {
           <MyProjects />
         </section>
 
-        <section id="contact" className="min-h-screen" data-section-index="3">
-          <ContactMe />
-        </section>
+
       
       {/* Navigation Dots */}
       <div className="fixed right-6 top-1/2 transform -translate-y-1/2 z-30 hidden lg:flex flex-col gap-4">
