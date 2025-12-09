@@ -1,12 +1,12 @@
-'use client'
+"use client";
 
-export const runtime = 'edge'
-import { useEffect, useRef, useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import AboutSection from "./AboutSection";
+import Experience from "./experience";
 import Hero from "./hero";
 import MyProjects from "./myProjects";
 import { motion, AnimatePresence } from "framer-motion";
-import {  ChevronUp } from "lucide-react";
+import { Menu, X, ChevronUp } from "lucide-react";
 
 const navItems = [
   { id: "hero", label: "Home" },
@@ -35,9 +35,10 @@ export default function Home() {
 
   // IntersectionObserver para secciones
   useEffect(() => {
-    const sectionElements = navItems.map(item => document.getElementById(item.id)).filter(Boolean) as HTMLElement[];
-    
-    // Desactivar el observer anterior si existe
+    const sectionElements = navItems
+      .map((item) => document.getElementById(item.id))
+      .filter(Boolean) as HTMLElement[];
+
     if (observerRef.current) {
       observerRef.current.disconnect();
     }
@@ -54,11 +55,11 @@ export default function Home() {
       const visibleEntries = entries
         .filter((entry) => entry.isIntersecting)
         .sort((a, b) => b.intersectionRatio - a.intersectionRatio);
-      
+
       if (visibleEntries.length > 0) {
         const mostVisibleEntry = visibleEntries[0];
         const newActiveSection = mostVisibleEntry.target.id;
-        
+
         if (newActiveSection !== activeSection) {
           setActiveSection(newActiveSection);
           history.replaceState(null, "", `#${newActiveSection}`);
@@ -66,13 +67,13 @@ export default function Home() {
       }
     };
 
-    observerRef.current = new IntersectionObserver(handleIntersect, observerOptions);
-    
-    // Observar todas las secciones
-    sectionElements.forEach(section => {
-      if (section) {
-        observerRef.current?.observe(section);
-      }
+    observerRef.current = new IntersectionObserver(
+      handleIntersect,
+      observerOptions
+    );
+
+    sectionElements.forEach((section) => {
+      observerRef.current?.observe(section);
     });
 
     return () => {
@@ -80,121 +81,71 @@ export default function Home() {
     };
   }, [isScrolling, activeSection]);
 
-  // Agregar listener de scroll manual como respaldo
-  useEffect(() => {
-    const handleScroll = () => {
-      if (isScrolling) return;
-
-      const scrollPosition = window.scrollY + window.innerHeight / 3;
-      const sections = navItems.map(item => document.getElementById(item.id)).filter(Boolean) as HTMLElement[];
-      
-      // Encontrar la sección más cercana a la posición actual
-      let newActiveSection = activeSection;
-      let minDistance = Infinity;
-      
-      sections.forEach(section => {
-        const sectionTop = section.offsetTop;
-        const sectionHeight = section.offsetHeight;
-        const distance = Math.abs(scrollPosition - (sectionTop + sectionHeight / 2));
-        
-        if (distance < minDistance) {
-          minDistance = distance;
-          newActiveSection = section.id;
-        }
-      });
-      
-      if (newActiveSection !== activeSection) {
-        setActiveSection(newActiveSection);
-        history.replaceState(null, '', `#${newActiveSection}`);
-      }
-    };
-    
-    // Debounced scroll listener
-    let scrollTimeout: NodeJS.Timeout;
-    const debouncedScrollHandler = () => {
-      clearTimeout(scrollTimeout);
-      scrollTimeout = setTimeout(handleScroll, 100);
-    };
-    
-    window.addEventListener('scroll', debouncedScrollHandler, { passive: true });
-    return () => {
-      window.removeEventListener('scroll', debouncedScrollHandler);
-      clearTimeout(scrollTimeout);
-    };
-  }, [activeSection, isScrolling]);
-
-  // Handle smooth scrolling when clicking navigation items
+  // Smooth scroll
   const scrollToSection = (sectionId: string) => {
     setIsScrolling(true);
     setMobileMenuOpen(false);
-    
+
     const section = document.getElementById(sectionId);
     if (section) {
       const navbarHeight = 64; // altura navbar
       const elementPosition = section.getBoundingClientRect().top;
       const offsetPosition = elementPosition + window.scrollY - navbarHeight;
-      
+
       window.scrollTo({
         top: offsetPosition,
         behavior: "smooth",
       });
 
-      // Set active section after scrolling completes
       setActiveSection(sectionId);
-      history.replaceState(null, '', `#${sectionId}`);
-      
-      // Reactivar detección después de completar scroll
+      history.replaceState(null, "", `#${sectionId}`);
+
       setTimeout(() => {
         setIsScrolling(false);
       }, 1000);
     }
   };
 
-  // Handle keyboard navigation
-  useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
-        e.preventDefault();
-        
-        const currentIndex = navItems.findIndex(item => item.id === activeSection);
-        let nextIndex;
-        
-        if (e.key === 'ArrowDown' && currentIndex < navItems.length - 1) {
-          nextIndex = currentIndex + 1;
-        } else if (e.key === 'ArrowUp' && currentIndex > 0) {
-          nextIndex = currentIndex - 1;
-        } else {
-          return;
-        }
-        
-        scrollToSection(navItems[nextIndex].id);
-      }
-    };
-    
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [activeSection]);
-
-  // Check for initial hash in URL
-  useEffect(() => {
-    const hash = window.location.hash.replace('#', '');
-    if (hash && navItems.some(item => item.id === hash)) {
-      // Delay to ensure DOM is fully loaded
-      setTimeout(() => {
-        scrollToSection(hash);
-      }, 300);
-    }
-  }, []);
-
-  // Calcular el progreso para la barra de progreso
-  const progressWidth = `${navItems.findIndex(item => item.id === activeSection) / (navItems.length - 1) * 100}%`;
-
   return (
     <main className="flex flex-col min-h-screen">
-      {/* Header tipo notch fijo */}
-      
+      {/* Header fijo */}
+      <header
+        className={`sticky top-0 z-50  flex items-center justify-between px-6 lg:px-20 py-4  
+        transition-colors duration-300 ${hasScrolled ? "bg-black/90 backdrop-blur-md" : "bg-black"
+          }`}
+      >
+        {/* Logo */}
+        <div className="text-xl font-bold text-white">JmChavarría</div>
 
-      {/* Menu móvil */}
+        {/* Menú desktop */}
+        <nav className="hidden lg:flex gap-12 text-white font-semibold ">
+          {navItems.map((item) => (
+            <button
+              key={item.id}
+              onClick={() => scrollToSection(item.id)}
+              className={`relative transition-colors duration-300 cursor-pointer ${activeSection === item.id
+                ? "text-yellow-400 after:w-full"
+                : "hover:text-yellow-400"
+                } 
+                after:content-[''] after:absolute after:left-0 after:-bottom-1
+                after:h-[2px] after:bg-yellow-400 after:w-0 
+                after:transition-all after:duration-300 hover:after:w-full`}
+            >
+              {item.label}
+            </button>
+          ))}
+        </nav>
+
+        {/* Menú móvil toggle */}
+        <button
+          className="lg:hidden text-white"
+          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+        >
+          {mobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
+        </button>
+      </header>
+
+      {/* Menú móvil animado */}
       <AnimatePresence>
         {mobileMenuOpen && (
           <motion.div
@@ -204,23 +155,21 @@ export default function Home() {
             transition={{ duration: 0.2 }}
             className="fixed inset-0 z-40 pt-16 bg-black/95 flex flex-col items-center justify-center gap-8"
           >
-            <div className="absolute inset-0 bg-gray-900/90 backdrop-blur-sm" onClick={() => setMobileMenuOpen(false)} />
-            <nav className="relative z-50 flex flex-col h-full justify-center items-center space-y-8 p-5">
-              {navItems.map((item, index) => (
-                <motion.button
-                  key={item.id}
-                  initial={{ opacity: 0, y: -10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.1 * index }}
-                  className={`text-2xl font-medium ${
-                    activeSection === item.id ? "text-violet-400" : "text-gray-300 hover:text-white"
+            {navItems.map((item, index) => (
+              <motion.button
+                key={item.id}
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.1 * index }}
+                className={`text-2xl font-medium ${activeSection === item.id
+                  ? "text-yellow-400"
+                  : "text-gray-300 hover:text-white"
                   }`}
-                  onClick={() => scrollToSection(item.id)}
-                >
-                  {item.label}
-                </motion.button>
-              ))}
-            </nav>
+                onClick={() => scrollToSection(item.id)}
+              >
+                {item.label}
+              </motion.button>
+            ))}
           </motion.div>
         )}
       </AnimatePresence>
@@ -242,37 +191,24 @@ export default function Home() {
         )}
       </AnimatePresence>
 
-      {/* Contenido principal - Con padding-top para compensar el navbar */}
-        {/* Content sections */}
-        <section id="hero" className="min-h-screen" data-section-index="0">
-          <Hero />
-        </section>
+      {/* Secciones */}
+      <section id="hero" className="min-h-screen">
+        <Hero />
+      </section>
 
-        <section id="about" className="min-h-screen" data-section-index="1">
-          <AboutSection />
-        </section>
+      <section id="about" className="min-h-screen">
+        <AboutSection />
+      </section>
 
-        <section id="projects" className="min-h-screen" data-section-index="2">
-          <MyProjects />
-        </section>
+      <section id="experience" className="min-h-screen">
+        <Experience />
+      </section>
 
 
-      
-      {/* Navigation Dots */}
-      <div className="fixed right-6 top-1/2 transform -translate-y-1/2 z-30 hidden lg:flex flex-col gap-4">
-        {navItems.map((item) => (
-          <button
-            key={item.id}
-            onClick={() => scrollToSection(item.id)}
-            className={`w-3 h-3 rounded-full transition-all duration-300 ${
-              activeSection === item.id 
-                ? "bg-violet-500 scale-125" 
-                : "bg-gray-500 hover:bg-gray-400"
-            }`}
-            aria-label={`Navegar a ${item.label}`}
-          />
-        ))}
-      </div>
+      <section id="projects" className="min-h-screen">
+        <MyProjects />
+      </section>
+
     </main>
   );
 }
