@@ -1,10 +1,10 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
-import AboutSection from "./AboutSection";
-import Experience from "./experience";
-import Hero from "./hero";
-import MyProjects from "./myProjects";
+import AboutSection from "@/features/aboutMe/AboutSection";
+import Experience from "@/features/experience/experience";
+import Hero from "@/features/hero/hero";
+import MyProjects from "./components/MyProjects";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, ChevronUp } from "lucide-react";
 

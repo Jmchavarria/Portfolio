@@ -30,7 +30,7 @@ export const FullScreenImage: React.FC<FullScreenImageProps> = ({ src, alt, onCl
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      className="fixed inset-0 bg-black z-[100] flex items-center justify-center"
+      className="fixed inset-0 bg-black z-100 flex items-center justify-center"
       onClick={onClose}
     >
       <button
@@ -38,7 +38,7 @@ export const FullScreenImage: React.FC<FullScreenImageProps> = ({ src, alt, onCl
           e.stopPropagation();
           onClose();
         }}
-        className="absolute top-4 right-4 z-[101] bg-black text-white p-2 rounded-full hover:bg-black/70"
+        className="absolute top-4 right-4 z-101 bg-black text-white p-2 rounded-full hover:bg-black/70"
         aria-label="Cerrar imagen"
         type="button"
       >

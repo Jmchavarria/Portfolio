@@ -5,18 +5,16 @@ import React, { useState, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { FiChevronLeft, FiChevronRight } from 'react-icons/fi';
 
-// Types
-import { Project } from "@/types/project";
-
 // Data
-import { projects } from '../data/projects';
+import { projects } from "@/features/projects/data/projects";
 
 // Hooks
-import { useProjectCarousel } from '../hooks/useProjectCarousel';
+import { useProjectCarousel } from "@/hooks/useProjectCarousel";
 
 // Components
-import { ProjectCard } from "./components/projectCard";
-import { ProjectModal } from "./components/ProjectModal";
+import { ProjectCard } from "@/app/components/projectCard";
+import { ProjectModal } from "@/app/components/ProjectModal";
+import { SectionTitle } from "@/app/components/sectionTitle";
 
 const MyProjects: React.FC = () => {
   const [selectedProjectId, setSelectedProjectId] = useState<string | null>(null);
@@ -42,23 +40,18 @@ const MyProjects: React.FC = () => {
 
   return (
     <section className="min-h-screen w-full bg-black text-white px-4 sm:px-8 md:px-16 py-20" id="proyectos">
+
       <div className="container mx-auto">
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: false, amount: 0.3 }}
-          className="mb-16 text-center"
-        >
-          <h2 className="text-4xl md:text-4xl text-[#FFFDED] font-bold leading-tight mb-4">
-            Projects
-          </h2>
-        </motion.div>
+   
+          <SectionTitle title="Projects" className="text-4xl md:text-4xl text-[#FFFDED] font-bold leading-tight mb-4"/>
+          
+        
 
         {/* Grid para móvil - Solo visible en móvil */}
         <div className="block md:hidden">
           <div className="grid grid-cols-1 gap-6">
             {projects.map((project, index) => (
+              
               <motion.div
                 key={project.id}
                 initial={{ opacity: 0, y: 30 }}
@@ -127,11 +120,13 @@ const MyProjects: React.FC = () => {
               {projects.map((project, index) => (
                 <div
                   key={project.id}
-                  className="flex-shrink-0 h-full"
+                  className="shrink-0 h-full"
                   style={{
                     width: `calc(${100 / projects.length}% - ${(24 * (projects.length - 1)) / projects.length}px)`
                   }}
                 >
+
+
                   <ProjectCard
                     project={project}
                     onOpen={openProjectModal}

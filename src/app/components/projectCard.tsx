@@ -8,6 +8,7 @@ import { ChevronRight } from "lucide-react";
 import { Project } from "@/types/project";
 import { getTechnologyIcon } from "@/utils/getTechnologyIcon";
 import { FullScreenImage } from "./fullScreenImage";
+import { CardParent } from "@/features/projects/cardParent";
 
 interface ProjectCardProps {
     project: Project;
@@ -21,7 +22,8 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, onOpen, delay
 
     return (
         <>
-            {/* Contenedor principal con altura fija y estructura flexbox */}
+
+
             <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -31,7 +33,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, onOpen, delay
                             flex flex-col border border-gray-800/50"
             >
                 {/* Sección de imagen - Altura fija */}
-                <div className="h-48 w-full relative overflow-hidden rounded-t-xl flex-shrink-0">
+                <div className="h-48 w-full relative overflow-hidden rounded-t-xl shrink-0">
                     {!imageError ? (
                         <Image
                             src={project.imageUrl}
@@ -49,7 +51,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, onOpen, delay
                     )}
 
                     {/* Overlay gradient */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a]/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                    <div className="absolute inset-0 bg-linear-to-t from-[#0a0a0a]/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                 </div>
 
                 {/* Sección de contenido - Flexible */}
@@ -65,14 +67,14 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, onOpen, delay
                             {project.title !== 'Bar Manager' && (
 
 
-                            <a href={project.link} target="_blank" className="text-gray-400 hover:text-gray-500">
-                                <FiExternalLink />
+                                <a href={project.link} target="_blank" className="text-gray-400 hover:text-gray-500">
+                                    <FiExternalLink />
 
-                            </a>
+                                </a>
 
-                            ) 
-                            
-}
+                            )
+
+                            }
 
 
 

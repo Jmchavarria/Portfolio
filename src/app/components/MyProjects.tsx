@@ -3,7 +3,7 @@
 import React, { useState, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { FiChevronLeft, FiChevronRight } from 'react-icons/fi';
-import { projects } from "@/data/projects";
+import { projects } from "@/features/projects/data/projects";
 import { useProjectCarousel } from "@/hooks/useProjectCarousel";
 import { ProjectCard } from "./projectCard";
 import { ProjectModal } from './ProjectModal';
