@@ -8,7 +8,6 @@ import { ChevronRight } from "lucide-react";
 import { Project } from "@/types/project";
 import { getTechnologyIcon } from "@/utils/getTechnologyIcon";
 import { FullScreenImage } from "./fullScreenImage";
-import { CardParent } from "@/features/projects/cardParent";
 
 interface ProjectCardProps {
     project: Project;
