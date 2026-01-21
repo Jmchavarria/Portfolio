@@ -1,4 +1,3 @@
-
 import { Technologies } from "./technologies"
 import { Formation } from "./formation"
 import { AboutImage } from "./image"
@@ -6,10 +5,10 @@ import { Description } from "./description"
 
 export const Content = () => {
     return (
-        <div className="max-w-6xl mx-auto flex flex-col  lg:flex-row gap-10 lg:gap-16 items-center">
+        <div className="max-w-6xl mx-auto flex flex-col lg:flex-row gap-10 lg:gap-16 items-center">
             <AboutImage />
 
-            <div className="lg:w-3/3 ">
+            <div className="lg:w-3/3 space-y-10">
                 <Description />
 
                 <Technologies />

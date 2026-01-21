@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
-import AboutSection from "@/features/aboutMe/AboutSection";
+import AboutMe from "@/features/aboutMe/aboutMe";
 import Experience from "@/features/experience/experience";
 import Hero from "@/features/hero/hero";
 import MyProjects from "./components/MyProjects";
@@ -128,7 +128,7 @@ export default function Home() {
                 : "hover:text-yellow-400"
                 } 
                 after:content-[''] after:absolute after:left-0 after:-bottom-1
-                after:h-[2px] after:bg-yellow-400 after:w-0 
+                after:h-0.5 after:bg-yellow-400 after:w-0 
                 after:transition-all after:duration-300 hover:after:w-full`}
             >
               {item.label}
@@ -197,7 +197,7 @@ export default function Home() {
       </section>
 
       <section id="about" className="min-h-screen">
-        <AboutSection />
+        <AboutMe />
       </section>
 
       <section id="experience" className="min-h-screen">

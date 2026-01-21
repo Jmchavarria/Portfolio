@@ -1,85 +1,62 @@
 "use client";
 
-// components/MyProjects.tsx
-import React, { useState, useCallback } from "react";
+import React from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { FiChevronLeft, FiChevronRight } from 'react-icons/fi';
+import { FiChevronLeft, FiChevronRight } from "react-icons/fi";
 
-// Data
 import { projects } from "@/features/projects/data/projects";
-
-// Hooks
 import { useProjectCarousel } from "@/hooks/useProjectCarousel";
+import { useProjectModal } from "./hooks/useProjectModal";
 
-// Components
-import { ProjectCard } from "@/app/components/projectCard";
+import { Card } from "./components/card";
 import { ProjectModal } from "@/app/components/ProjectModal";
 import { SectionTitle } from "@/app/components/sectionTitle";
 
 const MyProjects: React.FC = () => {
-  const [selectedProjectId, setSelectedProjectId] = useState<string | null>(null);
-  const selectedProject = projects.find(p => p.id === selectedProjectId);
+  const { selectedProject, open, close } = useProjectModal(projects);
 
-  const {
-    currentIndex,
-    itemsToShow,
-    nextSlide,
-    prevSlide,
-    goToSlide
-  } = useProjectCarousel(projects.length);
-
-  const openProjectModal = (id: string) => {
-    setSelectedProjectId(id);
-    document.body.style.overflow = 'hidden';
-  };
-
-  const closeProjectModal = useCallback(() => {
-    setSelectedProjectId(null);
-    document.body.style.overflow = 'auto';
-  }, []);
+  const { currentIndex, itemsToShow, nextSlide, prevSlide, goToSlide } =
+    useProjectCarousel(projects.length);
 
   return (
-    <section className="min-h-screen w-full bg-black text-white px-4 sm:px-8 md:px-16 py-20" id="proyectos">
-
+    <section
+      className="min-h-screen w-full bg-black text-white px-4 sm:px-8 md:px-16 py-20"
+      id="proyectos"
+    >
       <div className="container mx-auto">
-   
-          <SectionTitle title="Projects" className="text-4xl md:text-4xl text-[#FFFDED] font-bold leading-tight mb-4"/>
-          
-        
+        <SectionTitle
+          title="Projects"
+          className="text-4xl md:text-4xl text-[#FFFDED] font-bold leading-tight mb-4"
+        />
 
-        {/* Grid para móvil - Solo visible en móvil */}
+        {/* Móvil */}
         <div className="block md:hidden">
           <div className="grid grid-cols-1 gap-6">
             {projects.map((project, index) => (
-              
               <motion.div
                 key={project.id}
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                transition={{ 
-                  duration: 0.5, 
+                transition={{
+                  duration: 0.5,
                   delay: index * 0.1,
-                  ease: "easeOut"
+                  ease: "easeOut",
                 }}
                 viewport={{ once: true, amount: 0.2 }}
                 className="w-full"
               >
-                <ProjectCard
-                  project={project}
-                  onOpen={openProjectModal}
-                  delay={0}
-                />
+                <Card project={project} onOpen={open}  />
               </motion.div>
             ))}
           </div>
         </div>
 
-        {/* Carrusel para desktop - Solo visible en desktop */}
+        {/* Desktop */}
         <div className="hidden md:block relative px-8 sm:px-12 md:px-16">
-          {/* Botones de navegación */}
           {projects.length > itemsToShow && (
             <>
               <button
+                type="button"
                 onClick={prevSlide}
                 className="absolute left-0 top-1/2 cursor-pointer -translate-y-1/2 z-10 p-3 rounded-full 
                           bg-white/90 hover:bg-white text-black transition-all duration-300 
@@ -89,7 +66,8 @@ const MyProjects: React.FC = () => {
                 <FiChevronLeft size={20} />
               </button>
 
-              <button 
+              <button
+                type="button"
                 onClick={nextSlide}
                 className="absolute right-0 top-1/2 cursor-pointer -translate-y-1/2 z-10 p-3 rounded-full 
                           bg-white/90 hover:bg-white text-black transition-all duration-300 
@@ -101,20 +79,17 @@ const MyProjects: React.FC = () => {
             </>
           )}
 
-          {/* Contenedor del carrusel */}
           <div className="overflow-hidden">
             <motion.div
               className="flex gap-6 md:gap-8"
               animate={{
-                x: `calc(-${currentIndex * (100 / itemsToShow)}% - ${currentIndex * (24 / itemsToShow)}px)`
+                x: `calc(-${currentIndex * (100 / itemsToShow)}% - ${currentIndex * (24 / itemsToShow)
+                  }px)`,
               }}
-              transition={{
-                type: "spring",
-                damping: 20,
-                stiffness: 100
-              }}
+              transition={{ type: "spring", damping: 20, stiffness: 100 }}
               style={{
-                width: `calc(${(projects.length / itemsToShow) * 100}% + ${(projects.length - 1) * (24 / itemsToShow)}px)`
+                width: `calc(${(projects.length / itemsToShow) * 100}% + ${(projects.length - 1) * (24 / itemsToShow)
+                  }px)`,
               }}
             >
               {projects.map((project, index) => (
@@ -122,31 +97,28 @@ const MyProjects: React.FC = () => {
                   key={project.id}
                   className="shrink-0 h-full"
                   style={{
-                    width: `calc(${100 / projects.length}% - ${(24 * (projects.length - 1)) / projects.length}px)`
+                    width: `calc(${100 / projects.length}% - ${(24 * (projects.length - 1)) / projects.length
+                      }px)`,
                   }}
                 >
-
-
-                  <ProjectCard
-                    project={project}
-                    onOpen={openProjectModal}
-                    delay={index * 0.1}
-                  />
+                  <Card project={project} onOpen={open}  />
                 </div>
               ))}
             </motion.div>
           </div>
 
-          {/* Indicadores - Solo desktop */}
           {projects.length > itemsToShow && (
             <div className="flex justify-center mt-8 space-x-2">
-              {Array.from({ length: Math.max(1, projects.length - itemsToShow + 1) }).map((_, idx) => (
+              {Array.from({
+                length: Math.max(1, projects.length - itemsToShow + 1),
+              }).map((_, idx) => (
                 <button
                   key={idx}
+                  type="button"
                   onClick={() => goToSlide(idx)}
                   className={`h-2 rounded-full transition-all ${currentIndex === idx
-                    ? 'bg-[#ffb17a] w-8'
-                    : 'bg-gray-300 w-2 hover:bg-gray-200'
+                    ? "bg-[#ffb17a] w-8"
+                    : "bg-gray-300 w-2 hover:bg-gray-200"
                     }`}
                   aria-label={`Ir a proyecto ${idx + 1}`}
                 />
@@ -154,26 +126,16 @@ const MyProjects: React.FC = () => {
             </div>
           )}
 
-          {/* Información adicional - Solo desktop */}
           <div className="mt-4 text-center">
             <p className="text-gray-300 text-sm">
               Showing {Math.min(itemsToShow, projects.length)} of {projects.length} projects
             </p>
           </div>
         </div>
-
-        {/* Información total - Solo móvil */}
-       
       </div>
 
-      {/* Modal de detalles del proyecto */}
       <AnimatePresence>
-        {selectedProject && (
-          <ProjectModal
-            project={selectedProject}
-            onClose={closeProjectModal}
-          />
-        )}
+        {selectedProject && <ProjectModal project={selectedProject} onClose={close} />}
       </AnimatePresence>
     </section>
   );

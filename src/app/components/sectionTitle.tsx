@@ -14,7 +14,7 @@ export const SectionTitle: React.FC<sectionTitleProp> = ({ title, className }) =
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
-            className="text-center"
+            className=" "
         >
 
             <h2 className={className}>

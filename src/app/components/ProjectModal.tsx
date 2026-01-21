@@ -131,7 +131,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
           {/* Header */}
           <div className="flex items-center justify-between p-4 sm:p-6 border-b border-gray-800/50 bg-black/20 backdrop-blur-sm">
             <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-white flex items-center gap-3">
-              <span className="bg-gradient-to-r from-[#ffb17a] to-[#ff9e5c] bg-clip-text text-transparent">
+              <span className="bg-linear-to-r from-[#ffb17a] to-[#ff9e5c] bg-clip-text text-transparent">
                 {project.title}
               </span>
               {project.title !== "Bar Manager" && (
@@ -164,7 +164,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
               <div className="flex justify-center">
                 <div 
                   ref={carouselRef}
-                  className="relative group w-full max-w-5xl bg-gradient-to-br from-gray-900 to-black border border-gray-800/60 rounded-xl shadow-2xl overflow-hidden h-[30vh] sm:h-[40vh] md:h-[50vh] lg:h-[60vh] select-none"
+                  className="relative group w-full max-w-5xl bg-linear-to-br from-gray-900 to-black border border-gray-800/60 rounded-xl shadow-2xl overflow-hidden h-[30vh] sm:h-[40vh] md:h-[50vh] lg:h-[60vh] select-none"
                   onTouchStart={handleTouchStart}
                   onTouchMove={handleTouchMove}
                   onTouchEnd={handleTouchEnd}

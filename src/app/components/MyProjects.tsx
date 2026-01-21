@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { FiChevronLeft, FiChevronRight } from 'react-icons/fi';
 import { projects } from "@/features/projects/data/projects";
 import { useProjectCarousel } from "@/hooks/useProjectCarousel";
-import { ProjectCard } from "./projectCard";
+import { Card } from "@/features/projects/components/card";
 import { ProjectModal } from './ProjectModal';
 
 const MyProjects: React.FC = () => {
@@ -89,15 +89,14 @@ const MyProjects: React.FC = () => {
               {projects.map((project, index) => (
                 <div
                   key={project.id}
-                  className="flex-shrink-0"
+                  className="shrink-0"
                   style={{
                     width: `calc(${100 / projects.length}% - ${(24 * (projects.length - 1)) / projects.length}px)`
                   }}
                 >
-                  <ProjectCard
+                  <Card
                     project={project}
                     onOpen={openProjectModal}
-                    delay={index * 0.1}
                   />
                 </div>
               ))}
