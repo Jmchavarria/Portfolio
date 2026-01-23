@@ -1,7 +1,8 @@
-import { Technologies } from "./technologies"
+import { Technologies } from "./technologies/technologies"
 import { Formation } from "./formation"
 import { AboutImage } from "./image"
 import { Description } from "./description"
+import { skills } from "../data/skills"
 
 export const Content = () => {
     return (
@@ -11,7 +12,7 @@ export const Content = () => {
             <div className="lg:w-3/3 space-y-10">
                 <Description />
 
-                <Technologies />
+                <Technologies skills={skills} />
 
                 <Formation />
 
