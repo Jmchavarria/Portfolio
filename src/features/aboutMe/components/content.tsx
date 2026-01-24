@@ -1,5 +1,5 @@
 import { Technologies } from "./technologies/technologies"
-import { Formation } from "./formation"
+import { Formation } from "./formation/formation"
 import { AboutImage } from "./image"
 import { Description } from "./description"
 import { skills } from "../data/skills"

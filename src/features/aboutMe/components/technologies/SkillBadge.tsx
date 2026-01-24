@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Skill } from "./types";
+import { Skill } from "../../types/technologies.types";
 
 export function SkillBadge({ skill }: { skill: Skill }) {
   return (

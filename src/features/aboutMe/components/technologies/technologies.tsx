@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { SkillBadge } from "./SkillBadge";
-import { Props } from "./types";
+import { Props } from "../../types/technologies.types";
 
 
 export function Technologies({ title = "Technologies", skills }: Props) {

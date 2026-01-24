@@ -1,5 +1,6 @@
 import { SiGit, SiGithub, SiNextdotjs, SiNodedotjs, SiReact, SiSupabase, SiTailwindcss, SiTypescript } from "react-icons/si";
 
+// tecnologías
 export const skills = [
     { icon: <SiReact className="text-[#61DAFB] text-3xl" />, name: "React" },
     { icon: <SiNextdotjs className="text-white text-3xl" />, name: "Next.js" },

@@ -4,8 +4,6 @@ export type Skill = {
   icon: React.ReactNode;
 };
 
-
-
 export type Props = {
   title?: string;
   skills: Skill[];
