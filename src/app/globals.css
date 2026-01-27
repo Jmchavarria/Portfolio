@@ -5,12 +5,9 @@
   --foreground: #171717;
 }
 
-
 @theme {
   --font-stalinist_one: var(--font-stalinist_one), sans-serif,
 }
-
-
 
 @media (prefers-color-scheme: dark) {
   :root {

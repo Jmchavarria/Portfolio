@@ -23,7 +23,6 @@ export const Header: React.FC<HeaderProps> = ({ link, shortDescription, title })
                         </a>
                     )  }
 
-
                 </div>
                 <p className="text-gray-300 text-sm leading-relaxed h-10 overflow-hidden">
                     {shortDescription}

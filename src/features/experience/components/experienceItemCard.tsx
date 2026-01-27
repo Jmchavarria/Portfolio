@@ -1,5 +1,5 @@
 import { FiCalendar, FiMapPin } from "react-icons/fi";
-import { Card } from "@/app/components/card";
+import { Card } from "@/shared/components/card";
 import { Props } from "./types";
 
 export function ExperienceItemCard({ item }: Props) {

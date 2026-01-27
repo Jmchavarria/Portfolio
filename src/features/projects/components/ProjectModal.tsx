@@ -224,7 +224,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
                           e.stopPropagation();
                           prevSlide();
                         }}
-                        className="absolute left-2 sm:left-4 top-1/2 cursor-pointer -translate-y-1/2 bg-black/60 hover:bg-black/80 text-white h-8 w-8 sm:h-12 sm:w-12 flex items-center justify-center rounded-full transition-all duration-300 hover:scale-110 backdrop-blur-sm opacity-0 sm:group-hover:opacity-100 z-20 hidden sm:flex"
+                        className="absolute left-2 sm:left-4 top-1/2 cursor-pointer -translate-y-1/2 bg-black/60 hover:bg-black/80 text-white h-8 w-8 sm:h-12 sm:w-12 items-center justify-center rounded-full transition-all duration-300 hover:scale-110 backdrop-blur-sm opacity-0 sm:group-hover:opacity-100 z-20 hidden sm:flex"
                         aria-label="Imagen anterior"
                       >
                         <FiChevronLeft size={16} className="sm:w-6 sm:h-6" />
@@ -235,7 +235,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
                           e.stopPropagation();
                           nextSlide();
                         }}
-                        className="absolute right-2 sm:right-4 cursor-pointer top-1/2 -translate-y-1/2 bg-black/60 hover:bg-black/80 text-white h-8 w-8 sm:h-12 sm:w-12 flex items-center justify-center rounded-full transition-all duration-300 hover:scale-110 backdrop-blur-sm opacity-0 sm:group-hover:opacity-100 z-20 hidden sm:flex"
+                        className="absolute right-2 sm:right-4 cursor-pointer top-1/2 -translate-y-1/2 bg-black/60 hover:bg-black/80 text-white h-8 w-8 sm:h-12 sm:w-12 items-center justify-center rounded-full transition-all duration-300 hover:scale-110 backdrop-blur-sm opacity-0 sm:group-hover:opacity-100 z-20 hidden sm:flex"
                         aria-label="Imagen siguiente"
                       >
                         <FiChevronRight size={16} className="sm:w-6 sm:h-6" />
@@ -247,7 +247,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
 
               {/* Indicadores bajo el carrusel */}
               {imagesLength > 1 && (
-                <div className="flex justify-center items-center space-x-2 min-h-[24px]">
+                <div className="flex justify-center items-center space-x-2 min-h-6">
                   {project.additionalImages?.map((_, idx) => (
                     <button
                       key={idx}
@@ -257,7 +257,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
                       }}
                       className={`h-0.5 transition-all duration-300 ease-in-out ${
                         currentIndex === idx
-                          ? "bg-gradient-to-r from-[#ffb17a] to-[#ff9e5c] w-16 sm:w-20"
+                          ? "bg-linear-to-r from-[#ffb17a] to-[#ff9e5c] w-16 sm:w-20"
                           : "bg-gray-600/60 hover:bg-gray-500/80 w-12 sm:w-16"
                       }`}
                       aria-label={`Ir a imagen ${idx + 1}`}
@@ -312,7 +312,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
                           key={idx}
                           className="flex items-start gap-3 group"
                         >
-                          <div className="w-1.5 h-1.5 bg-gradient-to-r from-[#ffb17a] to-[#ff9e5c] rounded-full mt-2 group-hover:scale-125 transition-transform duration-200" />
+                          <div className="w-1.5 h-1.5 bg-linear-to-r from-[#ffb17a] to-[#ff9e5c] rounded-full mt-2 group-hover:scale-125 transition-transform duration-200" />
                           <span className="flex-1 text-sm sm:text-base">{feature}</span>
                         </li>
                       ))}

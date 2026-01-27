@@ -4,13 +4,14 @@ import { Technologies } from "./technologies";
 import { Header } from "./header";
 import { Actions } from "./action";
 import { ImageProject } from "./imageProject";
+import React from "react";
 
 type Props = {
   project: Project;
   onOpen: (id: string) => void;
 };
 
-export const Card = ({ project, onOpen }: Props) => {
+export const ProjectSection = ({ children }: { children: React.ReactNode }) => {
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -20,21 +21,37 @@ export const Card = ({ project, onOpen }: Props) => {
                  transition-all duration-300 hover:scale-[1.02] group 
                  flex flex-col border border-gray-800/50"
     >
+      <div className="flex flex-col justify-between">
+
+        {children} 
+
+      </div >
+    </motion.div>
+
+  )
+}
+
+export const Content = ({ project, onOpen }: Props) => {
+  return (
+
+    <ProjectSection>
 
       <ImageProject imageUrl={project.imageUrl} title={project.title} />
 
-      <div className="flex-1 p-5 flex flex-col justify-between">
+      <div className="p-5">
 
         <Header
           link={project.link}
-          shortDescription={project.shortDescription}
           title={project.title}
+          shortDescription={project.shortDescription} 
         />
 
         <Technologies technologies={project.technologies} />
 
         <Actions id={project.id} onOpen={onOpen} codeLink={project.codeLink} />
+
       </div>
-    </motion.div>
+
+    </ProjectSection >
   );
 };

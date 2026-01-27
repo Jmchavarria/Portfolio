@@ -1,4 +1,3 @@
-
 export type Skill = {
   name: string;
   icon: React.ReactNode;
