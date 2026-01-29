@@ -1,4 +1,4 @@
-import { SectionHeader } from "@/shared/components/sectionHeader";
+import { SectionHeader } from "@/shared/ui/sectionHeader";
 import { Content } from "./components/content";
 
 const Experience = () => {

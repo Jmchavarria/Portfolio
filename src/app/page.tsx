@@ -1,15 +1,14 @@
-"use client";
-
+'use client'
 import AboutMe from "@/features/aboutMe/aboutMe";
 import Experience from "@/features/experience/experience";
 import Hero from "@/features/hero/hero";
 import MyProjects from "@/features/projects/MyProjects";
 import { AnimatePresence, motion } from "framer-motion";
 import { ChevronUp } from "lucide-react";
-import { HOME_NAV_ITEMS } from "./home/ home-nav.config";
-import { useHomeNavigation } from "./home/useHomeNavigation";
-import { HeaderNav } from "./home/HeaderNav";
-import { MobileNav } from "./home/MobileNav";
+import { HOME_NAV_ITEMS } from "@/features/home/config/home-nav.config";
+import { useHomeNavigation } from "@/features/home/hooks/useHomeNavigation";
+import { HeaderNav } from "@/features/home/components/headerNav";
+import { MobileNav } from "@/features/home/components/mobileNav";
 
 export default function Home() {
   const {

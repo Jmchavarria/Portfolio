@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { FormationItem } from "../../types";
 import { FormationItemCard } from "./formationItemCard";
+import { GraduationCap } from "lucide-react";
 
 type Props = {
   title?: string;
@@ -16,8 +17,10 @@ export function FormationSection({ title = "Formation", items }: Props) {
       transition={{ duration: 0.6 }}
       className="max-w-3xl w-full"
     >
-      <div className="flex justify-between items-center mb-4">
+      <div className="flex gap-2 sm:flex sm:justify-between items-center mb-4">
         <h2 className="text-xl font-bold text-[#FFFDED]">{title}</h2>
+        <GraduationCap className="w-8 h-8 text-gray-300 sm:hidden" />
+
       </div>
 
       <div className="gap-5 flex flex-col">

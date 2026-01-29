@@ -1,5 +1,5 @@
 import { motion, AnimatePresence } from "framer-motion";
-import { HomeNavItem, HomeSectionId } from "./ home-nav.config";
+import { HomeNavItem, HomeSectionId } from "../home-nav.config";
 
 type Props = {
     open: boolean;

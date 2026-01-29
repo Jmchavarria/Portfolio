@@ -12,8 +12,8 @@ import {
 } from "react-icons/fi";
 import { Project } from "@/types/project";
 import { getTechnologyIcon } from "@/utils/getTechnologyIcon";
-import { useCarousel } from "@/hooks/useCarousel";
-import { FullScreenImage } from "./fullScreenImage";
+import { useCarousel } from "../../hooks/useCarousel";
+import { FullScreenImage } from "@/shared/ui/fullscreen-image/fullScreenImage";
 
 interface ProjectModalProps {
   project: Project;

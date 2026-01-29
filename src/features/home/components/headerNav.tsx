@@ -1,5 +1,5 @@
 
-import { HomeNavItem, HomeSectionId } from "./ home-nav.config";
+import { HomeNavItem, HomeSectionId } from "../home-nav.config";
 import { Menu, X } from "lucide-react";
 
 type Props = {

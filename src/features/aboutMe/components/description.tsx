@@ -1,4 +1,4 @@
-import { SectionHeader } from "@/shared/components/sectionHeader"
+import { SectionHeader } from "@/shared/ui/sectionHeader"
 
 export const Description = () => {
     return (
@@ -10,8 +10,6 @@ export const Description = () => {
                     I love tackling technical challenges and delivering efficient, innovative solutions.
                 </>}
             />
-
-
         </div>
 
     )

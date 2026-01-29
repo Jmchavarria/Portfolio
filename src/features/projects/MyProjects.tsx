@@ -1,12 +1,12 @@
 import {  AnimatePresence } from "framer-motion";
 import { projects } from "@/features/projects/data/projects";
-import { useProjectCarousel } from "@/hooks/useProjectCarousel";
-import { ProjectModal } from "./components/ProjectModal";
-import { useProjectModal } from "@/features/projects/hooks/useProjectModal";
+import { useProjectCarousel } from "./hooks/useProjectCarousel";
+import { ProjectModal } from "./components/modal/ProjectModal";
+import { useProjectModal } from "./components/modal/useProjectModal";
 import { PaginationIndicators } from "./paginationIndicators";
-import { Container } from "./components/carousel/container";
+import { Container } from "./components/project-card/container";
 import { ArrowButtons } from "./components/carousel/arrowButtons";
-import { SectionHeader } from "@/shared/components/sectionHeader";
+import { SectionHeader } from "@/shared/ui/sectionHeader";
 
 const MyProjects: React.FC = () => {
 
