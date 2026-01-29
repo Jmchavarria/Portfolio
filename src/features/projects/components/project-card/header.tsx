@@ -15,8 +15,6 @@ export const Header: React.FC<HeaderProps> = ({ link, shortDescription, title })
                     </h3>
 
                     {title !== 'Bar Manager' && (
-
-
                         <a href={link} target="_blank" className="text-gray-400 hover:text-gray-500">
                             <FiExternalLink />
 

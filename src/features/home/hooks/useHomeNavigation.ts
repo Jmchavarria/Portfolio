@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { HomeSectionId, HomeNavItem} from "../home-nav.config";
+import { HomeSectionId, HomeNavItem } from "../config/home-nav.config";
 
 export function useHomeNavigation(navItems: readonly HomeNavItem[]) {
   const [activeSection, setActiveSection] = useState<HomeSectionId>("hero");
@@ -72,7 +72,7 @@ export function useHomeNavigation(navItems: readonly HomeNavItem[]) {
     const top = section.getBoundingClientRect().top + window.scrollY - navbarHeight;
 
     // Actualiza estado primero (la URL se sincroniza por el effect)
-    setActiveSection(sectionId);  
+    setActiveSection(sectionId);
 
     window.scrollTo({ top, behavior: "smooth" });
 
