@@ -3,10 +3,9 @@ import Image from "next/image";
 export const ImageProject = ({ imageUrl, title }: { imageUrl: string; title: string }) => {
     return (
 
-        <div className="h-48 w-full relative overflow-hidden rounded-t-xl shrink-0 bg-gray-800 border">
+        <div className="h-48 w-full relative overflow-hidden rounded-t-xl shrink-0 bg-gray-800 ">
 
             {imageUrl &&
-
                 <><Image
                     src={imageUrl}
                     alt={title}
