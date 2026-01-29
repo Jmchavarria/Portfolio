@@ -83,7 +83,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
                 <GridTechnlogies features={project.features} technologies={project.technologies} />
 
                 <Cta title={project.title} link={project.link} />
-              </div>
+              </div>|
             </div>
           </Modal>
         )}
