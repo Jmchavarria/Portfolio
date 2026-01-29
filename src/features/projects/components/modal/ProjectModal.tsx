@@ -1,5 +1,4 @@
 "use client";
-
 import React, { useMemo, useRef, useState, useCallback } from "react";
 import { AnimatePresence } from "framer-motion";
 import { Project } from "@/types/project";
@@ -15,7 +14,7 @@ import { useModalControls } from "./hooks/useModalControls";
 
 interface ProjectModalProps {
   project: Project;
-  onClose: () => void; // se llama cuando Framer termina el exit
+  onClose: () => void; 
 }
 
 export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) => {
