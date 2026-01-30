@@ -1,30 +1,54 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useCallback } from "react";
 import { HomeSectionId, HomeNavItem } from "../config/home-nav.config";
 
 export function useHomeNavigation(navItems: readonly HomeNavItem[]) {
   const [activeSection, setActiveSection] = useState<HomeSectionId>("hero");
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [isScrolling, setIsScrolling] = useState(false);
   const [hasScrolled, setHasScrolled] = useState(false);
+  const [isScrolling, setIsScrolling] = useState(false);
   const observerRef = useRef<IntersectionObserver | null>(null);
+  const ratiosRef = useRef(new Map<HomeSectionId, number>());
+  const scrollEndTimer = useRef<number | null>(null);
+  const sectionElementsRef = useRef<HTMLElement[]>([]);
 
-  // 1) Detectar scroll
+  // 0) Guardar elementos cuando ya existe document (después de montar)
   useEffect(() => {
-    const handleScroll = () => setHasScrolled(window.scrollY > 100);
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    handleScroll();
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
-  // 2) Observer: SOLO decide sección activa (sin tocar history aquí)
-  useEffect(() => {
-    const sectionElements = navItems
+    sectionElementsRef.current = navItems
       .map((item) => document.getElementById(item.id))
       .filter(Boolean) as HTMLElement[];
+  }, [navItems]);
+
+  // 1) Detectar scroll + liberar isScrolling cuando "termina" el scroll
+  useEffect(() => {
+    const onScroll = () => {
+      setHasScrolled(window.scrollY > 100);
+
+      if (!isScrolling) return;
+
+      if (scrollEndTimer.current) window.clearTimeout(scrollEndTimer.current);
+      scrollEndTimer.current = window.setTimeout(() => {
+        setIsScrolling(false);
+      }, 120);
+    };
+
+    window.addEventListener("scroll", onScroll, { passive: true });
+    onScroll();
+
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      if (scrollEndTimer.current) window.clearTimeout(scrollEndTimer.current);
+    };
+  }, [isScrolling]);
+
+  // 2) Observer: decide sección activa
+  useEffect(() => {
+    const sectionElements = sectionElementsRef.current;
+    if (!sectionElements.length) return;
 
     observerRef.current?.disconnect();
+    ratiosRef.current.clear();
 
     const observerOptions: IntersectionObserverInit = {
       root: null,
@@ -35,33 +59,39 @@ export function useHomeNavigation(navItems: readonly HomeNavItem[]) {
     const handleIntersect = (entries: IntersectionObserverEntry[]) => {
       if (isScrolling) return;
 
-      const visibleEntries = entries
-        .filter((e) => e.isIntersecting)
-        .sort((a, b) => b.intersectionRatio - a.intersectionRatio);
+      for (const e of entries) {
+        const id = e.target.id as HomeSectionId;
+        ratiosRef.current.set(id, e.isIntersecting ? e.intersectionRatio : 0);
+      }
 
-      if (!visibleEntries.length) return;
+      let bestId: HomeSectionId | null = null;
+      let bestRatio = 0;
 
-      const id = visibleEntries[0].target.id as HomeSectionId;
-      setActiveSection((prev) => (prev === id ? prev : id));
+      for (const [id, ratio] of ratiosRef.current.entries()) {
+        if (ratio > bestRatio) {
+          bestRatio = ratio;
+          bestId = id;
+        }
+      }
+
+      if (!bestId || bestRatio === 0) return;
+      setActiveSection((prev) => (prev === bestId ? prev : bestId));
     };
 
     observerRef.current = new IntersectionObserver(handleIntersect, observerOptions);
     sectionElements.forEach((el) => observerRef.current?.observe(el));
 
     return () => observerRef.current?.disconnect();
-  }, [navItems, isScrolling]);
+  }, [navItems, isScrolling]); // 👈 importante: depende de navItems, no de sectionElements
 
-  // 3) Sincronizar URL con el estado (aquí sí tocamos history)
+  // 3) Sincronizar URL con el estado
   useEffect(() => {
-    // evita trabajo si ya está igual
-    if (typeof window === "undefined") return;
     const currentHash = window.location.hash.replace("#", "") as HomeSectionId | "";
     if (currentHash === activeSection) return;
-
     history.replaceState(null, "", `#${activeSection}`);
   }, [activeSection]);
 
-  const scrollToSection = (sectionId: HomeSectionId) => {
+  const scrollToSection = useCallback((sectionId: HomeSectionId) => {
     setIsScrolling(true);
     setMobileMenuOpen(false);
 
@@ -71,13 +101,9 @@ export function useHomeNavigation(navItems: readonly HomeNavItem[]) {
     const navbarHeight = 64;
     const top = section.getBoundingClientRect().top + window.scrollY - navbarHeight;
 
-    // Actualiza estado primero (la URL se sincroniza por el effect)
     setActiveSection(sectionId);
-
     window.scrollTo({ top, behavior: "smooth" });
-
-    window.setTimeout(() => setIsScrolling(false), 1000);
-  };
+  }, []);
 
   return {
     activeSection,

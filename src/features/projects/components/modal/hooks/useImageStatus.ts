@@ -18,4 +18,6 @@ export const useImageStatus = (src: string) => {
       setError(true);
     },
   };
+
+  
 };

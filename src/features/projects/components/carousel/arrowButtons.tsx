@@ -15,11 +15,14 @@ export const ArrowButtons = ({
 }: ArrowButtonsProps) => {
   if (total <= itemsToShow) return null;
 
+  const baseClass =
+    "absolute cursor-pointer hover:bg-gray-200 top-1/2 -translate-y-1/2 z-10 p-3 rounded-full bg-white text-black hidden sm:block";
+
   return (
     <>
       <button
         onClick={prevSlide}
-        className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 z-10 p-3 rounded-full bg-white text-black"
+        className={`${baseClass} left-0 -translate-x-4`}
         aria-label="Proyecto anterior"
         type="button"
       >
@@ -28,7 +31,7 @@ export const ArrowButtons = ({
 
       <button
         onClick={nextSlide}
-        className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 z-10 p-3 rounded-full bg-white text-black"
+        className={`${baseClass} right-0 translate-x-4`}
         aria-label="Proyecto siguiente"
         type="button"
       >

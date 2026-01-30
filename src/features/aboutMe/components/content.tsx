@@ -10,7 +10,7 @@ export const Content = () => {
             <AboutImage />
 
             <div className="lg:w-3/3 space-y-10">
-                <Description />
+                <Description     />
 
                 <Technologies skills={skills} />
 

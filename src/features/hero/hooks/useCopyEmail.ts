@@ -19,7 +19,7 @@ export function useCopyEmail() {
 
       timerRef.current = window.setTimeout(() => {
         setShowCopiedAlert(false);
-      }, 2000);
+      }, 1000);
     } catch (err) {
       console.error("Error al copiar:", err);
     }
