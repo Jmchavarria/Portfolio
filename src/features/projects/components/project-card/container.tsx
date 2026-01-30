@@ -47,35 +47,43 @@ export function Container({
 
   const isMobile = itemsToShow === 1;
 
+  // ✅ Transición más fluida en mobile
+  const transition = isMobile
+    ? { type: "spring", stiffness: 380, damping: 32, mass: 0.6 }
+    : { type: "spring", stiffness: 180, damping: 20 };
+
   return (
     <div ref={wrapperRef} className="overflow-hidden touch-pan-y">
       <motion.div
         className="flex"
         style={{
-          width: trackWidth,      // number -> px ✅
+          width: trackWidth, // number -> px ✅
           gap: `${gapPx}px`,
         }}
         animate={{ x: translateX }} // number ✅
-        transition={{ type: "spring", damping: 20, stiffness: 100 }}
+        transition={transition}
         drag={isMobile ? "x" : false}
         dragConstraints={{
-          left: -maxIndex * stepPx, // number ✅
+          left: -maxIndex * stepPx,
           right: 0,
         }}
-        dragElastic={0.08}
+        dragElastic={0.15} // ✅ más suelto
         onDragEnd={(_, info) => {
           if (!isMobile) return;
 
-          // arrastre hacia la izquierda => offset.x negativo => quiere ir al siguiente
           const swipe = info.offset.x;
+          const v = info.velocity.x;
 
-          // Umbral: 25% del paso (slide + gap). Ajusta a gusto: 0.2 / 0.3
-          const threshold = stepPx * 0.25;
+          // ✅ más sensible + soporta flick rápido
+          const threshold = stepPx * 0.18;
+          const velocityThreshold = 500;
 
           let next = currentIndex;
 
-          if (swipe < -threshold) next = currentIndex + 1; // siguiente
-          else if (swipe > threshold) next = currentIndex - 1; // anterior
+          // swipe a la izquierda -> siguiente
+          if (swipe < -threshold || v < -velocityThreshold) next = currentIndex + 1;
+          // swipe a la derecha -> anterior
+          else if (swipe > threshold || v > velocityThreshold) next = currentIndex - 1;
 
           const clamped = Math.min(maxIndex, Math.max(0, next));
           goToSlide(clamped);
