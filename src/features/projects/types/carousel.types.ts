@@ -6,4 +6,5 @@ export type ContainerProps = {
   itemsToShow: number;
   gapPx?: number;
   onOpen: (id: string) => void;
+  goToSlide: (index: number) => void; // 👈
 };

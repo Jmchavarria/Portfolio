@@ -3,17 +3,19 @@ export function getCarouselStyles(params: {
   itemsToShow: number;
   currentIndex: number;
   gapPx: number;
+  containerWidth: number;
 }) {
-  const { total, itemsToShow, currentIndex, gapPx } = params;
+  const { total, itemsToShow, currentIndex, gapPx, containerWidth } = params;
 
   const visible = Math.max(1, Math.min(itemsToShow, total));
   const maxIndex = Math.max(0, total - visible);
   const clampedIndex = Math.max(0, Math.min(currentIndex, maxIndex));
 
-  const trackWidth = `calc(${(total / visible) * 100}% + ${(total - 1) * (gapPx / visible)}px)`;
-  const translateX = `calc(-${clampedIndex * (100 / visible)}% - ${clampedIndex * (gapPx / visible)}px)`;
-  const itemWidth = `calc(${100 / total}% - ${(gapPx * (total - 1)) / total}px)`;
+  const itemWidth = visible === 0 ? 0 : (containerWidth - gapPx * (visible - 1)) / visible;
+  const stepPx = itemWidth + gapPx;
 
-  return { trackWidth, translateX, itemWidth };
+  const trackWidth = total * itemWidth + gapPx * Math.max(0, total - 1);
+  const translateX = -clampedIndex * stepPx;
+
+  return { trackWidth, translateX, itemWidth, maxIndex, stepPx };
 }
-    
