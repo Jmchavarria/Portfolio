@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import { motion, Transition } from "framer-motion";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { Content } from "./card";
 import { ContainerProps } from "../../types/carousel.types";
@@ -48,7 +48,7 @@ export function Container({
   const isMobile = itemsToShow === 1;
 
   // ✅ Transición más fluida en mobile
-  const transition = isMobile
+  const transition: Transition = isMobile
     ? { type: "spring", stiffness: 380, damping: 32, mass: 0.6 }
     : { type: "spring", stiffness: 180, damping: 20 };
 
