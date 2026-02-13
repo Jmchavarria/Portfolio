@@ -1,13 +1,11 @@
-import { ExperienceItemCard } from "./experienceItemCard";
+import { ExperienceItem } from "./experienceItem";
 
-import { PropsExperienceList } from "./types";
+import { Experience } from "./Experience.types";
+
+export type PropsExperienceList = { items: Experience[] };
 
 export function ExperienceList({ items }: PropsExperienceList) {
-    return (
-        <>
-            {items.map((item) => (
-                <ExperienceItemCard key={item.title} item={item} />
-            ))}
-        </>
-    );
+    return items.map((item) => (
+        <ExperienceItem key={item.id} item={item} />
+    ))
 }

@@ -1,7 +1,7 @@
 import { Download } from "lucide-react";
 import { ElementType  } from "react";
 
-export const Buttons = ({ socialLinks, copyEmail }: {
+export const SocialActions = ({ socialLinks, copyEmail }: {
     socialLinks: {
         label: string
         icon: ElementType
@@ -11,7 +11,6 @@ export const Buttons = ({ socialLinks, copyEmail }: {
 }) => {
     return (
         <div className="flex flex-wrap items-center gap-4">
-            {/* CV Button */}
             <a
                 href="/files/Jhon-Chavarria-CV.pdf"
                 download="Jhon-Chavarria-CV.pdf"
@@ -22,7 +21,6 @@ export const Buttons = ({ socialLinks, copyEmail }: {
             </a>
 
 
-            {/* Social Buttons */}
             <div className="flex gap-3 sm:border-none w-full sm:w-auto justify-center sm:justify-normal">
                 {socialLinks.map((social, index) => {
                     const hoverClass =
@@ -32,7 +30,6 @@ export const Buttons = ({ socialLinks, copyEmail }: {
                                 ? "hover:bg-[#0a66c2]"
                                 : "hover:bg-[#ffb17a]/20";
 
-                    // Si es el botón de email, usar button en lugar de anchor
                     if (social.label === "Email") {
                         return (
                             <button

@@ -1,10 +1,10 @@
 import { GraduationCap } from "lucide-react";
 import { FiCalendar, FiMapPin } from "react-icons/fi";
-import { FormationItem } from "../../types";
+import { FormationEntry } from "./Formation.types";
 
-type Props = { item: FormationItem };
+type Props = { item: FormationEntry };
 
-export function FormationItemCard({ item }: Props) {
+export function FormationItem({ item }: Props) {
   return (
     <div className="flex gap-3">
       <GraduationCap className="w-8 h-8 hidden sm:block" />
@@ -12,7 +12,6 @@ export function FormationItemCard({ item }: Props) {
       <div className="flex flex-col justify-between w-full">
         <div className="flex justify-between">
           <span className="font-normal text-gray-300 text-base">{item.degree}</span>
-
         </div>
 
         <span className="text-sm text-[#ffb17a]">{item.institution}</span>

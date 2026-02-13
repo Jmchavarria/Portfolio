@@ -1,9 +1,8 @@
 import { Mail } from "lucide-react"
 
-export const ShowAlert = ({ showCopiedAlert }: { showCopiedAlert: boolean }) => {
+export const EmailCopiedToast = ({ showCopiedAlert }: { showCopiedAlert: boolean }) => {
     return (
         <div>
-
             {showCopiedAlert && (
                 <div className="fixed  left-1/2 bottom-6 -translate-x-1/2 -translate-y-1/2 
                   z-50 bg-[#FFB17A] text-black px-6 py-3 rounded-lg 

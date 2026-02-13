@@ -1,5 +1,4 @@
-
-export const HeroInfo = () => {
+export const Profile = () => {
     return (
         <div className=" w-full order-2 lg:order-1 lg:col-span-3 lg:row-span-5 flex flex-col justify-center   gap-6 text-center sm:text-start"  >
 
@@ -8,7 +7,7 @@ export const HeroInfo = () => {
                 Hello!
             </span >
 
-            <h1 className="text-3xl sm:text-5xl md:text-6xl font-extrabold    ">
+            <h1 className="text-3xl sm:text-5xl md:text-6xl font-extrabold">
                 <span className="text-white">I&apos;m </span>
                 <span className="text-[#FFB17A]">Jhon Chavarría</span>
             </h1>
@@ -20,7 +19,6 @@ export const HeroInfo = () => {
             <p className="max-w-md text-gray-300 ">
                 Passionate about crafting seamless, scalable applications that bring ideas to life with great user experiences.
             </p>
-
 
         </div >
     )

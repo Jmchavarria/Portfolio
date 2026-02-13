@@ -6,7 +6,7 @@ export const AboutImage = () => {
     <motion.div
       initial={{ opacity: 0, x: -20 }}
       whileInView={{ opacity: 1, x: 0 }}
-      viewport={{ amount: 0.2, once: false }}
+      viewport={{ amount: 0.2, once: true }}
       transition={{ duration: 0.6 }}
       className="lg:w-1/3 flex justify-center"
     >
@@ -18,7 +18,6 @@ export const AboutImage = () => {
           height={600}
           className="object-cover w-full h-full"
         />
-        <div className="absolute inset-0 bg-linear-to-t from-black/30 to-transparent"></div>
       </div>
     </motion.div>
   );

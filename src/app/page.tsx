@@ -1,6 +1,6 @@
 'use client'
-import AboutMe from "@/features/aboutMe/aboutMe";
-import Experience from "@/features/experience/experience";
+import AboutMe from "@/features/aboutMe/AboutMe";
+import Experience from "@/features/experience/Experiencie";
 import Hero from "@/features/hero/hero";
 import MyProjects from "@/features/projects/MyProjects";
 import { AnimatePresence, motion } from "framer-motion";
