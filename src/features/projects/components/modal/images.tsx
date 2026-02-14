@@ -4,6 +4,8 @@ import React from "react";
 import Image from "next/image";
 import { FiChevronLeft, FiChevronRight, FiMaximize2 } from "react-icons/fi";
 import { useImageStatus } from "./hooks/useImageStatus";
+import { ImageCard } from "@/shared/ui/ImageCard";
+import { Indicators } from "./Indicators";
 
 type ImagesProps = {
   carouselRef: React.RefObject<HTMLDivElement | null>;
@@ -65,17 +67,18 @@ export const Images: React.FC<ImagesProps> = ({
 
           {/* Imagen */}
           {!imageError ? (
-            <Image
+
+            <ImageCard
               src={currentImageUrl}
               alt={`${projectTitle} - Imagen ${currentIndex + 1}`}
-              fill
               sizes="(max-width: 768px) 100vw, 80vw"
-              className="object-contain cursor-zoom-in"
+              onClick={onOpenFullScreen}
               onError={onError}
               onLoad={onLoad}
-              onClick={onOpenFullScreen}
-              priority
+              containerClassName="w-full h-full"
+              className="object-contain cursor-zoom-in"
             />
+
           ) : (
             <div className="absolute inset-0 flex items-center justify-center text-gray-400">
               No se pudo cargar la imagen
@@ -83,14 +86,14 @@ export const Images: React.FC<ImagesProps> = ({
           )}
 
           {/* Fullscreen */}
-          <button
+          {/* <button
             onClick={onOpenFullScreen}
             className="absolute top-2 right-2 sm:top-4 sm:right-4 bg-black/60 hover:bg-black/80 text-white p-1.5 sm:p-2 rounded-lg opacity-70 sm:opacity-0 sm:group-hover:opacity-100 transition-all duration-300 backdrop-blur-sm z-20"
             aria-label="Ver en pantalla completa"
             type="button"
           >
             <FiMaximize2 size={14} className="sm:w-4 sm:h-4" />
-          </button>
+          </button> */}
 
           {/* Flechas desktop */}
           {imagesLength > 1 && (
@@ -123,31 +126,11 @@ export const Images: React.FC<ImagesProps> = ({
         </div>
       </div>
 
-      {/* Indicadores */}
-      {dotsCount > 1 && (
-        <div className="flex justify-center items-center space-x-2 min-h-6">
-          {Array.from({ length: dotsCount }).map((_, idx) => (
-            <button
-              key={idx}
-              onClick={(e) => {
-                e.stopPropagation();
-                onGoToSlide(idx);
-              }}
-              className={`h-0.5 transition-all duration-300 ease-in-out ${
-                currentIndex === idx
-                  ? "bg-linear-to-r from-[#ffb17a] to-[#ff9e5c] w-16 sm:w-20"
-                  : "bg-gray-600/60 hover:bg-gray-500/80 w-12 sm:w-16"
-              }`}
-              aria-label={`Ir a imagen ${idx + 1}`}
-              type="button"
-            />
-          ))}
 
-          <span className="text-xs text-gray-400 ml-3">
-            {currentIndex + 1} / {dotsCount}
-          </span>
-        </div>
-      )}
+      <Indicators  currentIndex={currentIndex} dotsCount={dotsCount} onGoToSlide={onGoToSlide} />
     </div>
   );
 };
+
+
+

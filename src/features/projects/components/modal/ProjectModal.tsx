@@ -5,11 +5,11 @@ import { Project } from "@/types/project";
 import { useCarousel } from "../../hooks/useCarousel";
 import { FullScreenImage } from "@/shared/ui/fullscreen-image/fullScreenImage";
 import { Images } from "./images";
-import { Description } from "./description";
-import { GridTechnlogies } from "./technologies";
-import { Cta } from "./cta";
-import { Header } from "./header";
-import { Modal } from "./modal";
+import { Description } from "./Description";
+import { GridTechnlogies } from "./Technologies";
+import { Cta } from "./Cta";
+import { Header } from "./Header";
+import { Modal } from "./Modal";
 import { useModalControls } from "./hooks/useModalControls";
 
 interface ProjectModalProps {
@@ -75,7 +75,6 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
       <AnimatePresence onExitComplete={onClose}>
         {isOpen && (
 
-          
           <Modal onClose={handleClose}>
             {/* Handle bar para móvil */}
             <div className="flex justify-center pt-3 pb-1 sm:hidden">
@@ -99,7 +98,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
                   features={project.features}
                   technologies={project.technologies}
                 />
-
+                
                 <Cta title={project.title} link={project.link} />
               </div>
             </div>

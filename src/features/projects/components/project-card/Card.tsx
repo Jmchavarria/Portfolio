@@ -1,8 +1,8 @@
 import { motion } from "framer-motion";
 import { Project } from "@/types/project";
 import { Technologies } from "./technologies";
-import { Header } from "./header";
-import { Actions } from "./action";
+import { Header } from "./Header";
+import { Actions } from "./Action";
 import { ImageProject } from "./imageProject";
 import React from "react";
 

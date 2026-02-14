@@ -2,9 +2,9 @@ import { AnimatePresence } from "framer-motion";
 import { projects } from "@/features/projects/data/projects";
 import { useProjectCarousel } from "./hooks/useProjectCarousel";
 import { ProjectModal } from "./components/modal/ProjectModal";
-import { useProjectModal } from "./components/modal/useProjectModal";
+import { useProjectModal } from "./components/modal/UseProjectModal";
 import { PaginationIndicators } from "./paginationIndicators";
-import { Container } from "./components/project-card/container";
+import { Container } from "./components/project-card/Container";
 import { ArrowButtons } from "./components/carousel/arrowButtons";
 import { SectionHeader } from "@/shared/ui/sectionHeader";
 

@@ -1,6 +1,6 @@
 import { motion, Transition } from "framer-motion";
 import { useEffect, useMemo, useRef, useState } from "react";
-import { Content } from "./card";
+import { Content } from "./Card";
 import { ContainerProps } from "../../types/carousel.types";
 import { getCarouselStyles } from "../carousel/carousel.styles";
 

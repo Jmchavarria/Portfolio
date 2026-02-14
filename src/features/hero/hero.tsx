@@ -1,10 +1,10 @@
 "use client";
 import { SocialActions } from "./components/SocialActions";
 import { Profile } from "./components/Profile";
-import { ImagHero } from "./components/image";
 import { EmailCopiedToast } from "./components/EmailCopiedToast";
 import { socialLinks } from "./data/Hero.data";
 import { useCopyEmail } from "./hooks/useCopyEmail";
+import { ImageCard } from "@/shared/ui/ImageCard";
 
 const Hero = () => {
   const { copyEmail, showCopiedAlert } = useCopyEmail();
@@ -20,8 +20,11 @@ const Hero = () => {
             <Profile />
             <SocialActions copyEmail={copyEmail} socialLinks={socialLinks} />
           </div>
+          <div className="relative">
 
-          <ImagHero />
+
+            <ImageCard alt="Image hero" src="/images/imgportfolio.webp" containerClassName="rounded-xl w-64 h-80 md:w-72 md:h-96 border border-white/20 transition-all" />
+          </div>
         </div>
       </div>
     </section>
