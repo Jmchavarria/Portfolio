@@ -63,21 +63,13 @@ export default function Home() {
         )}
       </AnimatePresence>
 
-      <section id="hero" className="min-h-screen">
         <Hero />
-      </section>
 
-      <section id="about" className="min-h-screen">
-        <AboutMe />
-      </section>
+      <AboutMe />
 
-      <section id="experience" className="min-h-screen">
-        <Experience />
-      </section>
+      <Experience />
 
-      <section id="projects" className="min-h-screen">
-        <MyProjects />
-      </section>
+      <MyProjects />
     </main>
   );
 }

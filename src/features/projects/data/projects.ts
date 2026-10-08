@@ -8,16 +8,9 @@ export const projects: Project[] = [
       "Una plataforma web moderna de gestión de tareas y usuarios construida con Next.js, TypeScript y Supabase.",
     longDescription:
       "Una plataforma web full-stack moderna y responsiva orientada a la productividad individual y de equipo. Permite a los usuarios organizar sus tareas diarias con flujos de trabajo eficientes, gestión completa de perfiles y seguridad de nivel empresarial.",
-    link: "https://cge-exchange-development.greenstudio.workers.dev/",
-    imageUrl: "/images/cge/mainpage.png",
-    additionalImages: [
-      "/images/cge/mainpage.png",
-      "/images/cge/login.png",
-      "/images/cge/signUp.png",
-      "/images/cge/step1cart.png",
-      "/images/cge/addressInformation.png",
-      "/images/cge/pay.png",
-    ],
+    link: "https://todolist-app-sigma-topaz.vercel.app/",
+    imageUrl: "/images/octi/octi1.png",
+    additionalImages: ["/images/octi/octi1.png"],
     technologies: [
       "Next.js",
       "React",
