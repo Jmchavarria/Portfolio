@@ -21,7 +21,7 @@ export function ExperienceItem({ item, index = 0 }: Props) {
       className="group relative"
     >
       <div className="relative overflow-hidden rounded-2xl border border-[#1F1F23] bg-[#0D0D0F] transition-all duration-500 hover:border-[#7C3AED]/40">
-        <div className="absolute inset-y-0 left-0 w-px bg-gradient-to-b from-[#7C3AED] via-[#38BDF8] to-transparent opacity-60 transition-opacity duration-500 group-hover:opacity-100" />
+        <div className="absolute inset-y-0 left-0 w-px bg-linear-to-b from-[#7C3AED] via-[#38BDF8] to-transparent opacity-60 transition-opacity duration-500 group-hover:opacity-100" />
 
         <div className="absolute -right-24 -top-24 h-48 w-48 rounded-full bg-[#7C3AED]/[0.04] blur-3xl transition-all duration-500 group-hover:bg-[#7C3AED]/[0.08]" />
 
@@ -29,14 +29,6 @@ export function ExperienceItem({ item, index = 0 }: Props) {
           <div className="flex flex-col gap-7">
             <div className="flex flex-col gap-5 lg:flex-row lg:items-start lg:justify-between">
               <div className="min-w-0">
-                <div className="mb-3 flex items-center gap-2">
-                  <span className="h-1.5 w-1.5 rounded-full bg-[#38BDF8] shadow-[0_0_8px_rgba(56,189,248,0.6)]" />
-
-                  <span className="text-[11px] font-medium uppercase tracking-[0.2em] text-[#8B8B93]">
-                    Experiencia profesional
-                  </span>
-                </div>
-
                 <h3 className="text-xl font-semibold tracking-tight text-[#F5F5F5] sm:text-2xl">
                   {item.title}
                 </h3>
