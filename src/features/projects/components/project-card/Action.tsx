@@ -13,11 +13,15 @@ export const Actions: React.FC<ActionProps> = ({ id, onOpen, codeLink }) => {
       <button
         type="button"
         onClick={() => onOpen(id)}
-        className="group/btn flex items-center gap-2 text-[#ffb17a] cursor-pointer font-semibold transition-colors hover:text-[#ff9e5c]"
+        className="group/btn flex cursor-pointer items-center gap-2 font-semibold text-[#F5F5F5] transition-colors duration-300 hover:text-[#38BDF8]"
       >
-        <span>View project</span>
-        <span className="h-8 w-8 rounded-full flex items-center justify-center text-[#ffb17a] transition-all duration-200 group-hover/btn:bg-[#ffb17a] group-hover/btn:text-black">
-          <ChevronRight size={16} />
+        <span>Ver proyecto</span>
+
+        <span className="flex h-8 w-8 items-center justify-center rounded-full border border-[#1F1F23] text-[#8B8B93] transition-all duration-300 group-hover/btn:border-[#7C3AED]/50 group-hover/btn:bg-[#7C3AED] group-hover/btn:text-white">
+          <ChevronRight
+            size={16}
+            className="transition-transform duration-300 group-hover/btn:translat-ex-0.5"
+          />
         </span>
       </button>
 
@@ -26,12 +30,13 @@ export const Actions: React.FC<ActionProps> = ({ id, onOpen, codeLink }) => {
           href={codeLink}
           target="_blank"
           rel="noopener noreferrer"
-          className="group/code flex items-center gap-2 text-gray-400 font-semibold transition-colors hover:text-gray-200"
+          className="group/code flex items-center gap-2 font-semibold text-[#8B8B93] transition-colors duration-300 hover:text-[#F5F5F5]"
         >
-          <span className="h-8 w-8 rounded-full bg-gray-700/50 group-hover/code:bg-gray-600/50 flex items-center justify-center transition-colors">
+          <span className="flex h-8 w-8 items-center justify-center rounded-full border border-[#1F1F23] bg-[#0D0D0F] transition-all duration-300 group-hover/code:border-[#38BDF8]/40 group-hover/code:bg-[#38BDF8]/10 group-hover/code:text-[#38BDF8]">
             <FiGithub size={16} />
           </span>
-          <span>Code</span>
+
+          <span>Código</span>
         </a>
       )}
     </div>

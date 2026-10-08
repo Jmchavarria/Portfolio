@@ -1,37 +1,38 @@
-import { ImageCard } from '@/shared/ui/ImageCard';
-import { Description } from './components/AboutMeDescription';
-import { Formation } from './components/formation/Formation';
-import { Technologies } from './components/technologies/Technologies';
-import { formationItems } from './data/Formation.data';
-import { skills } from './data/Skills.data';
-import { motion } from 'framer-motion';
+import { Description } from "./components/AboutMeDescription";
+import { Formation } from "./components/formation/Formation";
+import { Technologies } from "./components/technologies/Technologies";
+import { formationItems } from "./data/Formation.data";
+import { skills } from "./data/Skills.data";
 
 const AboutMe = () => {
-
   return (
-    <section id="about" className="w-full py-16 px-6 md:px-12 text-white">
-      <div className="max-w-6xl mx-auto flex flex-col lg:flex-row gap-10 lg:gap-16 items-center">
+    <section
+      id="about"
+      className="relative w-full overflow-hidden bg-[#050505] px-6 py-24 text-[#F5F5F5] md:px-12 lg:py-32"
+    >
+      <div className="pointer-events-none absolute left-1/2 top-0 h-[500px] w-[500px] -translate-x-1/2 rounded-full bg-[#7C3AED]/[0.04] blur-[120px]" />
 
+      <div className="relative mx-auto max-w-6xl">
+        <div className="mb-16">
+          <span className="text-xs font-medium uppercase tracking-[0.25em] text-[#38BDF8]">
+            Sobre mí
+          </span>
 
-        <motion.div
-          initial={{ opacity: 0, x: -20 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ amount: 0.2, once: true }}
-          transition={{ duration: 0.6 }}
-          className="lg:w-1/3 flex justify-center relative"
-        >
-          <ImageCard alt='Image About Me' src="/images/aboutMeImage.png" containerClassName='w-64 h-80 md:w-72 md:h-96'
-          
-          />
-        </motion.div>
+          <div className="mt-4 h-px w-16 bg-gradient-to-r from-[#7C3AED] to-[#38BDF8]" />
+        </div>
 
-        <div className="lg:w-3/3 space-y-10">
-          <Description />
+        <div className="grid gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:gap-16">
+          <div className="space-y-10">
+            <Description />
 
-          <Technologies skills={skills} />
+            <div className="h-px w-full bg-[#1F1F23]" />
 
-          <Formation items={formationItems} />
+            <Technologies skills={skills} />
+          </div>
 
+          <div className="lg:border-l lg:border-[#1F1F23] lg:pl-12">
+            <Formation items={formationItems} />
+          </div>
         </div>
       </div>
     </section>

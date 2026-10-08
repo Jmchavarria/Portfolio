@@ -1,5 +1,4 @@
-
-import { HomeNavItem, HomeSectionId} from "../config/home-nav.config";
+import { HomeNavItem, HomeSectionId } from "../config/home-nav.config";
 import { Menu, X } from "lucide-react";
 
 type Props = {
@@ -21,31 +20,50 @@ export function HeaderNav({
 }: Props) {
   return (
     <header
-      className={`sticky top-0 z-50 flex items-center justify-between px-6 lg:px-20 py-4 transition-colors duration-300 ${hasScrolled ? "bg-black/90 backdrop-blur-md" : "bg-black"
-        }`}
+      className={`fixed left-1/2 top-3 z-50 -translate-x-1/2 rounded-2xl border px-3 py-2.5 transition-all duration-500 sm:px-4 ${
+        hasScrolled || mobileMenuOpen
+          ? "border-[#1F1F23] bg-[#0D0D0F]/90 shadow-2xl shadow-black/30 backdrop-blur-xl"
+          : "border-[#1F1F23]/60 bg-[#0D0D0F]/70 backdrop-blur-md"
+      }`}
     >
-      <div className="text-xl font-bold text-white">JmChavarría</div>
+      <div className="flex items-center justify-center">
+        <nav className="hidden items-center gap-1 lg:flex">
+          {navItems.map((item) => {
+            const isActive = activeSection === item.id;
 
-      <nav className="hidden lg:flex gap-12 text-white font-semibold">
-        {navItems.map((item) => (
-          <button
-            key={item.id}
-            onClick={() => onNavigate(item.id)}
-            type="button"
-            className={`relative transition-colors duration-300 cursor-pointer ${activeSection === item.id ? "text-yellow-400 after:w-full" : "hover:text-yellow-400"
-              }
-              after:content-[''] after:absolute after:left-0 after:-bottom-1
-              after:h-0.5 after:bg-yellow-400 after:w-0
-              after:transition-all after:duration-300 hover:after:w-full`}
-          >
-            {item.label}
-          </button>
-        ))}
-      </nav>
+            return (
+              <button
+                key={item.id}
+                type="button"
+                onClick={() => onNavigate(item.id)}
+                className={`group relative cursor-pointer rounded-xl px-4 py-2 text-sm font-medium transition-colors duration-300 ${
+                  isActive
+                    ? "text-[#F5F5F5]"
+                    : "text-[#8B8B93] hover:text-[#F5F5F5]"
+                }`}
+              >
+                {item.label}
 
-      <button className="lg:hidden text-white" onClick={onToggleMobileMenu} type="button">
-        {mobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
-      </button>
+                <span
+                  className={`absolute bottom-1 left-1/2 h-px -translate-x-1/2 bg-gradient-to-r from-[#7C3AED] to-[#38BDF8] transition-all duration-300 ${
+                    isActive ? "w-6" : "w-0 group-hover:w-5"
+                  }`}
+                />
+              </button>
+            );
+          })}
+        </nav>
+
+        <button
+          type="button"
+          onClick={onToggleMobileMenu}
+          aria-label={mobileMenuOpen ? "Cerrar menú" : "Abrir menú"}
+          aria-expanded={mobileMenuOpen}
+          className="flex h-9 w-9 cursor-pointer items-center justify-center rounded-lg border border-[#1F1F23] text-[#8B8B93] transition-all duration-300 hover:border-[#7C3AED]/40 hover:bg-[#7C3AED]/10 hover:text-[#F5F5F5] lg:hidden"
+        >
+          {mobileMenuOpen ? <X size={19} /> : <Menu size={19} />}
+        </button>
+      </div>
     </header>
   );
 }

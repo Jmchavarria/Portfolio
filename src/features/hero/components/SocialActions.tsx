@@ -1,67 +1,75 @@
 import { Download } from "lucide-react";
-import { ElementType  } from "react";
+import { ElementType } from "react";
 
-export const SocialActions = ({ socialLinks, copyEmail }: {
-    socialLinks: {
-        label: string
-        icon: ElementType
-        href: string
-    }[], copyEmail: () => void
+type SocialLink = {
+  label: string;
+  icon: ElementType;
+  href: string;
+};
 
-}) => {
-    return (
-        <div className="flex flex-wrap items-center gap-4">
+type SocialActionsProps = {
+  socialLinks: SocialLink[];
+  copyEmail: () => void;
+};
+
+export const SocialActions = ({
+  socialLinks,
+  copyEmail,
+}: SocialActionsProps) => {
+  return (
+    <div className="flex flex-wrap items-center gap-3">
+      <a
+        href="/files/cv-jhon-chavarria.pdf"
+        download="cv-jhon-chavarria.pdf"
+        className="group inline-flex w-full items-center justify-center gap-2 rounded-xl border border-[#7C3AED]/40 bg-[#7C3AED] px-5 py-3 text-sm font-semibold text-white shadow-[0_0_25px_rgba(124,58,237,0.15)] transition-all duration-300 hover:-translate-y-0.5 hover:border-[#8B5CF6] hover:bg-[#8B5CF6] hover:shadow-[0_0_30px_rgba(124,58,237,0.25)] sm:w-auto"
+      >
+        <Download
+          size={18}
+          className="transition-transform duration-300 group-hover:translate-y-0.5"
+        />
+        Descargar CV
+      </a>
+
+      <div className="flex w-full items-center justify-center gap-2 sm:w-auto sm:justify-start">
+        {socialLinks.map((social) => {
+          const isEmail = social.label === "Email";
+
+          if (isEmail) {
+            return (
+              <button
+                key={social.label}
+                type="button"
+                onClick={copyEmail}
+                aria-label="Copiar email"
+                title="Copiar email"
+                className="group flex h-11 w-11 cursor-pointer items-center justify-center rounded-xl border border-[#1F1F23] bg-[#0D0D0F] text-[#8B8B93] transition-all duration-300 hover:-translate-y-0.5 hover:border-[#38BDF8]/40 hover:bg-[#38BDF8]/10 hover:text-[#38BDF8]"
+              >
+                <social.icon
+                  size={19}
+                  className="transition-transform duration-300 group-hover:scale-110"
+                />
+              </button>
+            );
+          }
+
+          return (
             <a
-                href="/files/Jhon-Chavarria-CV.pdf"
-                download="Jhon-Chavarria-CV.pdf"
-                className="inline-flex items-center justify-center sm:justify-start gap-2 px-5 py-3 bg-[#ffb17a] text-black font-semibold rounded-lg shadow-md hover:bg-[#e89c62] transition text-sm sm:text-base border w-full sm:w-auto sm:border-none"
+              key={social.label}
+              href={social.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={social.label}
+              title={social.label}
+              className="group flex h-11 w-11 items-center justify-center rounded-xl border border-[#1F1F23] bg-[#0D0D0F] text-[#8B8B93] transition-all duration-300 hover:-translate-y-0.5 hover:border-[#7C3AED]/40 hover:bg-[#7C3AED]/10 hover:text-[#F5F5F5]"
             >
-                <Download size={20} />
-                Download CV
+              <social.icon
+                size={19}
+                className="transition-transform duration-300 group-hover:scale-110"
+              />
             </a>
-
-
-            <div className="flex gap-3 sm:border-none w-full sm:w-auto justify-center sm:justify-normal">
-                {socialLinks.map((social, index) => {
-                    const hoverClass =
-                        social.label === "GitHub"
-                            ? "hover:bg-white/10"
-                            : social.label === "LinkedIn"
-                                ? "hover:bg-[#0a66c2]"
-                                : "hover:bg-[#ffb17a]/20";
-
-                    if (social.label === "Email") {
-                        return (
-                            <button
-                                key={index}
-                                onClick={(e) => {
-                                    e.preventDefault();
-                                    copyEmail();
-                                }}
-                                className={`flex items-center justify-center rounded-lg transition-colors cursor-pointer ${hoverClass} px-4 py-2 gap-2 bg-gray-800/50`}
-                                aria-label={social.label}
-                                title="Copy email"
-                            >
-                                <social.icon className="text-gray-200 transition-colors" size={20} />
-                            </button>
-                        );
-                    }
-
-                    return (
-                        <a
-                            key={index}
-                            href={social.href}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className={`flex items-center justify-center rounded-lg transition-colors ${hoverClass} w-11 h-11 bg-gray-800/50`}
-                            aria-label={social.label}
-                        >
-                            <social.icon className="text-gray-200 transition-colors" size={20} />
-                        </a>
-                    );
-                })}
-            </div>
-        </div>
-
-    )
-}
+          );
+        })}
+      </div>
+    </div>
+  );
+};

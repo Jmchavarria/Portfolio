@@ -1,24 +1,28 @@
-import { FiExternalLink } from "react-icons/fi"
+import { FiExternalLink } from "react-icons/fi";
 
-// CALL TO ACTION
-export const Cta = ({ title, link }: { title: string, link: string }) => {
+type CtaProps = {
+  title: string;
+  link: string;
+};
 
-    return (
+export const Cta = ({ title, link }: CtaProps) => {
+  if (title === "Bar Manager" || !link) return null;
 
-        <div>
-            {title !== "Bar Manager" && (
-                <div className="flex justify-center pt-2 pb-4 sm:pb-0">
-                    <a
-                        href={link}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center gap-2 px-6 py-3 text-black bg-[#ffb17a] hover:bg-[#ff9e5c] rounded-lg font-medium transition-all duration-300 hover:scale-105 active:scale-95"
-                    >
-                        Visit website
-                        <FiExternalLink />
-                    </a>
-                </div>
-            )}
-        </div>
-    )
-}
+  return (
+    <div className="flex justify-center pt-4 sm:pt-6">
+      <a
+        href={link}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="group inline-flex items-center gap-2 rounded-xl border border-[#7C3AED]/40 bg-[#7C3AED] px-6 py-3 text-sm font-semibold text-white transition-all duration-300 hover:-translate-y-0.5 hover:border-[#8B5CF6] hover:bg-[#8B5CF6] hover:shadow-[0_0_25px_rgba(124,58,237,0.2)]"
+      >
+        <span>Visitar sitio web</span>
+
+        <FiExternalLink
+          size={16}
+          className="transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+        />
+      </a>
+    </div>
+  );
+};
