@@ -11,7 +11,7 @@ export const Header = ({ title, link, handleClose }: HeaderProps) => {
     <div className="flex items-center justify-between gap-4 border-b border-[#1F1F23] bg-[#0D0D0F]/80 p-4 backdrop-blur-xl sm:p-6">
       <div className="flex min-w-0 items-center gap-3">
         <h2 className="min-w-0 truncate text-xl font-bold tracking-tight text-[#F5F5F5] sm:text-2xl md:text-3xl">
-          <span className="bg-gradient-to-r from-[#7C3AED] via-[#38BDF8] to-[#7C3AED] bg-clip-text text-transparent">
+          <span className="bg-linear-to-r from-[#7C3AED] via-[#38BDF8] to-[#7C3AED] bg-clip-text text-transparent">
             {title}
           </span>
         </h2>

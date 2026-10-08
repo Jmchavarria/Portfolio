@@ -45,7 +45,7 @@ export function HeaderNav({
                 {item.label}
 
                 <span
-                  className={`absolute bottom-1 left-1/2 h-px -translate-x-1/2 bg-gradient-to-r from-[#7C3AED] to-[#38BDF8] transition-all duration-300 ${
+                  className={`absolute bottom-1 left-1/2 h-px -translate-x-1/2 bg-linear-to-r from-[#7C3AED] to-[#38BDF8] transition-all duration-300 ${
                     isActive ? "w-6" : "w-0 group-hover:w-5"
                   }`}
                 />

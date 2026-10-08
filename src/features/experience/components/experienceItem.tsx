@@ -23,7 +23,7 @@ export function ExperienceItem({ item, index = 0 }: Props) {
       <div className="relative overflow-hidden rounded-2xl border border-[#1F1F23] bg-[#0D0D0F] transition-all duration-500 hover:border-[#7C3AED]/40">
         <div className="absolute inset-y-0 left-0 w-px bg-linear-to-b from-[#7C3AED] via-[#38BDF8] to-transparent opacity-60 transition-opacity duration-500 group-hover:opacity-100" />
 
-        <div className="absolute -right-24 -top-24 h-48 w-48 rounded-full bg-[#7C3AED]/[0.04] blur-3xl transition-all duration-500 group-hover:bg-[#7C3AED]/[0.08]" />
+        <div className="absolute -right-24 -top-24 h-48 w-48 rounded-full bg-[#7C3AED]/4 blur-3xl transition-all duration-500 group-hover:bg-[#7C3AED]/8" />
 
         <div className="relative p-6 sm:p-8">
           <div className="flex flex-col gap-7">

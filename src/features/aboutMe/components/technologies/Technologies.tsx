@@ -1,7 +1,6 @@
 import { motion } from "framer-motion";
-import { Code2 } from "lucide-react";
 import { SkillBadge } from "./SkillBadge";
-import { Props } from "../Technologies.types";
+import { Props } from "./Technologies.types";
 
 export function Technologies({ title = "Tecnologías", skills }: Props) {
   return (

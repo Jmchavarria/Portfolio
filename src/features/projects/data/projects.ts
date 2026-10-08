@@ -71,11 +71,6 @@ export const projects: Project[] = [
     link: "https://inout-system.vercel.app/",
     codeLink: "https://github.com/Jmchavarria/inout-system",
     imageUrl: "/images/inout/inout1.png",
-    additionalImages: [
-      "/images/inout/inout1.png",
-      "/images/inout/inout2.png",
-      "/images/inout/inout3.png",
-    ],
     technologies: [
       "Next.js",
       "TypeScript",
@@ -101,15 +96,6 @@ export const projects: Project[] = [
     link: "https://motorbikefull.onrender.com/",
     codeLink: "https://github.com/carlos2771/MotorBikeFull",
     imageUrl: "/images/motorbike/motorbike1.png",
-    additionalImages: [
-      "/images/motorbike/motorbike1.png",
-      "/images/motorbike/motorbike2.png",
-      "/images/motorbike/motorbike3.png",
-      "/images/motorbike/motorbike4.png",
-      "/images/motorbike/motorbike5.png",
-      "/images/motorbike/motorbike6.png",
-      "/images/motorbike/motorbike7.png",
-    ],
     technologies: ["React", "Node.js", "MongoDB", "Tailwind CSS"],
     features: [
       "Catálogo de productos",
@@ -127,12 +113,6 @@ export const projects: Project[] = [
       "Bar Manager es un software orientado a la gestión de bares y restaurantes, con funcionalidades para administrar usuarios, mesas, pedidos y procesos relacionados con la operación del establecimiento.",
     link: "https://barmanager.example.com/",
     imageUrl: "/images/bmg/login.jpg",
-    additionalImages: [
-      "/images/bmg/login.jpg",
-      "/images/bmg/profile.webp",
-      "/images/bmg/usersList.jpg",
-      "/images/bmg/tableList.webp",
-    ],
     technologies: ["React", "TypeScript", "Tailwind CSS", "Node.js", "Docker"],
     features: [
       "Gestión de usuarios",

@@ -23,7 +23,6 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
   const [isImageFullScreen, setIsImageFullScreen] = useState(false);
   const carouselRef = useRef<HTMLDivElement>(null);
 
-  // ✅ Siempre habrá al menos 1 imagen
   const images =
     project.additionalImages?.length && project.additionalImages.length > 0
       ? project.additionalImages

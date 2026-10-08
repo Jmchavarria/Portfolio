@@ -10,7 +10,7 @@ const AboutMe = () => {
       id="about"
       className="relative w-full overflow-hidden bg-[#050505] px-6 py-24 text-[#F5F5F5] md:px-12 lg:py-32"
     >
-      <div className="pointer-events-none absolute left-1/2 top-0 h-[500px] w-[500px] -translate-x-1/2 rounded-full bg-[#7C3AED]/[0.04] blur-[120px]" />
+      <div className="pointer-events-none absolute left-1/2 top-0 h-[500px] w-[500px] -translate-x-1/2 rounded-full bg-[#7C3AED]/4 blur-[120px]" />
 
       <div className="relative mx-auto max-w-6xl">
         <div className="mb-16">
@@ -18,7 +18,7 @@ const AboutMe = () => {
             Sobre mí
           </span>
 
-          <div className="mt-4 h-px w-16 bg-gradient-to-r from-[#7C3AED] to-[#38BDF8]" />
+          <div className="mt-4 h-px w-16 bg-linear-to-r from-[#7C3AED] to-[#38BDF8]" />
         </div>
 
         <div className="grid gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:gap-16">

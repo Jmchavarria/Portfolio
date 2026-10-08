@@ -4,8 +4,6 @@ import AboutMe from "@/features/aboutMe/AboutMe";
 import Experience from "@/features/experience/Experiencie";
 import Hero from "@/features/hero/hero";
 import MyProjects from "@/features/projects/MyProjects";
-import { AnimatePresence, motion } from "framer-motion";
-import { ChevronUp } from "lucide-react";
 import { HOME_NAV_ITEMS } from "@/features/home/config/home-nav.config";
 import { useHomeNavigation } from "@/features/home/hooks/useHomeNavigation";
 import { HeaderNav } from "@/features/home/components/headerNav";

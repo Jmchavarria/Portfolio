@@ -23,7 +23,7 @@ export function ProjectShowcase({ projects }: Props) {
             }}
             className="group relative overflow-hidden rounded-xl border border-[#1F1F23] bg-[#0D0D0F] transition-all duration-500 hover:border-[#7C3AED]/40"
           >
-            <div className="pointer-events-none absolute -right-20 -top-20 h-40 w-40 rounded-full bg-[#7C3AED]/[0.04] blur-[70px] transition-all duration-500 group-hover:bg-[#7C3AED]/[0.08]" />
+            <div className="pointer-events-none absolute -right-20 -top-20 h-40 w-40 rounded-full bg-[#7C3AED]/4 blur-[70px] transition-all duration-500 group-hover:bg-[#7C3AED]/8" />
 
             <div className="relative">
               <div className="relative aspect-video overflow-hidden border-b border-[#1F1F23] bg-[#050505]">
@@ -33,7 +33,7 @@ export function ProjectShowcase({ projects }: Props) {
                   className="h-full w-full object-contain object-center transition-transform duration-700 group-hover:scale-[1.01]"
                 />
 
-                <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#050505]/10 via-transparent to-transparent" />
+                <div className="pointer-events-none absolute inset-0 bg-linear-to-t from-[#050505]/10 via-transparent to-transparent" />
               </div>
 
               <div className="p-5 sm:p-6">

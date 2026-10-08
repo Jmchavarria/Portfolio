@@ -291,7 +291,7 @@ const Hero = () => {
         </div>
 
         <motion.div
-          className="flex items-center justify-between border-t border-white/[0.08] pt-5 text-xs text-[#55555D]"
+          className="flex items-center justify-between border-t border-white/8 pt-5 text-xs text-[#55555D]"
           variants={{
             hidden: {
               opacity: 0,

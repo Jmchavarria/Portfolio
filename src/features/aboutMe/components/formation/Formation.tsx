@@ -33,7 +33,7 @@ export function Formation({ title = "Formación", items }: Props) {
 
       {items.length > 0 && (
         <div className="relative space-y-3">
-          <div className="pointer-events-none absolute bottom-4 left-[18px] top-4 w-px bg-gradient-to-b from-[#7C3AED]/50 via-[#1F1F23] to-transparent" />
+          <div className="pointer-events-none absolute bottom-4 left-[18px] top-4 w-px bg-linear-to-b from-[#7C3AED]/50 via-[#1F1F23] to-transparent" />
 
           {items.map((item, index) => (
             <motion.div

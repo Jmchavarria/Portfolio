@@ -15,7 +15,7 @@ export const Profile = () => {
       >
         <span className="text-white">Hola, soy </span>
 
-        <span className="bg-gradient-to-r from-[#7C3AED] via-[#38BDF8] to-[#7C3AED] bg-[length:200%_auto] bg-clip-text text-transparent">
+        <span className="bg-linear-to-r from-[#7C3AED] via-[#38BDF8] to-[#7C3AED] bg-size-[200%_auto] bg-clip-text text-transparent">
           Jhon.
         </span>
       </motion.h1>
