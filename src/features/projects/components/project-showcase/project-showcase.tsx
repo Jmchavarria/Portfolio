@@ -10,8 +10,6 @@ export function ProjectShowcase({ projects }: Props) {
   return (
     <div className="mx-auto max-w-4xl space-y-6">
       {projects.map((project, index) => {
-        const number = String(index + 1).padStart(2, "0");
-
         return (
           <motion.article
             key={project.id}
@@ -28,14 +26,14 @@ export function ProjectShowcase({ projects }: Props) {
             <div className="pointer-events-none absolute -right-20 -top-20 h-40 w-40 rounded-full bg-[#7C3AED]/[0.04] blur-[70px] transition-all duration-500 group-hover:bg-[#7C3AED]/[0.08]" />
 
             <div className="relative">
-              <div className="relative aspect-[3.2/1] overflow-hidden border-b border-[#1F1F23] bg-[#050505]">
+              <div className="relative aspect-video overflow-hidden border-b border-[#1F1F23] bg-[#050505]">
                 <img
                   src={project.imageUrl}
                   alt={`Vista previa de ${project.title}`}
-                  className="h-full w-full object-cover object-center transition-transform duration-700 group-hover:scale-[1.02]"
+                  className="h-full w-full object-contain object-center transition-transform duration-700 group-hover:scale-[1.01]"
                 />
 
-                <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#050505]/20 via-transparent to-transparent" />
+                <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#050505]/10 via-transparent to-transparent" />
               </div>
 
               <div className="p-5 sm:p-6">
