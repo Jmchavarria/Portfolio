@@ -1,41 +1,30 @@
 "use client";
 
-import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
-import { MouseEvent } from "react";
+import { motion } from "framer-motion";
 import { SocialActions } from "./components/SocialActions";
 import { Profile } from "./components/Profile";
 import { EmailCopiedToast } from "./components/EmailCopiedToast";
 import { socialLinks } from "./data/Hero.data";
-import { useCopyEmail } from "./hooks/useCopyEmail";
+import {
+  useHeroAnimations,
+  heroContainerVariants,
+  headerVariants,
+  profileVariants,
+  socialActionsVariants,
+  circleVariants,
+  footerVariants,
+} from "./hooks/use-hero-animations";
 
 const Hero = () => {
-  const { copyEmail, showCopiedAlert } = useCopyEmail();
-
-  const mouseX = useMotionValue(0);
-  const mouseY = useMotionValue(0);
-
-  const smoothX = useSpring(mouseX, {
-    stiffness: 80,
-    damping: 20,
-  });
-
-  const smoothY = useSpring(mouseY, {
-    stiffness: 80,
-    damping: 20,
-  });
-
-  const glowX = useTransform(smoothX, [-1, 1], ["30%", "70%"]);
-  const glowY = useTransform(smoothY, [-1, 1], ["30%", "70%"]);
-
-  const circleX = useTransform(smoothX, [-1, 1], [18, -18]);
-  const circleY = useTransform(smoothY, [-1, 1], [18, -18]);
-
-  const handleMouseMove = (event: MouseEvent<HTMLElement>) => {
-    const { innerWidth, innerHeight } = window;
-
-    mouseX.set((event.clientX / innerWidth) * 2 - 1);
-    mouseY.set((event.clientY / innerHeight) * 2 - 1);
-  };
+  const {
+    copyEmail,
+    showCopiedAlert,
+    glowX,
+    glowY,
+    circleX,
+    circleY,
+    handleMouseMove,
+  } = useHeroAnimations();
 
   return (
     <motion.section
@@ -43,14 +32,7 @@ const Hero = () => {
       className="relative min-h-screen overflow-hidden bg-[#050505] text-white"
       initial="hidden"
       animate="visible"
-      variants={{
-        hidden: {},
-        visible: {
-          transition: {
-            staggerChildren: 0.12,
-          },
-        },
-      }}
+      variants={heroContainerVariants}
     >
       <EmailCopiedToast showCopiedAlert={showCopiedAlert} />
 
@@ -62,7 +44,7 @@ const Hero = () => {
       />
 
       <motion.div
-        className="pointer-events-none absolute right-[-15%] top-[-20%] h-[600px] w-[600px] rounded-full bg-[#38BDF8]/[0.04] blur-[120px]"
+        className="pointer-events-none absolute right-[-15%] top-[-20%] h-[600px] w-[600px] rounded-full bg-[#38BDF8]/4 blur-[120px]"
         animate={{
           x: [0, -80, 0],
           y: [0, 100, 0],
@@ -76,7 +58,7 @@ const Hero = () => {
       />
 
       <motion.div
-        className="pointer-events-none absolute bottom-[-20%] left-[-15%] h-[500px] w-[500px] rounded-full bg-[#7C3AED]/[0.06] blur-[120px]"
+        className="pointer-events-none absolute bottom-[-20%] left-[-15%] h-[500px] w-[500px] rounded-full bg-[#7C3AED]/6 blur-[120px]"
         animate={{
           x: [0, 100, 0],
           y: [0, -80, 0],
@@ -109,20 +91,7 @@ const Hero = () => {
       <div className="relative mx-auto flex min-h-screen max-w-7xl flex-col px-6 py-8 sm:px-10 lg:px-16">
         <motion.header
           className="flex items-center justify-between"
-          variants={{
-            hidden: {
-              opacity: 0,
-              y: -20,
-            },
-            visible: {
-              opacity: 1,
-              y: 0,
-              transition: {
-                duration: 0.7,
-                ease: "easeOut",
-              },
-            },
-          }}
+          variants={headerVariants}
         >
           <span className="hidden text-sm text-[#8B8B93] sm:block">
             Medellín, Colombia
@@ -131,41 +100,10 @@ const Hero = () => {
 
         <div className="flex flex-1 items-center py-20">
           <div className="grid w-full items-center gap-16 lg:grid-cols-5">
-            <motion.div
-              className="lg:col-span-3"
-              variants={{
-                hidden: {
-                  opacity: 0,
-                  x: -50,
-                },
-                visible: {
-                  opacity: 1,
-                  x: 0,
-                  transition: {
-                    duration: 0.9,
-                    ease: [0.16, 1, 0.3, 1],
-                  },
-                },
-              }}
-            >
+            <motion.div className="lg:col-span-3" variants={profileVariants}>
               <Profile />
 
-              <motion.div
-                className="mt-10"
-                variants={{
-                  hidden: {
-                    opacity: 0,
-                    y: 20,
-                  },
-                  visible: {
-                    opacity: 1,
-                    y: 0,
-                    transition: {
-                      duration: 0.7,
-                    },
-                  },
-                }}
-              >
+              <motion.div className="mt-10" variants={socialActionsVariants}>
                 <SocialActions
                   copyEmail={copyEmail}
                   socialLinks={socialLinks}
@@ -179,23 +117,10 @@ const Hero = () => {
                 x: circleX,
                 y: circleY,
               }}
-              variants={{
-                hidden: {
-                  opacity: 0,
-                  scale: 0.8,
-                },
-                visible: {
-                  opacity: 1,
-                  scale: 1,
-                  transition: {
-                    duration: 1.2,
-                    ease: [0.16, 1, 0.3, 1],
-                  },
-                },
-              }}
+              variants={circleVariants}
             >
               <motion.div
-                className="relative flex h-72 w-72 items-center justify-center rounded-full border border-white/[0.08]"
+                className="relative flex h-72 w-72 items-center justify-center rounded-full border border-white/8"
                 animate={{
                   y: [0, -12, 0],
                   rotate: [0, 2, 0, -2, 0],
@@ -247,7 +172,7 @@ const Hero = () => {
                 />
 
                 <motion.span
-                  className="relative text-7xl font-bold tracking-tighter text-white/[0.06]"
+                  className="relative text-7xl font-bold tracking-tighter text-white/6"
                   animate={{
                     opacity: [0.3, 0.7, 0.3],
                   }}
@@ -292,17 +217,7 @@ const Hero = () => {
 
         <motion.div
           className="flex items-center justify-between border-t border-white/8 pt-5 text-xs text-[#55555D]"
-          variants={{
-            hidden: {
-              opacity: 0,
-            },
-            visible: {
-              opacity: 1,
-              transition: {
-                duration: 0.8,
-              },
-            },
-          }}
+          variants={footerVariants}
         >
           <span>Full Stack Developer</span>
 
